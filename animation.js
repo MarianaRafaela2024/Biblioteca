@@ -137,3 +137,121 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+/*cadLivro*/
+// Enhanced functionality for details elements - making entire details clickable
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Add click enhancement to all details elements
+    const detailsElements = document.querySelectorAll('details');
+    
+    detailsElements.forEach(details => {
+        const summary = details.querySelector('summary');
+        
+        // Make the entire details element clickable (excluding form inputs)
+        details.addEventListener('click', function(e) {
+            // Don't trigger if clicking on form inputs, buttons, or other interactive elements
+            if (e.target.tagName === 'INPUT' || 
+                e.target.tagName === 'SELECT' || 
+                e.target.tagName === 'TEXTAREA' || 
+                e.target.tagName === 'BUTTON' ||
+                e.target.type === 'submit' ||
+                e.target.type === 'reset' ||
+                e.target.closest('input') ||
+                e.target.closest('select') ||
+                e.target.closest('textarea') ||
+                e.target.closest('button')) {
+                return;
+            }
+            
+            // Toggle the details element
+            e.preventDefault();
+            this.open = !this.open;
+            
+            // Add visual feedback
+            const summary = this.querySelector('summary');
+            if (summary) {
+                summary.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    summary.style.transform = 'scale(1)';
+                }, 150);
+            }
+        });
+        
+        // Enhanced visual feedback on summary click
+        summary.addEventListener('click', function(e) {
+            // Add click animation
+            this.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+        });
+        
+        // Add keyboard navigation
+        summary.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                details.open = !details.open;
+                
+                // Trigger click animation
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            }
+        });
+        
+        // Add smooth animation when opening/closing
+        details.addEventListener('toggle', function() {
+            if (this.open) {
+                // Animate opening
+                const content = this.querySelector(':not(summary)');
+                if (content) {
+                    this.style.overflow = 'hidden';
+                    const height = content.scrollHeight;
+                    content.style.maxHeight = '0px';
+                    content.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        content.style.transition = 'max-height 0.3s ease, opacity 0.3s ease';
+                        content.style.maxHeight = height + 'px';
+                        content.style.opacity = '1';
+                        
+                        setTimeout(() => {
+                            content.style.maxHeight = 'none';
+                            this.style.overflow = 'visible';
+                        }, 300);
+                    }, 10);
+                }
+            }
+        });
+        
+        // Add hover effect to make it clear the entire area is clickable
+        details.addEventListener('mouseenter', function() {
+            if (!this.querySelector(':hover:is(input, select, textarea, button)')) {
+                this.style.cursor = 'pointer';
+                this.style.transform = 'translateY(-1px)';
+                this.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.12)';
+            }
+        });
+        
+        details.addEventListener('mouseleave', function() {
+            this.style.cursor = 'default';
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.08)';
+        });
+        
+        // Update cursor when hovering over form elements
+        const formElements = details.querySelectorAll('input, select, textarea, button');
+        formElements.forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                details.style.cursor = 'default';
+                details.style.transform = 'translateY(0)';
+                details.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.08)';
+            });
+        });
+    });
+    
+    // Add "Expand All" / "Collapse All" buttons functionality
+    addControlButtons();
+});

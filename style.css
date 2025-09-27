@@ -1178,5 +1178,201 @@ button:active {
     cursor: pointer;
     color: #C41E3A;
   }
+/*CadLivro forms*/
+
+
+  main form {
+  width: 100%;
+  max-width: 900px;   /* formulário mais largo */
+  margin: 0 auto;
+}
+
+main form details {
+  margin-bottom: 25px;   /* separa cada bloco */
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(236, 236, 236, 0.95);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+main form summary {
+  font-weight: bold;
+  color: #C41E3A;
+  margin-bottom: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  
+}
+
+main form label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #555;
+}
+
+main form input,
+main form select,
+main form textarea {
+  width: 100%;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+  border: 2px solid rgba(127, 140, 141, 0.3);
+  border-radius: 8px;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+main form input:focus,
+main form select:focus,
+main form textarea:focus {
+  border-color: #C41E3A;
+  box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.1);
+  outline: none;
+}
+
+main .form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  justify-content: flex-end;
+}
+
+/* Main Content - Grid Layout with wider form container */
+.main-content {
+    margin-left: 280px;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 600px; /* Increased from 400px to 600px */
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "header header"
+        "table forms";
+    height: 100vh;
+    gap: 20px;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+/* CadLivro specific - make form even wider for book cataloging */
+.main-content.cataloging {
+    grid-template-columns: 1fr 800px; /* Even wider for book forms */
+}
+
+/* Forms Container - Right Side with Scroll */
+.forms-container {
+    grid-area: forms;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(100vh - 180px);
+    padding-right: 10px;
+    min-width: 600px; /* Ensure minimum width */
+}
+
+/* CadLivro forms - wider form styling */
+main form {
+    width: 100%;
+    max-width: 100%; /* Remove max-width restriction */
+    margin: 0 auto;
+}
+
+main form details {
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(236, 236, 236, 0.95);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Two-column layout for form fields in wider containers */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-grid-full {
+    grid-column: 1 / -1; /* Full width for certain fields */
+}
+
+/* Responsive Design Updates */
+
+/* Large Desktop */
+@media (min-width: 1400px) {
+    .sidebar {
+        width: 320px;
+    }
+    
+    .main-content {
+        margin-left: 320px;
+        grid-template-columns: 1fr 900px; /* Even wider on large screens */
+        padding: 50px;
+        gap: 30px;
+    }
+    
+    .main-content.cataloging {
+        grid-template-columns: 1fr 1000px;
+    }
+    
+    .forms-container {
+        gap: 25px;
+        min-width: 900px;
+    }
+    
+    .sidebar-close-btn {
+        display: none !important;
+    }
+}
+
+/* Desktop */
+@media (max-width: 1399px) and (min-width: 1200px) {
+    .main-content {
+        grid-template-columns: 1fr 700px; /* Increased from 420px */
+        gap: 25px;
+    }
+    
+    .main-content.cataloging {
+        grid-template-columns: 1fr 800px;
+    }
+    
+    .forms-container {
+        min-width: 700px;
+    }
+    
+    .sidebar-close-btn {
+        display: none !important;
+    }
+}
+
+/* Large Tablet */
+@media (max-width: 1199px) and (min-width: 1024px) {
+    .sidebar {
+        width: 250px;
+    }
+    
+    .main-content {
+        margin-left: 250px;
+        grid-template-columns: 1fr 550px; /* Increased from 380px */
+        padding: 30px;
+        gap: 20px;
+    }
+    
+    .main-content.cataloging {
+        grid-template-columns: 1fr 650px;
+    }
+    
+    .forms-container {
+        gap: 18px;
+        min-width: 550px;
+    }
+    
+    .sidebar-close-btn {
+        display: none !important;
+    }
+}
 
   
