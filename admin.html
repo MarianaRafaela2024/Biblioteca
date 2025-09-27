@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configuração - Biblioteca</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/jpg" href="midia/config.png">
+</head>
+<body>
+  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+  <!-- Sidebar Overlay (Mobile) -->
+  <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <h2>Biblioteca</h2>
+      <p>Sistema de Gestão</p>
+      <button class="sidebar-close-btn" onclick="toggleSidebar()">×</button>
+    </div>
+    <div class="sidebar-nav">
+      <ul>
+        <li><a href="index.html">🏠 Início</a></li>
+        <li><a href="CadLivro.html">📚 Catalogação</a></li>
+        <li><a href="acervo.html">🔍 Consulta ao Acervo</a></li>
+        <li><a href="CadUser.html">👥 Cadastro de Usuários</a></li>
+        <li><a href="admin.html" class="active">⚙️ Administração</a></li>
+      </ul>
+    </div>
+  </nav>

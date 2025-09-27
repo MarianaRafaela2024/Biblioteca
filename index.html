@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Início - Biblioteca</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon"  type="image/jpg" href="midia/home.png">
+</head>
+
+<body>
+  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+  <!-- Sidebar Overlay (Mobile) -->
+  <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <h2>Biblioteca</h2>
+      <p>Sistema de Gestão</p>
+      <button class="sidebar-close-btn" onclick="toggleSidebar()">×</button>
+    </div>
+    <div class="sidebar-nav">
+      <ul>
+        <li><a href="index.html" class="active">🏠 Início</a></li>
+        <li><a href="CadLivro.html">📚 Catalogação</a></li>
+        <li><a href="acervo.html">🔍 Consulta ao Acervo</a></li>
+        <li><a href="CadUser.html">👥 Cadastro de Usuários</a></li>
+        <li><a href="admin.html">⚙️ Administração</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="page-header">
+      <h1>Bem-vindo ao Sistema de Biblioteca</h1>
+      <p>Gerencie acervo, usuários e processos administrativos de forma prática e organizada.</p>
+    </div>
+
+    <div class="forms-container-i">
+      <div class="form-card-i">
+        <h3>📚 Sobre o Sistema</h3>
+        <p>
+          Este sistema segue o padrão <strong>MARC 21 simplificado</strong> para cadastro e organização do acervo.
+        </p>
+      </div>
+
+      <div class="form-card-i">
+        <h3>🚀 Como Navegar</h3>
+        <p>Use o menu lateral para acessar as principais funcionalidades:</p>
+        <ul>
+          <li>Catalogação de livros</li>
+          <li>Consulta ao acervo</li>
+          <li>Cadastro de usuários</li>
+          <li>Administração e relatórios</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="animation.js"></script>
+</body>
+
+</html>

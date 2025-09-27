@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/jpg" href="midia/login.png">
+</head>
+<body>
+
+  <div class="container">
+        
+        <div class="icon">
+            <img src="midia/ferrucio.png" alt="Logo">
+        </div>
+        
+        <h1>LOGIN</h1>
+        
+        <form>
+            <div class="form-group">
+                <label for="username">Digite seu RM:</label>
+                <input type="number" id="username" name="username" required placeholder="Seu RM">
+            </div>
+
+            <div class="form-group">
+                <label for="senha">Digite sua senha:</label>
+                <input type="password" id="senha" name="senha" required placeholder="Sua senha">
+            </div>
+
+            <button type="button" class="login-btn" onclick="login()">Login</button>
+        </form>
+    </div>
+    <script src="function.js"></script>
+</body>
+</html>
+
