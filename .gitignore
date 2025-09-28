@@ -1,0 +1,13 @@
+# Arquivos gerados por IDEs (Visual Studio/VS Code)
+# Isso irá ignorar a pasta .vs/ inteira e seus arquivos de cache
+.vs/
+*.suo
+*.user
+
+# Diretórios de compilação e binários
+/bin/
+/obj/
+
+# Arquivos temporários e de log
+*.log
+*.tmp
