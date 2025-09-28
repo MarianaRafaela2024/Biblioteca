@@ -39,7 +39,7 @@ namespace Biblioteca.Controllers
                         Id = Convert.ToInt32(reader["Id_Aluno"]),
                         Nome = reader["Nome_Aluno"].ToString(),
                         Sobrenome = reader["Sobrenome_Aluno"].ToString(),
-                        RM = Convert.ToInt32(reader["RM_Aluno"]),
+                        RM = reader["RM_Aluno"]?.ToString() ?? string.Empty,
                         Telefone = reader["Telefone_Aluno"].ToString(),
                         Curso = reader["Curso"].ToString(),
                         Status = reader["Status_Aluno"].ToString()
@@ -50,6 +50,59 @@ namespace Biblioteca.Controllers
             }
             return alunos;
         }
+
+        [HttpGet("search/{searchTerm}")]
+        public ActionResult SearchAluno(string searchTerm)
+        {
+            var alunos = new List<Aluno>();
+
+            using (SqlConnection connection = new SqlConnection(StrConex))
+            {
+                connection.Open();
+
+                bool isNumero = int.TryParse(searchTerm, out int rmInt);
+
+                string query;
+                SqlCommand command;
+
+                if (isNumero)
+                {
+                    query = "SELECT * FROM Aluno WHERE RM_Aluno = @RM";
+                    command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@RM", rmInt);
+                }
+                else
+                {
+                    query = "SELECT * FROM Aluno WHERE Nome_Aluno LIKE @Nome";
+                    command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@Nome", "%" + searchTerm + "%");
+                }
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var aluno = new Aluno
+                        {
+                            Id = Convert.ToInt32(reader["Id_Aluno"]),
+                            Nome = reader["Nome_Aluno"] as string ?? string.Empty,
+                            Sobrenome = reader["Sobrenome_Aluno"] as string ?? string.Empty,
+                            RM = reader["RM_Aluno"]?.ToString() ?? string.Empty,
+                            Telefone = reader["Telefone_Aluno"]?.ToString() ?? string.Empty,
+                            Curso = reader["Curso"]?.ToString() ?? string.Empty,
+                            Status = reader["Status_Aluno"]?.ToString() ?? string.Empty
+                        };
+                        alunos.Add(aluno);
+                    }
+                }
+            }
+
+            if (alunos.Count == 0)
+                return NotFound();
+
+            return Ok(alunos);
+        }
+
 
         [HttpGet("{id}", Name = "GetAlunoID")]
 
@@ -71,7 +124,7 @@ namespace Biblioteca.Controllers
                         Id = Convert.ToInt32(reader["Id_Aluno"]),
                         Nome = reader["Nome_Aluno"].ToString(),
                         Sobrenome = reader["Sobrenome_Aluno"].ToString(),
-                        RM = Convert.ToInt32(reader["RM_Aluno"]),
+                        RM = reader["RM_Aluno"]?.ToString() ?? string.Empty,
                         Telefone = reader["Telefone_Aluno"].ToString(),
                         Curso = reader["Curso"].ToString(),
                         Status = reader["Status_Aluno"].ToString()

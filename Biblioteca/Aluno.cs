@@ -8,7 +8,7 @@ namespace Biblioteca
 
         public string Sobrenome { get; set; }
 
-        public int RM { get; set; }
+        public string RM { get; set; }
 
         public string Telefone { get; set; }   
 
