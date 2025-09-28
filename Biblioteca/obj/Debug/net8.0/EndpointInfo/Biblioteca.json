@@ -112,6 +112,28 @@
         }
       }
     },
+    "/Aluno/search/{searchTerm}": {
+      "get": {
+        "tags": [
+          "Aluno"
+        ],
+        "parameters": [
+          {
+            "name": "searchTerm",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Aluno/{id}": {
       "get": {
         "tags": [
@@ -264,8 +286,8 @@
             "nullable": true
           },
           "rm": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "telefone": {
             "type": "string",
