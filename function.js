@@ -209,3 +209,48 @@ function login() {
 //     window.location.href = 'login.html';
 // }
 
+
+//CadLivro
+
+function addLivro() {
+
+    const Nome = document.getElementById('nome').value;
+    const Sobrenome = document.getElementById('sobrenome').value;
+    const RM = document.getElementById('RM').value;
+    const Telefone = document.getElementById('telefone').value;
+    const Curso = document.getElementById('curso').value.toString();
+    const Status = document.getElementById('status').value.toString();
+
+
+    const aluno = {
+        Nome: Nome,
+        Sobrenome: Sobrenome,
+        RM: RM,
+        Telefone: Telefone,
+        Curso: Curso,
+        Status: Status
+    };
+    console.log(Status);
+    fetch('https://localhost:7139/Aluno', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(aluno)
+    })
+        .then(response => {
+            if (response.ok) {
+                document.getElementById('nome').value = '';
+                document.getElementById('sobrenome').value = '';
+                document.getElementById('telefone').value = '';
+                document.getElementById('RM').value = '';
+                document.getElementById('curso').value = '';
+                document.getElementById('status').value = '';
+                getAluno();
+            }
+        });
+
+    console.log('Adicionar aluno');
+    showNotification('Usuário adicionado com sucesso!', 'success');
+}
+
