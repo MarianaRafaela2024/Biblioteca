@@ -214,8 +214,8 @@ function login() {
 
 function addLivro() {
 
-    const Nome = document.getElementById('nome').value;
-    const Sobrenome = document.getElementById('sobrenome').value;
+    const ISBNA = document.getElementById('isbn_a').value;
+    const ISBNC = document.getElementById('isbn_c').value;
     const RM = document.getElementById('RM').value;
     const Telefone = document.getElementById('telefone').value;
     const Curso = document.getElementById('curso').value.toString();
@@ -223,7 +223,7 @@ function addLivro() {
 
 
     const aluno = {
-        Nome: Nome,
+        ISBN: ISBNA,
         Sobrenome: Sobrenome,
         RM: RM,
         Telefone: Telefone,

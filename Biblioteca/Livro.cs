@@ -4,7 +4,7 @@ namespace Biblioteca
 {
     public class Livro
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public string ISBN { get; set; }
 
@@ -94,6 +94,6 @@ namespace Biblioteca
 
         public string Status_Item { get; set; }
 
-        public string Status { get; set; }
+        public string Status_Emprestimos { get; set; }
     }
 }
