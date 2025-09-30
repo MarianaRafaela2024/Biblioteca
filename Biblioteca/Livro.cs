@@ -8,11 +8,11 @@ namespace Biblioteca
 
         public string ISBN { get; set; }
 
-        public string Cond_Encardenação { get; set; }
+        public string Cond_Encardenacao { get; set; }
 
         public string Agen_Catalogadora { get; set; }
 
-        public string Idi_Catalogocao { get; set; }
+        public string Idi_Catalogacao { get; set; }
 
         public string Agen_Transcricao { get; set; }
 

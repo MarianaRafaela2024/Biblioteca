@@ -133,6 +133,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Biblioteca.Controllers.LivroController",
+    "Method": "CreateLivro",
+    "RelativePath": "Livro",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "livro",
+        "Type": "Biblioteca.Livro",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Biblioteca.Controllers.LoginController",
     "Method": "ValidarLogin",
     "RelativePath": "Login",

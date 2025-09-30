@@ -213,44 +213,204 @@ function login() {
 //CadLivro
 
 function addLivro() {
+    // Campo 020 - ISBN
+    const ISBN = document.getElementById('isbn_a').value;
+    const Cond_Encardenaçao = document.getElementById('isbn_c').value;
 
-    const ISBNA = document.getElementById('isbn_a').value;
-    const ISBNC = document.getElementById('isbn_c').value;
-    const RM = document.getElementById('RM').value;
-    const Telefone = document.getElementById('telefone').value;
-    const Curso = document.getElementById('curso').value.toString();
-    const Status = document.getElementById('status').value.toString();
+    // Campo 040 - Fonte da Catalogação
+    const Agen_Catalogadora = document.getElementById('agencia').value;
+    const Idi_Catalogacao = document.getElementById('idioma_catalogacao').value;
+    const Agen_Transcricao = document.getElementById('agencia_transcricao').value;
+    const Agen_Modigicacao = document.getElementById('agencia_modificacao').value;
 
+    // Campo 041 - Código de Idioma
+    const Idi_Texto = document.getElementById('idioma_texto').value;
+    const Idi_Resumo = document.getElementById('idioma_resumo').value;
+    const Idi_Legenda = document.getElementById('idioma_legenda').value;
 
-    const aluno = {
-        ISBN: ISBNA,
-        Sobrenome: Sobrenome,
-        RM: RM,
-        Telefone: Telefone,
-        Curso: Curso,
-        Status: Status
+    // Campo 082 - Classificação CDD
+    const Numero_CDD = document.getElementById('cdd').value;
+    const Numero_Item_CDD = document.getElementById('cdd_numero').value;
+
+    // Campo 090 - Classificação Local
+    const Num_Cham_Local = document.getElementById('classificacao_local').value;
+    const Num_Item_Local = document.getElementById('classificacao_local_b').value;
+
+    // Campo 095 - Classificação Local Secundária
+    const Num_Cham_Secundaria = document.getElementById('classificacao_local_sec').value;
+
+    // Campo 100 - Autor Principal
+    const Nome = document.getElementById('autor_nome').value;
+    const Datas_Pessoais = document.getElementById('autor_datas').value;
+    const Funcao_Pessoal = document.getElementById('autor_funcao').value;
+
+    // Campo 245 - Título
+    const Subtitulo = document.getElementById('subtitulo').value;
+    const Indi_Responsabilidade = document.getElementById('responsabilidade').value;
+    const Indi_Arti_Inicial = document.getElementById('indicador').value;
+
+    // Campo 250 - Edição
+    const Num_Edicao = document.getElementById('edicao').value;
+    const Mencao_Responsa_Edicao = document.getElementById('edicao_mencao').value;
+
+    // Campo 260 - Publicação
+    const Local_Publicacao = document.getElementById('local').value;
+    const Editora = document.getElementById('editora').value;
+    const Ano_Publicacao = document.getElementById('ano').value;
+
+    // Campo 300 - Descrição Física
+    const Paginas = document.getElementById('paginas').value;
+    const Ilustracoes = document.getElementById('ilustracoes').value;
+    const Dimensoes = document.getElementById('dimensoes').value;
+    const Material_Adicional = document.getElementById('material_adicional').value;
+
+    // Campo 490 - Série
+    const Titulo_Serie = document.getElementById('serie').value;
+    const Num_Serie = document.getElementById('serie_numero').value;
+
+    // Campo 500 - Notas Gerais
+    const Notas_Gerais = document.getElementById('nota').value;
+
+    // Campo 600 - Assunto - Nome Pessoal
+    const Nome_Pess_Assunto = document.getElementById('assunto_nome').value;
+    const Topico = document.getElementById('assunto_topico').value;
+
+    // Campo 630 - Assunto - Título Uniforme
+    const Titulo_Uniforme = document.getElementById('assunto_titulo').value;
+    const Forma_Uniforme = document.getElementById('assunto_forma').value;
+    const Periodo_Historico = document.getElementById('assunto_tempo').value;
+    const Local_Uniforme = document.getElementById('assunto_local').value;
+
+    // Campo 650 - Assunto - Termo Tópico
+    const Assunto_Termo = document.getElementById('assunto_topico2').value;
+    const Forma_Termo = document.getElementById('assunto_forma2').value;
+    const Periodo_Histo_Termo = document.getElementById('assunto_tempo2').value;
+    const Local_Termo = document.getElementById('assunto_local2').value;
+
+    // Campo 949 - Controle Local
+    const Info_Local = document.getElementById('controle_local').value;
+    const Status_Item = document.getElementById('controle_status').value;
+
+    // Status de empréstimos (pode ser fixo ou dinâmico)
+    const Status_Emprestimos = 'Disponível';
+
+    const livro = {
+        ISBN: ISBN,
+        Cond_Encardenaçao: Cond_Encardenaçao,
+        Agen_Catalogadora: Agen_Catalogadora,
+        Idi_Catalogacao: Idi_Catalogacao,
+        Agen_Transcricao: Agen_Transcricao,
+        Agen_Modigicacao: Agen_Modigicacao,
+        Idi_Texto: Idi_Texto,
+        Idi_Resumo: Idi_Resumo,
+        Idi_Legenda: Idi_Legenda,
+        Numero_CDD: Numero_CDD,
+        Numero_Item_CDD: Numero_Item_CDD,
+        Num_Cham_Local: Num_Cham_Local,
+        Num_Item_Local: Num_Item_Local,
+        Num_Cham_Secundaria: Num_Cham_Secundaria,
+        Nome: Nome,
+        Subtitulo: Subtitulo,
+        Indi_Responsabilidade: Indi_Responsabilidade,
+        Indi_Arti_Inicial: Indi_Arti_Inicial,
+        Num_Edicao: Num_Edicao,
+        Mencao_Responsa_Edicao: Mencao_Responsa_Edicao,
+        Local_Publicacao: Local_Publicacao,
+        Editora: Editora,
+        Ano_Publicacao: Ano_Publicacao,
+        Paginas: Paginas,
+        Ilustracoes: Ilustracoes,
+        Dimensoes: Dimensoes,
+        Material_Adicional: Material_Adicional,
+        Titulo_Serie: Titulo_Serie,
+        Num_Serie: Num_Serie,
+        Notas_Gerais: Notas_Gerais,
+        Nome_Pess_Assunto: Nome_Pess_Assunto,
+        Datas_Pessoais: Datas_Pessoais,
+        Funcao_Pessoal: Funcao_Pessoal,
+        Topico: Topico,
+        Titulo_Uniforme: Titulo_Uniforme,
+        Forma_Uniforme: Forma_Uniforme,
+        Periodo_Historico: Periodo_Historico,
+        Local_Uniforme: Local_Uniforme,
+        Assunto_Termo: Assunto_Termo,
+        Forma_Termo: Forma_Termo,
+        Periodo_Histo_Termo: Periodo_Histo_Termo,
+        Local_Termo: Local_Termo,
+        Info_Local: Info_Local,
+        Status_Item: Status_Item,
+        Status_Emprestimos: Status_Emprestimos
     };
-    console.log(Status);
-    fetch('https://localhost:7139/Aluno', {
+
+    console.log(livro);
+
+    fetch('https://localhost:7139/Livro', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(aluno)
+        body: JSON.stringify(livro)
     })
-        .then(response => {
-            if (response.ok) {
-                document.getElementById('nome').value = '';
-                document.getElementById('sobrenome').value = '';
-                document.getElementById('telefone').value = '';
-                document.getElementById('RM').value = '';
-                document.getElementById('curso').value = '';
-                document.getElementById('status').value = '';
-                getAluno();
-            }
-        });
+    .then(response => {
+        if (response.ok) {
+            // Limpar todos os campos do formulário
+            document.getElementById('isbn_a').value = '';
+            document.getElementById('isbn_c').value = '';
+            document.getElementById('agencia').value = '';
+            document.getElementById('idioma_catalogacao').value = '';
+            document.getElementById('agencia_transcricao').value = '';
+            document.getElementById('agencia_modificacao').value = '';
+            document.getElementById('idioma_texto').value = '';
+            document.getElementById('idioma_resumo').value = '';
+            document.getElementById('idioma_legenda').value = '';
+            document.getElementById('cdd').value = '';
+            document.getElementById('cdd_numero').value = '';
+            document.getElementById('classificacao_local').value = '';
+            document.getElementById('classificacao_local_b').value = '';
+            document.getElementById('classificacao_local_sec').value = '';
+            document.getElementById('autor_nome').value = '';
+            document.getElementById('autor_datas').value = '';
+            document.getElementById('autor_funcao').value = '';
+            document.getElementById('titulo').value = '';
+            document.getElementById('subtitulo').value = '';
+            document.getElementById('responsabilidade').value = '';
+            document.getElementById('indicador').value = '0';
+            document.getElementById('edicao').value = '';
+            document.getElementById('edicao_mencao').value = '';
+            document.getElementById('local').value = '';
+            document.getElementById('editora').value = '';
+            document.getElementById('ano').value = '';
+            document.getElementById('paginas').value = '';
+            document.getElementById('ilustracoes').value = '';
+            document.getElementById('dimensoes').value = '';
+            document.getElementById('material_adicional').value = '';
+            document.getElementById('serie').value = '';
+            document.getElementById('serie_numero').value = '';
+            document.getElementById('nota').value = '';
+            document.getElementById('assunto_nome').value = '';
+            document.getElementById('assunto_datas').value = '';
+            document.getElementById('assunto_funcao').value = '';
+            document.getElementById('assunto_topico').value = '';
+            document.getElementById('assunto_titulo').value = '';
+            document.getElementById('assunto_forma').value = '';
+            document.getElementById('assunto_tempo').value = '';
+            document.getElementById('assunto_local').value = '';
+            document.getElementById('assunto_topico2').value = '';
+            document.getElementById('assunto_forma2').value = '';
+            document.getElementById('assunto_tempo2').value = '';
+            document.getElementById('assunto_local2').value = '';
+            document.getElementById('controle_local').value = '';
+            document.getElementById('controle_status').value = '';
+            
+            showNotification('Livro adicionado com sucesso!', 'success');
+        } else {
+            showNotification('Erro ao adicionar livro!', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        showNotification('Erro ao adicionar livro!', 'error');
+    });
 
-    console.log('Adicionar aluno');
-    showNotification('Usuário adicionado com sucesso!', 'success');
+    console.log('Adicionar livro');
 }
-

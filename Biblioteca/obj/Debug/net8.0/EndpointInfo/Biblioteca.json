@@ -219,6 +219,37 @@
         }
       }
     },
+    "/Livro": {
+      "post": {
+        "tags": [
+          "Livro"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Livro"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Livro"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Livro"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Login": {
       "post": {
         "tags": [
@@ -298,6 +329,196 @@
             "nullable": true
           },
           "status": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Livro": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isbn": {
+            "type": "string",
+            "nullable": true
+          },
+          "cond_Encardenacao": {
+            "type": "string",
+            "nullable": true
+          },
+          "agen_Catalogadora": {
+            "type": "string",
+            "nullable": true
+          },
+          "idi_Catalogacao": {
+            "type": "string",
+            "nullable": true
+          },
+          "agen_Transcricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "agen_Modigicacao": {
+            "type": "string",
+            "nullable": true
+          },
+          "idi_Texto": {
+            "type": "string",
+            "nullable": true
+          },
+          "idi_Resumo": {
+            "type": "string",
+            "nullable": true
+          },
+          "idi_Legenda": {
+            "type": "string",
+            "nullable": true
+          },
+          "numero_CDD": {
+            "type": "string",
+            "nullable": true
+          },
+          "numero_Item_CDD": {
+            "type": "string",
+            "nullable": true
+          },
+          "num_Cham_Local": {
+            "type": "string",
+            "nullable": true
+          },
+          "num_Item_Local": {
+            "type": "string",
+            "nullable": true
+          },
+          "num_Cham_Secundaria": {
+            "type": "string",
+            "nullable": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "subtitulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "indi_Responsabilidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "indi_Arti_Inicial": {
+            "type": "string",
+            "nullable": true
+          },
+          "num_Edicao": {
+            "type": "string",
+            "nullable": true
+          },
+          "mencao_Responsa_Edicao": {
+            "type": "string",
+            "nullable": true
+          },
+          "local_Publicacao": {
+            "type": "string",
+            "nullable": true
+          },
+          "editora": {
+            "type": "string",
+            "nullable": true
+          },
+          "ano_Publicacao": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paginas": {
+            "type": "string",
+            "nullable": true
+          },
+          "ilustracoes": {
+            "type": "string",
+            "nullable": true
+          },
+          "dimensoes": {
+            "type": "string",
+            "nullable": true
+          },
+          "material_Adicional": {
+            "type": "string",
+            "nullable": true
+          },
+          "titulo_Serie": {
+            "type": "string",
+            "nullable": true
+          },
+          "num_Serie": {
+            "type": "string",
+            "nullable": true
+          },
+          "notas_Gerais": {
+            "type": "string",
+            "nullable": true
+          },
+          "nome_Pess_Assunto": {
+            "type": "string",
+            "nullable": true
+          },
+          "datas_Pessoais": {
+            "type": "string",
+            "nullable": true
+          },
+          "funcao_Pessoal": {
+            "type": "string",
+            "nullable": true
+          },
+          "topico": {
+            "type": "string",
+            "nullable": true
+          },
+          "titulo_Uniforme": {
+            "type": "string",
+            "nullable": true
+          },
+          "forma_Uniforme": {
+            "type": "string",
+            "nullable": true
+          },
+          "periodo_Historico": {
+            "type": "string",
+            "nullable": true
+          },
+          "local_Uniforme": {
+            "type": "string",
+            "nullable": true
+          },
+          "assunto_Termo": {
+            "type": "string",
+            "nullable": true
+          },
+          "forma_Termo": {
+            "type": "string",
+            "nullable": true
+          },
+          "periodo_Histo_Termo": {
+            "type": "string",
+            "nullable": true
+          },
+          "local_Termo": {
+            "type": "string",
+            "nullable": true
+          },
+          "info_Local": {
+            "type": "string",
+            "nullable": true
+          },
+          "status_Item": {
+            "type": "string",
+            "nullable": true
+          },
+          "status_Emprestimos": {
             "type": "string",
             "nullable": true
           }
