@@ -253,5 +253,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Add "Expand All" / "Collapse All" buttons functionality
-    addControlButtons();
+    //addControlButtons();
 });
