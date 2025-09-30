@@ -63,7 +63,7 @@
           </div>
           
           <div class="table-container">
-             … <!-- tabela permanece igual -->
+             
           </div>
           
           <!-- ======= MODAIS ======= -->
@@ -71,7 +71,7 @@
             <div class="modal-content">
               <span class="close" onclick="closeModal('addModal')">&times;</span>
               <h3>Adicionar Usuário</h3>
-              <form id="addAlunoForm" onsubmit="addAluno();return false;">
+              <form id="addAlunoForm">
                 <h3>Adicionar Usuário</h3>
                     <label for="nome">Nome</label>
                     <input type="text" id="nome" placeholder="Digite o nome" required>
@@ -120,7 +120,7 @@
                         <option value="Ativo">Ativo</option>
                         <option value="Inativo">Inativo</option>
                     </select>
-                <button type="submit">Adicionar</button>
+                <button type="button" onclick="addAluno();return false;">Adicionar</button>
               </form>
             </div>
           </div>
