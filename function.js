@@ -287,8 +287,8 @@ function addLivro() {
 
     // Campo 949 - Controle Local
     const Info_Local = document.getElementById('controle_local').value;
-    const Status_Item = document.getElementById('controle_status').value;
-    const Status_Emprestimos = 'Devolvido';
+    const Status_Item = document.getElementById('controle_status').value.toString();
+    const Status_Emprestimos = document.getElementById('status_emprestimo').value.toString();
 
     // Objeto com os mesmos nomes da classe C# Livro.cs
     const livro = {
