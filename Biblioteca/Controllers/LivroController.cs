@@ -137,6 +137,73 @@ namespace Biblioteca.Controllers
         //    return NotFound();
         //}
 
+
+        [HttpGet("search")]
+        public IActionResult Search(string? termo)
+        {
+            var livros = new List<object>();
+
+            using (SqlConnection conection = new SqlConnection(StrConex))
+            {
+                conection.Open();
+
+                string sql = @"
+        SELECT 
+            l.Id_Livro, 
+            l.Nome_Livro, 
+            l.Subtitulo, 
+            l.Indicacao_Responsabilidade, 
+            l.Ano_Publicacao, 
+            l.ISBN, 
+            l.Assunto_Termo,
+            STRING_AGG(a.Nome_Autor, ', ') AS Autores
+        FROM Livro l
+        LEFT JOIN Livro_Autor la ON l.Id_Livro = la.Id_Livro
+        LEFT JOIN Autor a ON la.Id_Autor = a.Id_Autor
+        WHERE (@termo IS NULL OR
+               l.Nome_Livro LIKE '%' + @termo + '%' OR
+               l.Subtitulo LIKE '%' + @termo + '%' OR
+               l.Indicacao_Responsabilidade LIKE '%' + @termo + '%' OR
+               l.Assunto_Termo LIKE '%' + @termo + '%' OR
+               CAST(l.Ano_Publicacao AS NVARCHAR) = @termo OR
+               a.Nome_Autor LIKE '%' + @termo + '%'
+        )
+        GROUP BY 
+            l.Id_Livro, l.Nome_Livro, l.Subtitulo, l.Indicacao_Responsabilidade, 
+            l.Ano_Publicacao, l.ISBN, l.Assunto_Termo
+        ORDER BY l.Nome_Livro";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conection))
+                {
+                    cmd.Parameters.AddWithValue("@termo", (object)termo ?? DBNull.Value);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            livros.Add(new
+                            {
+                                Id_Livro = Convert.ToInt32(reader["Id_Livro"]),
+                                Nome_Livro = reader["Nome_Livro"].ToString(),
+                                Subtitulo = reader["Subtitulo"].ToString(),
+                                Indicacao_Responsabilidade = reader["Indicacao_Responsabilidade"].ToString(),
+                                Ano_Publicacao = reader["Ano_Publicacao"] != DBNull.Value ? Convert.ToInt32(reader["Ano_Publicacao"]) : (int?)null,
+                                ISBN = reader["ISBN"].ToString(),
+                                Assunto_Termo = reader["Assunto_Termo"].ToString(),
+                                Autores = reader["Autores"]?.ToString()
+                            });
+                        }
+                    }
+                }
+            }
+
+            return Ok(livros);
+        }
+
+
+
+
+
         [HttpPost]
 
         public ActionResult CreateLivro(Livro livro)
@@ -178,10 +245,10 @@ namespace Biblioteca.Controllers
                 comand.Parameters.AddWithValue("@Nome_Pessoal_Assunto", livro.Nome_Pess_Assunto);
                 comand.Parameters.AddWithValue("@Datas_Pessoais", livro.Datas_Pessoais);
                 comand.Parameters.AddWithValue("@Funcao_Pessoal", livro.Funcao_Pessoal);
-                comand.Parameters.AddWithValue("@Topico", livro.Topico);
+                //comand.Parameters.AddWithValue("@Topico_Pessoal", livro.Topico_Pessoal);
                 comand.Parameters.AddWithValue("@Titulo_Uniforme", livro.Titulo_Uniforme);
                 comand.Parameters.AddWithValue("@Forma_Uniforme", livro.Forma_Uniforme);
-                comand.Parameters.AddWithValue("@Periodo_Historico", livro.Periodo_Historico);
+                //comand.Parameters.AddWithValue("@Periodo_Historico_Uniforme", livro.Periodo_Historico);
                 comand.Parameters.AddWithValue("@Localidade_Uniforme", livro.Local_Uniforme);
                 comand.Parameters.AddWithValue("@Assunto_Termo", livro.Assunto_Termo);
                 comand.Parameters.AddWithValue("@Forma_Termo", livro.Forma_Termo);

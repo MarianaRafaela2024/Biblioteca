@@ -36,85 +36,12 @@
 
         <div class="busca-container">
             <form class="busca-topo">
-                <input type="text" id="busca" name="busca" placeholder="Digite título, autor ou ISBN">
-                <select id="tipo_material" name="tipo_material">
-                    <option value="todos">Todos</option>
-                    <option value="livros">Livros</option>
-                    <option value="periodicos">Periódicos</option>
-                    <option value="artigos">Artigos</option>
-                </select>
-                <button type="submit">Pesquisar</button>
+                <input type="text" id="busca" placeholder="Digite título, autor, assunto ou ano">
+                <button type="button" onclick="buscarLivros();">Pesquisar</button>
             </form>
 
-            <h2>Resultados da Pesquisa</h2>
-            <div id="resultados">
-                <!-- Exemplo de resultado -->
-                <div class="resultado-item">
-                    <details open>
-                        <summary>Resumo Catalográfico</summary>
-                        <p><strong>Título:</strong> HARRY POTTER E A CÂMARA SECRETA</p>
-                        <p><strong>Autor:</strong> ROWLING, J. K.</p>
-                        <p><strong>Ano de publicação:</strong> 2000</p>
-                        <p><strong>ISBN:</strong> 853251166</p>
-                        <p><strong>Assunto:</strong> PATRIMÔNIO</p>
-                        <p><strong>Exemplares:</strong> 1 - <em>Disponíveis:</em> 1 <em>Emprestados:</em> 0 <em>Reservas:</em> 0</p>
-                    </details>
-
-                    <details>
-                        <summary>Registro MARC 21</summary>
-                        <pre>
-020    ‡a 853251166
-100    ‡a ROWLING, J. K.
-245    ‡a HARRY POTTER E A CÂMARA SECRETA
-260    ‡c 2000
-650    ‡a PATRIMÔNIO
-949    ‡a Exemplares: 1 Disponíveis: 1 Emprestados: 0 Reservas: 0
-                        </pre>
-                    </details>
-                </div>
-
-                <div class="resultado-item">
-                    <details open>
-                        <summary>Resumo Catalográfico</summary>
-                        <p><strong>Título:</strong> Harry Potter e a criança amaldiçoada, partes um e dois</p>
-                        <p><strong>Autor:</strong> TIFFANY, John; THORNE, Jack; VICENTINI, Anna</p>
-                        <p><strong>Ano de publicação:</strong> 2016</p>
-                        <p><strong>ISBN:</strong> 9788532530424</p>
-                        <p><strong>Assunto:</strong> Literatura infantojuvenil inglesa</p>
-                        <p><strong>Exemplares:</strong> 3 - <em>Disponíveis:</em> 2 <em>Emprestados:</em> 1 <em>Reservas:</em> 0</p>
-                    </details>
-
-                    <details>
-                        <summary>Registro MARC 21</summary>
-                        <pre>
-020    ‡a 9788532530424
-100    ‡a TIFFANY, John; THORNE, Jack; VICENTINI, Anna
-245    ‡a Harry Potter e a criança amaldiçoada, partes um e dois
-260    ‡c 2016
-650    ‡a Literatura infantojuvenil inglesa
-949    ‡a Exemplares: 3 Disponíveis: 2 Emprestados: 1 Reservas: 0
-                        </pre>
-                    </details>
-                </div>
-            </div>
+            <div id="resultados"></div>
         </div>
-
     </main>
-
-    <script>
-        // Exemplo de integração futura com API
-        document.querySelector("form").addEventListener("submit", function(e){
-            e.preventDefault();
-            let termo = document.getElementById("busca").value;
-            let tipo = document.getElementById("tipo_material").value;
-
-            // Aqui faria a chamada à API
-            // fetch(`/api/busca?termo=${termo}&tipo=${tipo}`)
-            //   .then(res => res.json())
-            //   .then(data => {
-            //       // Para cada item retornado, montar os dois <details> (resumo + marc21)
-            //   });
-        });
-    </script>
 </body>
 </html>
