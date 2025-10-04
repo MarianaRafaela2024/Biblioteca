@@ -37,10 +37,35 @@ function getAluno() {
                 statusCell.textContent = aluno.status;
                 row.appendChild(statusCell);
 
+                 const actionCell = document.createElement('td');
+                actionCell.innerHTML = `
+                    <div class="action">
+                        <button class="btn-edit" onclick="abrirEdicao(${aluno.id}, '${aluno.nome}', '${aluno.sobrenome}', '${aluno.telefone}', '${aluno.rm}', '${aluno.curso}', '${aluno.status}')">Editar</button>
+                        <button class="btn-delete" onclick="abrirExclusao(${aluno.id})">Excluir</button>
+                    </div>
+                `;
+                row.appendChild(actionCell);
 
                 tbody.appendChild(row);
             });
         });
+}
+
+function abrirEdicao(id, nome, sobrenome, telefone, rm, curso, status) {
+    document.getElementById('upid').value = id;
+    document.getElementById('upnome').value = nome;
+    document.getElementById('upsobrenome').value = sobrenome;
+    document.getElementById('uptelefone').value = telefone;
+    document.getElementById('upRM').value = rm;
+    document.getElementById('upcurso').value = curso;
+    document.getElementById('upstatus').value = status;
+    
+    openModal('editModal');
+}
+
+function abrirExclusao(id) {
+    document.getElementById('deleId').value = id;
+    openModal('deleteModal');
 }
 
 function addAluno() {
@@ -78,11 +103,12 @@ function addAluno() {
                 document.getElementById('curso').value = '';
                 document.getElementById('status').value = '';
                 getAluno();
+                showNotification('Usuário adicionado com sucesso!', 'success');
             }
         });
 
     console.log('Adicionar aluno');
-    showNotification('Usuário adicionado com sucesso!', 'success');
+    
 }
 
 
@@ -364,4 +390,53 @@ function addLivro() {
         console.error('Erro na requisição:', error);
         alert('Erro ao conectar com o servidor!');
     });
+}
+
+
+// Buscar livro acervo
+
+async function buscarLivros() {
+    const termo = document.getElementById('busca').value.trim();
+    const resultadosDiv = document.getElementById('resultados');
+
+    resultadosDiv.innerHTML = '';
+
+    try {
+        const response = await fetch(`https://localhost:7139/Livro/search?termo=${encodeURIComponent(termo)}`);
+        if (!response.ok) throw new Error('Erro ao buscar livros');
+
+        const livros = await response.json();
+
+        if (livros.length === 0) {
+            resultadosDiv.innerHTML = '<p>Nenhum livro encontrado.</p>';
+            return;
+        }
+
+        const lista = document.createElement('ul');
+        lista.style.listStyle = "none";
+
+        livros.forEach(livro => {
+            const item = document.createElement('li');
+            item.style.border = "1px solid #ccc";
+            item.style.margin = "5px";
+            item.style.padding = "10px";
+            item.style.borderRadius = "5px";
+
+            item.innerHTML = `
+                <strong>${livro.Nome_Livro}</strong> (${livro.Ano_Publicacao || 'Ano não informado'})<br>
+                ${livro.Subtitulo ? livro.Subtitulo + '<br>' : ''}
+                Autor/Responsável: ${livro.Indicacao_Responsabilidade || 'Não informado'}<br>
+                Autores: ${livro.Autores || 'Não informado'}<br>
+                ISBN: ${livro.ISBN || 'Não informado'}<br>
+                Assunto: ${livro.Assunto_Termo || 'Não informado'}
+            `;
+            lista.appendChild(item);
+        });
+
+        resultadosDiv.appendChild(lista);
+
+    } catch (error) {
+        resultadosDiv.innerHTML = `<p style="color:red;">${error.message}</p>`;
+        console.error(error);
+    }
 }

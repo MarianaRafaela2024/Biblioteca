@@ -171,16 +171,28 @@
   },
   {
     "ContainingType": "Biblioteca.Controllers.LivroController",
+<<<<<<< HEAD
     "Method": "CreateLivroLeigos",
     "RelativePath": "Livro/PostLivroLeigos",
     "HttpMethod": "POST",
+=======
+    "Method": "Search",
+    "RelativePath": "Livro/search",
+    "HttpMethod": "GET",
+>>>>>>> 48bb1f699a3934e423b574372f4a2a6b9a34c6cb
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
+<<<<<<< HEAD
         "Name": "livro",
         "Type": "Biblioteca.Livro",
         "IsRequired": true
+=======
+        "Name": "termo",
+        "Type": "System.String",
+        "IsRequired": false
+>>>>>>> 48bb1f699a3934e423b574372f4a2a6b9a34c6cb
       }
     ],
     "ReturnTypes": []
