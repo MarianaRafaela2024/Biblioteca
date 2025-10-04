@@ -149,6 +149,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Biblioteca.Controllers.LivroController",
+    "Method": "Search",
+    "RelativePath": "Livro/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "termo",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Biblioteca.Controllers.LoginController",
     "Method": "ValidarLogin",
     "RelativePath": "Login",

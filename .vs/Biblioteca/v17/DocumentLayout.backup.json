@@ -1,37 +1,34 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\User\\Softwares\\Biblioteca\\",
+  "WorkspaceRootPath": "C:\\Users\\FULLGAMERS\\Biblioteca\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Biblioteca/True/SqlTable/dbo.Livro.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\controllers\\livrocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\fullgamers\\biblioteca\\biblioteca\\controllers\\livrocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\livrocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\fullgamers\\biblioteca\\biblioteca\\autor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\autor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\livro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\fullgamers\\biblioteca\\biblioteca\\livro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\livro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\controllers\\alunocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\fullgamers\\biblioteca\\biblioteca\\controllers\\alunocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\alunocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\aluno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\fullgamers\\biblioteca\\biblioteca\\aluno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\aluno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\fullgamers\\biblioteca\\biblioteca\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\fullgamers\\biblioteca\\biblioteca\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -41,89 +38,84 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "dbo.Livro [Dados]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Biblioteca/True/SqlTable/dbo.Livro.sql",
-              "ToolTip": "dbo.Livro [Dados]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-09-30T20:28:39.583Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Program.cs",
-              "RelativeDocumentMoniker": "Biblioteca\\Program.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Program.cs",
-              "RelativeToolTip": "Biblioteca\\Program.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAwDUAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T04:42:58.974Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Autor.cs",
+              "DocumentMoniker": "C:\\Users\\FULLGAMERS\\Biblioteca\\Biblioteca\\Autor.cs",
+              "RelativeDocumentMoniker": "Biblioteca\\Autor.cs",
+              "ToolTip": "C:\\Users\\FULLGAMERS\\Biblioteca\\Biblioteca\\Autor.cs",
+              "RelativeToolTip": "Biblioteca\\Autor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-01T02:47:06.453Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "LivroController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\LivroController.cs",
+              "DocumentMoniker": "C:\\Users\\FULLGAMERS\\Biblioteca\\Biblioteca\\Controllers\\LivroController.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Controllers\\LivroController.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\LivroController.cs",
+              "ToolTip": "C:\\Users\\FULLGAMERS\\Biblioteca\\Biblioteca\\Controllers\\LivroController.cs",
               "RelativeToolTip": "Biblioteca\\Controllers\\LivroController.cs",
-              "ViewState": "AgIAAKoAAAAAAAAAAAAAAMEAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAKsAAAAAAAAAAAAAALYAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-29T20:48:18.863Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "Aluno.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Aluno.cs",
+              "DocumentMoniker": "C:\\Users\\FULLGAMERS\\Biblioteca\\Biblioteca\\Aluno.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Aluno.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Aluno.cs",
+              "ToolTip": "C:\\Users\\FULLGAMERS\\Biblioteca\\Biblioteca\\Aluno.cs",
               "RelativeToolTip": "Biblioteca\\Aluno.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-20T20:53:38.057Z"
+              "WhenOpened": "2025-09-20T20:53:38.057Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Livro.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Livro.cs",
+              "DocumentMoniker": "C:\\Users\\FULLGAMERS\\Biblioteca\\Biblioteca\\Livro.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Livro.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Livro.cs",
+              "ToolTip": "C:\\Users\\FULLGAMERS\\Biblioteca\\Biblioteca\\Livro.cs",
               "RelativeToolTip": "Biblioteca\\Livro.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAwwBcAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAEcAAAAAAAAAAADwv1oAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-18T01:14:08.627Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "LoginController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\LoginController.cs",
+              "DocumentMoniker": "C:\\Users\\FULLGAMERS\\Biblioteca\\Biblioteca\\Controllers\\LoginController.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Controllers\\LoginController.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\LoginController.cs",
+              "ToolTip": "C:\\Users\\FULLGAMERS\\Biblioteca\\Biblioteca\\Controllers\\LoginController.cs",
               "RelativeToolTip": "Biblioteca\\Controllers\\LoginController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-09T14:12:12.881Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Login.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Login.cs",
+              "DocumentMoniker": "C:\\Users\\FULLGAMERS\\Biblioteca\\Biblioteca\\Login.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Login.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Login.cs",
+              "ToolTip": "C:\\Users\\FULLGAMERS\\Biblioteca\\Biblioteca\\Login.cs",
               "RelativeToolTip": "Biblioteca\\Login.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -132,15 +124,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "AlunoController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\AlunoController.cs",
+              "DocumentMoniker": "C:\\Users\\FULLGAMERS\\Biblioteca\\Biblioteca\\Controllers\\AlunoController.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Controllers\\AlunoController.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\AlunoController.cs",
+              "ToolTip": "C:\\Users\\FULLGAMERS\\Biblioteca\\Biblioteca\\Controllers\\AlunoController.cs",
               "RelativeToolTip": "Biblioteca\\Controllers\\AlunoController.cs",
-              "ViewState": "AgIAAH4AAAAAAAAAAAAAAMMAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAADEAAAAAAAAAAAAiwDYAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T14:03:35.333Z"
+              "WhenOpened": "2025-09-09T14:03:35.333Z",
+              "EditorCaption": ""
             }
           ]
         }
