@@ -37,10 +37,35 @@ function getAluno() {
                 statusCell.textContent = aluno.status;
                 row.appendChild(statusCell);
 
+                 const actionCell = document.createElement('td');
+                actionCell.innerHTML = `
+                    <div class="action">
+                        <button class="btn-edit" onclick="abrirEdicao(${aluno.id}, '${aluno.nome}', '${aluno.sobrenome}', '${aluno.telefone}', '${aluno.rm}', '${aluno.curso}', '${aluno.status}')">Editar</button>
+                        <button class="btn-delete" onclick="abrirExclusao(${aluno.id})">Excluir</button>
+                    </div>
+                `;
+                row.appendChild(actionCell);
 
                 tbody.appendChild(row);
             });
         });
+}
+
+function abrirEdicao(id, nome, sobrenome, telefone, rm, curso, status) {
+    document.getElementById('upid').value = id;
+    document.getElementById('upnome').value = nome;
+    document.getElementById('upsobrenome').value = sobrenome;
+    document.getElementById('uptelefone').value = telefone;
+    document.getElementById('upRM').value = rm;
+    document.getElementById('upcurso').value = curso;
+    document.getElementById('upstatus').value = status;
+    
+    openModal('editModal');
+}
+
+function abrirExclusao(id) {
+    document.getElementById('deleId').value = id;
+    openModal('deleteModal');
 }
 
 function addAluno() {
@@ -78,11 +103,12 @@ function addAluno() {
                 document.getElementById('curso').value = '';
                 document.getElementById('status').value = '';
                 getAluno();
+                showNotification('Usuário adicionado com sucesso!', 'success');
             }
         });
 
     console.log('Adicionar aluno');
-    showNotification('Usuário adicionado com sucesso!', 'success');
+    
 }
 
 

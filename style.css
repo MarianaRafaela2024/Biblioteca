@@ -1,7 +1,4 @@
 
-
-/*Teste da bagaceira, funcionou?*/
-
 /*
     inicio
     login - aluno(nome, rm, telefone, curso, ano letivo, senha com rm) e funcionario(nome de login e senha)
@@ -24,68 +21,17 @@
         altera livro e aluno e emprestimo(put)
         buscar livro e aluno(get)
         deleta livro e aluno e emprestimo(delete)
-
-
-    banco de dados
-
-    aluno 
-        pk-id
-        nome
-        rm
-        curso
-        ano
-        telefone
-        fk-emprestimo
-        senha
-        ativo
-
-    multa
-        pk-id
-        tempoMulta
-        Ativo
-        fk-idAluno
-
-    livro
-        pk-id
-        colunas marc 21
-    
-    autor
-        pk - id
-        nome
-        
-
-    livro-autor
-        id
-        fk-idautor
-        fk-idlivro
-
-    bibliotecario
-        id
-        senha
-        login
-
-    emprestimo
-        pk id
-        ativo boolean
-        fk aluno
-        fk livro
-        dataemprestimo
-        datadevolucao
-
-    
-
-
-
-
 */
 
-/*Login*/
+body {
+    background: linear-gradient(135deg, #271919 0%, #271919 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    color: #7f8c8d;
+    display: flex;
+}
 
-* {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/*Login*/
 
         body {
             background: linear-gradient(135deg, #271919 0%, #271919 100%);
@@ -248,20 +194,6 @@
 
         
 /*Usuario*/
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background: linear-gradient(135deg, #271919 0%, #271919 100%);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    min-height: 100vh;
-    color: #7f8c8d;
-    display: flex;
-}
 
 /* Sidebar Navigation */
 .sidebar {

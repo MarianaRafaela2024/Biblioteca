@@ -54,8 +54,7 @@
               "RelativeToolTip": "Biblioteca\\Autor.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T02:47:06.453Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-01T02:47:06.453Z"
             },
             {
               "$type": "Document",
@@ -80,8 +79,7 @@
               "RelativeToolTip": "Biblioteca\\Aluno.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-20T20:53:38.057Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-20T20:53:38.057Z"
             },
             {
               "$type": "Document",
@@ -93,8 +91,7 @@
               "RelativeToolTip": "Biblioteca\\Livro.cs",
               "ViewState": "AgIAAEcAAAAAAAAAAADwv1oAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-18T01:14:08.627Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-18T01:14:08.627Z"
             },
             {
               "$type": "Document",
@@ -106,8 +103,7 @@
               "RelativeToolTip": "Biblioteca\\Controllers\\LoginController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T14:12:12.881Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-09T14:12:12.881Z"
             },
             {
               "$type": "Document",
@@ -119,8 +115,7 @@
               "RelativeToolTip": "Biblioteca\\Login.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T14:12:05.718Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-09T14:12:05.718Z"
             },
             {
               "$type": "Document",
@@ -132,8 +127,7 @@
               "RelativeToolTip": "Biblioteca\\Controllers\\AlunoController.cs",
               "ViewState": "AgIAADEAAAAAAAAAAAAiwDYAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T14:03:35.333Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-09T14:03:35.333Z"
             }
           ]
         }
