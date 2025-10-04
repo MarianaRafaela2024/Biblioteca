@@ -16,7 +16,7 @@ namespace Biblioteca
 
         public string Agen_Transcricao { get; set; }
 
-        public string Agen_Modigicacao { get; set; }
+        public string Agen_Modificacao { get; set; }
 
         public string Idi_Texto { get; set; }
 

@@ -134,8 +134,45 @@
   },
   {
     "ContainingType": "Biblioteca.Controllers.LivroController",
+    "Method": "GetLivro",
+    "RelativePath": "Livro",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Biblioteca.Livro, Biblioteca, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetLivro"
+  },
+  {
+    "ContainingType": "Biblioteca.Controllers.LivroController",
     "Method": "CreateLivro",
     "RelativePath": "Livro",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "livro",
+        "Type": "Biblioteca.Livro",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Biblioteca.Controllers.LivroController",
+    "Method": "CreateLivroLeigos",
+    "RelativePath": "Livro/PostLivroLeigos",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
