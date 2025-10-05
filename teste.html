@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Livros</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .loading {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .livros-lista {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .livro-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .livro-card h3 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .livro-card p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .livro-card strong {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Buscar Livros - Biblioteca</h1>
+        
+        <div class="search-box">
+            <input type="text" id="busca" placeholder="Digite o nome do livro ou ISBN para buscar...">
+            <button onclick="buscarTodos()">Buscar Todos os Livros</button>
+        </div>
+
+        <div id="mensagem"></div>
+        <div id="resultado" class="livros-lista"></div>
+    </div>
+
+    <script>
+        const API_URL = 'https://localhost:7139/Livro'; // Ajuste a porta se necessário
+
+        // Função para buscar todos os livros
+        async function buscarTodos() {
+            const mensagem = document.getElementById('mensagem');
+            const resultado = document.getElementById('resultado');
+            
+            mensagem.innerHTML = '<div class="loading">Carregando livros...</div>';
+            resultado.innerHTML = '';
+
+            try {
+                const response = await fetch(API_URL);
+                
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar livros');
+                }
+
+                const livros = await response.json();
+                mensagem.innerHTML = '';
+                
+                if (livros.length === 0) {
+                    resultado.innerHTML = '<p>Nenhum livro encontrado.</p>';
+                    return;
+                }
+
+                exibirLivros(livros);
+                
+            } catch (error) {
+                mensagem.innerHTML = `<div class="error">Erro: ${error.message}</div>`;
+                console.error('Erro:', error);
+            }
+        }
+
+        // Função para buscar livro por ID
+        async function buscarPorId(id) {
+            try {
+                const response = await fetch(`${API_URL}/${id}`);
+                
+                if (!response.ok) {
+                    throw new Error('Livro não encontrado');
+                }
+
+                const livro = await response.json();
+                return livro;
+                
+            } catch (error) {
+                console.error('Erro:', error);
+                return null;
+            }
+        }
+
+        // Função para exibir os livros na tela
+        function exibirLivros(livros) {
+            const resultado = document.getElementById('resultado');
+            
+            resultado.innerHTML = livros.map(livro => `
+                <div class="livro-card">
+                    <h3>${livro.nome || 'Sem título'}</h3>
+                    <p><strong>ISBN:</strong> ${livro.isbn || 'N/A'}</p>
+                    <p><strong>Editora:</strong> ${livro.editora || 'N/A'}</p>
+                    <p><strong>Ano:</strong> ${livro.ano_Publicacao || 'N/A'}</p>
+                    <p><strong>Páginas:</strong> ${livro.paginas || 'N/A'}</p>
+                    <p><strong>Status:</strong> ${livro.status_Emprestimos || 'N/A'}</p>
+                    ${livro.notas_Gerais ? `<p><strong>Notas:</strong> ${livro.notas_Gerais}</p>` : ''}
+                </div>
+            `).join('');
+        }
+
+        // Buscar ao pressionar Enter
+        document.getElementById('busca').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                buscarTodos();
+            }
+        });
+
+        // Carregar livros ao abrir a página
+        window.onload = function() {
+            buscarTodos();
+        };
+    </script>
+</body>
+</html>

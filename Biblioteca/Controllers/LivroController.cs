@@ -371,17 +371,12 @@ namespace Biblioteca.Controllers
                 comand.Parameters.AddWithValue("@Nome_Pessoal_Assunto", livro.Nome_Pess_Assunto);
                 comand.Parameters.AddWithValue("@Datas_Pessoal", livro.Datas_Pessoais);
                 comand.Parameters.AddWithValue("@Funcao_Pessoal", livro.Funcao_Pessoal);
-<<<<<<< HEAD
                 comand.Parameters.AddWithValue("@Topico_Pessoal", livro.Topico);
                 comand.Parameters.AddWithValue("@Titulo_Uniforme", livro.Titulo_Uniforme);
                 comand.Parameters.AddWithValue("@Forma_Uniforme", livro.Forma_Uniforme);
                 comand.Parameters.AddWithValue("@Periodo_Historico_Uniforme", livro.Periodo_Historico);
-=======
-                //comand.Parameters.AddWithValue("@Topico_Pessoal", livro.Topico_Pessoal);
-                comand.Parameters.AddWithValue("@Titulo_Uniforme", livro.Titulo_Uniforme);
                 comand.Parameters.AddWithValue("@Forma_Uniforme", livro.Forma_Uniforme);
-                //comand.Parameters.AddWithValue("@Periodo_Historico_Uniforme", livro.Periodo_Historico);
->>>>>>> 48bb1f699a3934e423b574372f4a2a6b9a34c6cb
+                comand.Parameters.AddWithValue("@Periodo_Historico_Uniforme", livro.Periodo_Historico);
                 comand.Parameters.AddWithValue("@Localidade_Uniforme", livro.Local_Uniforme);
                 comand.Parameters.AddWithValue("@Assunto_Termo", livro.Assunto_Termo);
                 comand.Parameters.AddWithValue("@Forma_Termo", livro.Forma_Termo);
