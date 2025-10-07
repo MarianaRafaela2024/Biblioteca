@@ -200,9 +200,30 @@ namespace Biblioteca.Controllers
             {
                 using (SqlConnection conection = new SqlConnection(StrConex))
                 {
-                    string query = "INSERT INTO Livro_Autor (Nome_Livro_Autor,Numero,Datas,Funcao,Tipo_Livro_Autor) VALUES (@Nome_Livro_Autor,@Numero,@Datas,@Funcao,@Tipo_Livro_Autor)";
+                    string selectUm = "SELECT Id_Livro FROM Livro WHERE ISBN = @ISBN";
+                    string selectDois = "SELECT Id_Autor FROM Autor WHERE Nome_Autor = @Nome_Autor";
+                    string query = "INSERT INTO Livro_Autor (Id_Livro,Id_Autor) VALUES (@Id_Livro,@Id_Autor)";
 
-                    SqlCommand comand = new SqlCommand(query, conection);
+                    List<Livro_Autor> Livro_Autors = new List<Livro_Autor>();
+                    using (SqlCommand cmdLivro = new SqlCommand(selectUm, conection))
+                    {
+                        
+                        conection.Open();
+                        SqlDataReader reader = cmdLivro.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            Livro_Autor Livro_Autor = new Livro_Autor()
+                            {
+                                Id = Convert.ToInt32(reader["Id_Livro_Autor"]),
+
+                            };
+                            Livro_Autors.Add(Livro_Autor);
+                        }
+                        reader.Close();
+                        return Livro_Autors;
+                    }
+
+                SqlCommand comand = new SqlCommand(query, conection);
 
                     //comand.Parameters.AddWithValue("@Nome_Livro_Autor", Livro_Autor.Nome_Livro_Autor);
                     

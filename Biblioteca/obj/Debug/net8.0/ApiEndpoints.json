@@ -276,6 +276,59 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Biblioteca.Controllers.Livro_AutorController",
+    "Method": "GetLivro_Livro_Autor",
+    "RelativePath": "Livro_Autor",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Biblioteca.Controllers.Livro_Autor, Biblioteca, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetLivro_Livro_Autor"
+  },
+  {
+    "ContainingType": "Biblioteca.Controllers.Livro_AutorController",
+    "Method": "CreateLivro_Autor",
+    "RelativePath": "Livro_Autor",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Livro_Autor",
+        "Type": "Biblioteca.Controllers.Livro_Autor",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Biblioteca.Controllers.Livro_AutorController",
+    "Method": "Search",
+    "RelativePath": "Livro_Autor/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "termo",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Biblioteca.Controllers.LivroController",
     "Method": "CreateLivroLeigos",
     "RelativePath": "Livro/PostLivroLeigos",

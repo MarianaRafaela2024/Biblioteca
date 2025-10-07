@@ -1,6 +1,5 @@
 /* ====== BASE GERAL ====== */
-/* Herdado de styleNovo.css */
-@import url("styleNovo.css");
+@import url("styleCadUser.css");
 
 /* ====== CONTEÚDO ESPECÍFICO DA PÁGINA INICIAL ====== */
 
@@ -82,6 +81,50 @@
   margin-bottom: 6px;
   font-size: 14px;
 }
+
+/* ===== RODAPÉ DA SIDEBAR ===== */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.login-link {
+  display: inline-block;
+  width: 100%;
+  background: var(--primary-red);
+  color: var(--white);
+  padding: 12px 0;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.login-link:hover {
+  background: var(--hover-red);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(196, 30, 58, 0.3);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .sidebar-footer {
+    padding: 15px;
+  }
+  .login-link {
+    padding: 10px 0;
+    font-size: 15px;
+  }
+}
+
 
 /* ===== ANIMAÇÕES ===== */
 @keyframes fadeIn {
