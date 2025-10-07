@@ -416,13 +416,9 @@ async function buscarLivros() {
         lista.style.listStyle = "none";
 
         livros.forEach(livro => {
-            const item = document.createElement('li');
-            item.style.border = "1px solid #ccc";
-            item.style.margin = "5px";
-            item.style.padding = "10px";
-            item.style.borderRadius = "5px";
-
-            item.innerHTML = `
+            const card = document.createElement('div');
+            card.className = 'livro-card';
+            card.innerHTML = `
                 <strong>${livro.Nome_Livro}</strong> (${livro.Ano_Publicacao || 'Ano não informado'})<br>
                 ${livro.Subtitulo ? livro.Subtitulo + '<br>' : ''}
                 Autor/Responsável: ${livro.Indicacao_Responsabilidade || 'Não informado'}<br>
@@ -430,9 +426,9 @@ async function buscarLivros() {
                 ISBN: ${livro.ISBN || 'Não informado'}<br>
                 Assunto: ${livro.Assunto_Termo || 'Não informado'}
             `;
-            lista.appendChild(item);
+            lista.appendChild(card);
         });
-
+        
         resultadosDiv.appendChild(lista);
 
     } catch (error) {
@@ -440,3 +436,10 @@ async function buscarLivros() {
         console.error(error);
     }
 }
+
+ // Função de limpar busca do acervo
+ async function limparBuscar() {
+      document.getElementById('busca').value = '';
+      document.getElementById('resultados').innerHTML = '';
+      showNotification('Busca limpa com sucesso!', 'info');
+    };
