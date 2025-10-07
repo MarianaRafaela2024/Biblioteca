@@ -3,13 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acervo - Biblioteca</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Consulta ao Acervo - Biblioteca</title>
+  <link rel="stylesheet" href="styleAcervo.css">
   <link rel="icon" type="image/jpg" href="midia/acervo.png">
 </head>
 <body>
-  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-
   <!-- Sidebar Overlay (Mobile) -->
   <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
@@ -31,17 +29,28 @@
     </div>
   </nav>
 
-    <main>
-        <h1>Consulta ao Acervo</h1>
+  <!-- Botão Mobile -->
+  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
 
-        <div class="busca-container">
-            <form class="busca-topo">
-                <input type="text" id="busca" placeholder="Digite título, autor, assunto ou ano">
-                <button type="button" onclick="buscarLivros();">Pesquisar</button>
-            </form>
+  <!-- Conteúdo Principal -->
+  <div class="main-content">
+    <div class="page-header">
+      <h1>Consulta ao Acervo</h1>
+      <p>Pesquise livros disponíveis na biblioteca</p>
+    </div>
 
-            <div id="resultados"></div>
-        </div>
-    </main>
+    <div class="busca-container">
+      <form class="busca-topo" onsubmit="buscarLivros(); return false;">
+        <input type="text" id="busca" placeholder="Digite título, autor, assunto ou ano">
+        <button type="submit">Pesquisar</button>
+        <button type="button" class="btn-limpar" onclick="limparBuscar()">Limpar</button>
+      </form>
+
+      <div id="resultados"></div>
+    </div>
+  </div>
+
+  <script src="function.js"></script>
+  <script src="animation.js"></script>
 </body>
 </html>
