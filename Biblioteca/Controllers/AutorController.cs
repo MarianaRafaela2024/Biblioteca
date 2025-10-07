@@ -31,6 +31,11 @@ namespace Biblioteca.Controllers
                     Autor Autor = new Autor()
                     {
                         Id = Convert.ToInt32(reader["Id_Autor"]),
+                        Nome_Autor = reader["Nome_Autor"]?.ToString() ?? string.Empty,
+                        Numero = reader["Numero"]?.ToString() ?? string.Empty,
+                        Datas = reader["Datas"]?.ToString() ?? string.Empty,
+                        Funcao = reader["Funcao"]?.ToString() ?? string.Empty,
+                        Tipo_Autor = reader["Tipo_Autor"]?.ToString() ?? string.Empty,
                         
                     };
                     Autors.Add(Autor);
@@ -199,103 +204,15 @@ namespace Biblioteca.Controllers
         {
             using (SqlConnection conection = new SqlConnection(StrConex))
             {
-                string query = @"INSERT INTO Autor (
-                    ISBN,
-                    Condicoes_Encadernacao,
-                    Agencia_Catalogadora,
-                    Idioma_Catalogacao,
-                    Agencia_Transcricao,
-                    Agencia_Modificacao,
-                    Idioma_Texto,
-                    Idioma_Resumo,
-                    Idioma_Legenda,
-                    Numero_CDD,
-                    Numero_Item_CDD,
-                    Numero_Chamada_Local,
-                    Numero_Item_Local,
-                    Numero_Chamada_Secundaria,
-                    Nome_Autor,
-                    Subtitulo,
-                    Indicacao_Responsabilidade,
-                    Indicador_Artigo_Inicial,
-                    Numero_Edicao,
-                    Mencao_Responsabilidade_Edicao,
-                    Local_Publicacao,
-                    Editora,
-                    Ano_Publicacao,
-                    Paginas,
-                    Ilustracoes,
-                    Dimensoes,
-                    Material_Adicional,
-                    Titulo_Serie,
-                    Numero_Serie,
-                    Notas_Gerais,
-                    Nome_Pessoal_Assunto,
-                    Datas_Pessoal,
-                    Funcao_Pessoal,
-                    Topico_Pessoal,
-                    Titulo_Uniforme,
-                    Forma_Uniforme,
-                    Periodo_Historico_Uniforme,
-                    Localidade_Uniforme,
-                    Assunto_Termo,
-                    Forma_Termo,
-                    Periodo_Historico_Termo,
-                    Localidade_Termo,
-                    Informacao_Local,
-                    Status_Item,
-                    Status_Emprestimo
-                ) VALUES (
-                    @ISBN,
-                    @Condicoes_Encadernacao,
-                    @Agencia_Catalogadora,
-                    @Idioma_Catalogacao,
-                    @Agencia_Transcricao,
-                    @Agencia_Modificacao,
-                    @Idioma_Texto,
-                    @Idioma_Resumo,
-                    @Idioma_Legenda,
-                    @Numero_CDD,
-                    @Numero_Item_CDD,
-                    @Numero_Chamada_Local,
-                    @Numero_Item_Local,
-                    @Numero_Chamada_Secundaria,
-                    @Nome_Autor,
-                    @Subtitulo,
-                    @Indicacao_Responsabilidade,
-                    @Indicador_Artigo_Inicial,
-                    @Numero_Edicao,
-                    @Mencao_Responsabilidade_Edicao,
-                    @Local_Publicacao,
-                    @Editora,
-                    @Ano_Publicacao,
-                    @Paginas,
-                    @Ilustracoes,
-                    @Dimensoes,
-                    @Material_Adicional,
-                    @Titulo_Serie,
-                    @Numero_Serie,
-                    @Notas_Gerais,
-                    @Nome_Pessoal_Assunto,
-                    @Datas_Pessoal,
-                    @Funcao_Pessoal,
-                    @Topico_Pessoal,
-                    @Titulo_Uniforme,
-                    @Forma_Uniforme,
-                    @Periodo_Historico_Uniforme,
-                    @Localidade_Uniforme,
-                    @Assunto_Termo,
-                    @Forma_Termo,
-                    @Periodo_Historico_Termo,
-                    @Localidade_Termo,
-                    @Informacao_Local,
-                    @Status_Item,
-                    @Status_Emprestimo
-                )";
+                string query = "INSERT INTO Autor (Nome_Autor,Numero,Datas,Funcao,Tipo_Autor) VALUES (@Nome_Autor,@Numero,@Datas,@Funcao,@Tipo_Autor)";
 
                 SqlCommand comand = new SqlCommand(query, conection);
-              
-                //comand.Parameters.AddWithValue("@Status_Emprestimo");
+
+                comand.Parameters.AddWithValue("@Nome_Autor", Autor.Nome_Autor);
+                comand.Parameters.AddWithValue("@Numero", Autor.Numero);
+                comand.Parameters.AddWithValue("@Datas", Autor.Datas);
+                comand.Parameters.AddWithValue("@Funcao", Autor.Funcao);
+                comand.Parameters.AddWithValue("@Tipo_Autor", Autor.Tipo_Autor);
 
                 conection.Open();
                 int rowsAffected = comand.ExecuteNonQuery();
