@@ -43,9 +43,9 @@
     </div>
 
     <div class="busca-container">
-      <form class="busca-topo" onsubmit="buscarLivros(); return false;">
+      <form class="busca-topo" >
         <input type="text" id="busca" placeholder="Digite título, autor, assunto ou ano">
-        <button type="submit">Pesquisar</button>
+        <button type="button" onclick="buscarLivros(); return false;">Pesquisar</button>
         <button type="button" class="btn-limpar" onclick="limparBuscar()">Limpar</button>
       </form>
 

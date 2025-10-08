@@ -1,3 +1,5 @@
+cadUser html
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -120,7 +122,7 @@
                         <option value="Ativo">Ativo</option>
                         <option value="Inativo">Inativo</option>
                     </select>
-                <button type="button" onclick="addAluno();return false;">Adicionar</button>
+                <button type="button" onclick="addAluno(); return false;">Adicionar</button>
               </form>
             </div>
           </div>
@@ -129,7 +131,7 @@
             <div class="modal-content">
               <span class="close" onclick="closeModal('editModal')">&times;</span>
               <h3>Atualizar Usuário</h3>
-              <form id="updateAlunoForm" onsubmit="updateAluno();return false;">
+              <form id="updateAlunoForm">
                 <label for="upid">ID</label>
                     <input type="text" id="upid" placeholder="Digite o ID" required>
 
@@ -180,7 +182,7 @@
                         <option value="Ativo">Ativo</option>
                         <option value="Inativo">Inativo</option>
                     </select>
-                <button type="submit">Atualizar</button>
+                <button type="button" onclick="updateAluno(); return false;">Atualizar</button>
               </form>
             </div>
           </div>
@@ -189,10 +191,10 @@
             <div class="modal-content">
               <span class="close" onclick="closeModal('deleteModal')">&times;</span>
               <h3>Excluir Usuário</h3>
-              <form id="deleteAlunoForm" onsubmit="confirmDelete();return false;">
+              <form id="deleteAlunoForm">
                 <label for="deleId">ID</label>
                 <input type="text" id="deleId" required>
-                <button type="submit">Excluir</button>
+                <button type="button" onclick="confirmDelete(); return false;">Excluir</button>
               </form>
             </div>
         </div>
@@ -202,3 +204,4 @@
     <script src="animation.js"></script>
 </body>
 </html>
+
