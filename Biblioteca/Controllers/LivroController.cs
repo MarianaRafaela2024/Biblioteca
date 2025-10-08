@@ -236,8 +236,6 @@ namespace Biblioteca.Controllers
 
 
 
-
-
         [HttpPost]
         public ActionResult CreateLivro(Livro livro)
         {
@@ -375,7 +373,6 @@ namespace Biblioteca.Controllers
                 comand.Parameters.AddWithValue("@Titulo_Uniforme", livro.Titulo_Uniforme);
                 comand.Parameters.AddWithValue("@Forma_Uniforme", livro.Forma_Uniforme);
                 comand.Parameters.AddWithValue("@Periodo_Historico_Uniforme", livro.Periodo_Historico);
-                comand.Parameters.AddWithValue("@Forma_Uniforme", livro.Forma_Uniforme);
                 comand.Parameters.AddWithValue("@Periodo_Historico_Uniforme", livro.Periodo_Historico);
                 comand.Parameters.AddWithValue("@Localidade_Uniforme", livro.Local_Uniforme);
                 comand.Parameters.AddWithValue("@Assunto_Termo", livro.Assunto_Termo);
@@ -396,9 +393,9 @@ namespace Biblioteca.Controllers
             }
             return BadRequest();
         }
-    
 
-    [HttpPost("PostLivroLeigos")]
+
+        [HttpPost("PostLivroLeigos")]
         public ActionResult CreateLivroLeigos(Livro livro)
         {
             using (SqlConnection conection = new SqlConnection(StrConex))

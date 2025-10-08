@@ -184,6 +184,7 @@ function updateAluno() {
 
 
 getAluno();
+
 //login//
 
 function login() {
@@ -392,6 +393,13 @@ function addLivro() {
     });
 }
 
+function contarCaracteres(input) {
+  const max = input.getAttribute("maxlength");
+  const contador = input.parentElement.querySelector(".input-counter");
+  contador.textContent = `${input.value.length}/${max}`;
+}
+
+
 
 // Buscar livro acervo
 
@@ -416,15 +424,17 @@ async function buscarLivros() {
         lista.style.listStyle = "none";
 
         livros.forEach(livro => {
+            console.log('Dados do livro:', livro);
             const card = document.createElement('div');
             card.className = 'livro-card';
             card.innerHTML = `
-                <strong>${livro.Nome_Livro}</strong> (${livro.Ano_Publicacao || 'Ano não informado'})<br>
-                ${livro.Subtitulo ? livro.Subtitulo + '<br>' : ''}
-                Autor/Responsável: ${livro.Indicacao_Responsabilidade || 'Não informado'}<br>
-                Autores: ${livro.Autores || 'Não informado'}<br>
-                ISBN: ${livro.ISBN || 'Não informado'}<br>
-                Assunto: ${livro.Assunto_Termo || 'Não informado'}
+                <strong>${livro.nome_Livro}</strong> (${livro.ano_Publicacao || 'Ano não informado'})<br>
+                ${livro.subtitulo ? livro.subtitulo + '<br>' : ''}
+                <strong>Autor/Responsável:</strong> ${livro.indicacao_Responsabilidade || 'Não informado'}<br>
+                <strong>Autores:</strong> ${livro.autores || 'Não informado'}<br>
+                <strong>ISBN:</strong> ${livro.isbn || 'Não informado'}<br>
+                <strong>Assunto:</strong> ${livro.assunto_Termo || 'Não informado'}<br>
+                <strong>Status:</strong> ${livro.status_Emprestimos || 'Não informado'}
             `;
             lista.appendChild(card);
         });

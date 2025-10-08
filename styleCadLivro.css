@@ -1,0 +1,353 @@
+/* ====== ESTILO CADASTRO DE LIVRO ====== */
+
+/* Variáveis e reset */
+:root {
+  --primary-red: #c41e3a;
+  --hover-red: #b22222;
+  --dark-gray: #333;
+  --light-gray: #271919;
+  --white: #d3d3d3;
+  --secondary-gray: #b8b8b8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--light-gray);
+  overflow-x: hidden;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 280px;
+  height: 100vh;
+  background-color: var(--white);
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar-header {
+  background: linear-gradient(135deg, var(--primary-red) 0%, var(--hover-red) 100%);
+  padding: 40px 30px;
+  text-align: center;
+  color: var(--white);
+  position: relative;
+}
+
+.sidebar-header h2 {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.sidebar-header p {
+  font-size: 13px;
+  letter-spacing: 1px;
+  opacity: 0.95;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+/* Navegação */
+.sidebar-nav {
+  padding: 20px 0;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  padding: 18px 30px;
+  color: var(--dark-gray);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  border-left: 4px solid transparent;
+  gap: 12px;
+  transition: all 0.3s ease;
+}
+
+.sidebar-nav a:hover {
+  background-color: rgba(196, 30, 58, 0.05);
+  border-left-color: var(--primary-red);
+  color: var(--primary-red);
+  padding-left: 35px;
+}
+
+.sidebar-nav a.active {
+  background-color: var(--primary-red);
+  color: var(--white);
+  border-left-color: var(--hover-red);
+}
+
+/* Rodapé da sidebar */
+.sidebar-footer {
+  margin-top: auto;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.login-link {
+  display: inline-block;
+  width: 100%;
+  background: var(--primary-red);
+  color: var(--white);
+  padding: 12px 0;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.login-link:hover {
+  background: var(--hover-red);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(196, 30, 58, 0.3);
+}
+
+/* ===== BOTÕES MOBILE ===== */
+.menu-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: var(--primary-red);
+  color: var(--white);
+  border: none;
+  padding: 12px 18px;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: none !important;
+  z-index: 1001;
+}
+
+.sidebar-close-btn {
+  display: none;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  color: var(--white);
+  font-size: 32px;
+  cursor: pointer;
+}
+
+/* ===== CONTEÚDO PRINCIPAL ===== */
+.main-content {
+  margin-left: 280px;
+  padding: 40px;
+  min-height: 100vh;
+  color: var(--dark-gray);
+}
+
+.page-header {
+  background: linear-gradient(135deg, var(--primary-red), var(--hover-red));
+  color: var(--white);
+  padding: 30px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(196, 30, 58, 0.2);
+}
+
+.page-header h1 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.page-header p {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+/* ===== FORMULÁRIOS ===== */
+.forms-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.form-card {
+  background-color: var(--white);
+  border-radius: 10px;
+  padding: 25px 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===== DETAILS COM SETINHAS ===== */
+details {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px 20px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+details summary {
+  font-weight: 600;
+  color: var(--primary-red);
+  font-size: 16px;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+details summary::before {
+  content: "▶";
+  font-size: 14px;
+  color: var(--primary-red);
+  transition: transform 0.3s ease;
+}
+
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+details[open] {
+  background-color: #fff;
+  border-color: var(--primary-red);
+  box-shadow: 0 2px 8px rgba(196, 30, 58, 0.15);
+}
+
+/* ===== CAMPOS ===== */
+label {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--dark-gray);
+  margin-top: 10px;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px 38px 10px 12px; /* espaço p/ contador à direita */
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-red);
+}
+
+/* Contador embutido no input */
+.input-counter {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: var(--secondary-gray);
+  background-color: transparent;
+  pointer-events: none;
+}
+
+/* ===== TEXTAREA ===== */
+textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+/* ===== BOTÕES ===== */
+.form-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.form-actions button {
+  background-color: var(--primary-red);
+  color: var(--white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.form-actions button:hover {
+  background-color: var(--hover-red);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(196, 30, 58, 0.3);
+}
+
+.form-actions button[type="reset"] {
+  background-color: #555;
+}
+
+.form-actions button[type="reset"]:hover {
+  background-color: #333;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block !important;
+  }
+
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 80px 20px 20px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .form-actions button {
+    width: 100%;
+  }
+
+  .sidebar-close-btn {
+    display: block;
+  }
+}
