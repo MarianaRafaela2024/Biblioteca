@@ -563,17 +563,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Livro_Autor"
+                "$ref": "#/components/schemas/LivroAutorRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Livro_Autor"
+                "$ref": "#/components/schemas/LivroAutorRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Livro_Autor"
+                "$ref": "#/components/schemas/LivroAutorRequest"
               }
             }
           }
@@ -923,6 +923,20 @@
             "nullable": true
           },
           "status_Emprestimos": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LivroAutorRequest": {
+        "type": "object",
+        "properties": {
+          "isbn": {
+            "type": "string",
+            "nullable": true
+          },
+          "nome_Autor": {
             "type": "string",
             "nullable": true
           }

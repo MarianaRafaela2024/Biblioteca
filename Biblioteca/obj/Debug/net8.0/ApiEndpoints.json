@@ -305,8 +305,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Livro_Autor",
-        "Type": "Biblioteca.Controllers.Livro_Autor",
+        "Name": "request",
+        "Type": "Biblioteca.LivroAutorRequest",
         "IsRequired": true
       }
     ],
