@@ -209,9 +209,9 @@ namespace Biblioteca.Controllers
 
                 SqlCommand cmdLivro = new SqlCommand(selectLivro, conection);
                 cmdLivro.Parameters.AddWithValue("@ISBN", request.ISBN);
-                SqlDataReader reader = cmdLivro.ExecuteReader();
-                int idLivro = Convert.ToInt32(reader["Id_Livro"]);
-                reader.Close();
+                object reader = cmdLivro.ExecuteScalar();
+                int idLivro = Convert.ToInt32(reader);
+                
                 conection.Close();
 
                 //Pegando o Id do autor
@@ -220,9 +220,8 @@ namespace Biblioteca.Controllers
                 SqlCommand cmdAutor = new SqlCommand(selectAutor, conection);
                 cmdAutor.Parameters.AddWithValue("@Nome_Autor", request.Nome_Autor);
 
-                SqlDataReader reader2 = cmdLivro.ExecuteReader();
-                int idAutor = Convert.ToInt32(reader2["Id_Autor"]);
-                reader2.Close();
+                object reader2 = cmdLivro.ExecuteScalar();
+                int idAutor = Convert.ToInt32(reader2);
                 conection.Close();
 
                 //Inserindo os id na tabela Livro_Autor
@@ -244,75 +243,7 @@ namespace Biblioteca.Controllers
 
         }
 
-        //[HttpPost]
-        //public ActionResult CreateLivro_Autor([FromBody] LivroAutorRequest request)
-        //{
-        //    if (string.IsNullOrEmpty(request.ISBN) || string.IsNullOrEmpty(request.Nome_Autor))
-        //    {
-        //        return BadRequest(new { message = "ISBN e Nome_Autor são obrigatórios" });
-        //    }
-
-        //    using (SqlConnection connection = new SqlConnection(StrConex))
-        //    {
-        //        connection.Open();
-
-        //        // Pegando Id do livro
-        //        string selectLivro = "SELECT Id_Livro FROM Livro WHERE ISBN = @ISBN";
-        //        SqlCommand cmdLivro = new SqlCommand(selectLivro, connection);
-        //        cmdLivro.Parameters.AddWithValue("@ISBN", request.ISBN);
-
-        //        object resultLivro = cmdLivro.ExecuteScalar();
-        //        if (resultLivro == null)
-        //        {
-        //            return NotFound(new { message = $"Livro não encontrado com ISBN: {request.ISBN}" });
-        //        }
-        //        int idLivro = Convert.ToInt32(resultLivro);
-
-        //        // Pegando Id do autor
-        //        string selectAutor = "SELECT Id_Autor FROM Autor WHERE Nome_Autor = @Nome_Autor";
-        //        SqlCommand cmdAutor = new SqlCommand(selectAutor, connection);
-        //        cmdAutor.Parameters.AddWithValue("@Nome_Autor", request.Nome_Autor);
-
-        //        object resultAutor = cmdAutor.ExecuteScalar();
-        //        if (resultAutor == null)
-        //        {
-        //            return NotFound(new { message = $"Autor não encontrado com nome: {request.Nome_Autor}" });
-        //        }
-        //        int idAutor = Convert.ToInt32(resultAutor);
-
-        //        // Verificar se relacionamento já existe
-        //        string checkQuery = "SELECT COUNT(*) FROM Livro_Autor WHERE Id_Livro = @Id_Livro AND Id_Autor = @Id_Autor";
-        //        SqlCommand cmdCheck = new SqlCommand(checkQuery, connection);
-        //        cmdCheck.Parameters.AddWithValue("@Id_Livro", idLivro);
-        //        cmdCheck.Parameters.AddWithValue("@Id_Autor", idAutor);
-
-        //        int exists = Convert.ToInt32(cmdCheck.ExecuteScalar());
-        //        if (exists > 0)
-        //        {
-        //            return Conflict(new { message = "Este relacionamento já existe" });
-        //        }
-
-        //        // Inserindo o relacionamento
-        //        string query = "INSERT INTO Livro_Autor (Id_Livro, Id_Autor) VALUES (@Id_Livro, @Id_Autor)";
-        //        SqlCommand command = new SqlCommand(query, connection);
-        //        command.Parameters.AddWithValue("@Id_Livro", idLivro);
-        //        command.Parameters.AddWithValue("@Id_Autor", idAutor);
-
-        //        int rowsAffected = command.ExecuteNonQuery();
-
-        //        if (rowsAffected > 0)
-        //        {
-        //            return Ok(new
-        //            {
-        //                message = "Relacionamento criado com sucesso",
-        //                Id_Livro = idLivro,
-        //                Id_Autor = idAutor
-        //            });
-        //        }
-        //    }
-
-        //    return BadRequest(new { message = "Erro ao criar relacionamento" });
-        //}
+        
 
     }
 
