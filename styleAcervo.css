@@ -291,6 +291,28 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(196, 30, 58, 0.3);
 }
+/* ===== ANCÔRA ===== */
+.voltar-topo img{
+  width: 15px;
+  height: 15px;
+}
+.voltar-topo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #c41e3a;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: none; /* começa invisível */
+  transition: opacity 0.3s ease;
+}
+
+.voltar-topo.mostrar {
+  display: block;
+  opacity: 1;
+}
 
 /* ====== Responsividade ====== */
 @media (max-width: 768px) {
