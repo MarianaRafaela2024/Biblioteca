@@ -19,6 +19,7 @@ namespace Biblioteca.Controllers
         [HttpGet(Name = "GetLivro")]
         public IEnumerable<Livro> GetLivro()
         {
+
             List<Livro> Livros = new List<Livro>();
             using (SqlConnection conection = new SqlConnection(StrConex))
             {
@@ -79,109 +80,112 @@ namespace Biblioteca.Controllers
                     };
                     Livros.Add(Livro);
                 }
-                reader.Close();
+
+                return Livros;
             }
-            return Livros;
         }
 
-        //[HttpGet("search/{searchTerm}")]
-        //public ActionResult SearchLivro(string searchTerm)
-        //{
-        //    var Livros = new List<Livro>();
-
-        //    using (SqlConnection connection = new SqlConnection(StrConex))
-        //    {
-        //        connection.Open();
-
-        //        bool isNumero = int.TryParse(searchTerm, out int rmInt);
-
-        //        string query;
-        //        SqlCommand command;
-
-        //        if (isNumero)
-        //        {
-        //            query = "SELECT * FROM Livro WHERE RM_Livro = @RM";
-        //            command = new SqlCommand(query, connection);
-        //            command.Parameters.AddWithValue("@RM", rmInt);
-        //        }
-        //        else
-        //        {
-        //            query = "SELECT * FROM Livro WHERE Nome_Livro LIKE @Nome";
-        //            command = new SqlCommand(query, connection);
-        //            command.Parameters.AddWithValue("@Nome", "%" + searchTerm + "%");
-        //        }
-
-        //        using (SqlDataReader reader = command.ExecuteReader())
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                var Livro = new Livro
-        //                {
-        //                    Id = Convert.ToInt32(reader["Id_Livro"]),
-        //                    Nome = reader["Nome_Livro"] as string ?? string.Empty,
-        //                    Sobrenome = reader["Sobrenome_Livro"] as string ?? string.Empty,
-        //                    RM = reader["RM_Livro"]?.ToString() ?? string.Empty,
-        //                    Telefone = reader["Telefone_Livro"]?.ToString() ?? string.Empty,
-        //                    Curso = reader["Curso"]?.ToString() ?? string.Empty,
-        //                    Status = reader["Status_Livro"]?.ToString() ?? string.Empty
-        //                };
-        //                Livros.Add(Livro);
-        //            }
-        //        }
-        //    }
-
-        //    if (Livros.Count == 0)
-        //        return NotFound();
-
-        //    return Ok(Livros);
-        //}
 
 
-        //[HttpGet("{id}", Name = "GetLivroID")]
 
-        //public ActionResult GetLivroId(int id)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(StrConex))
-        //    {
-        //        string query = "SELECT * FROM Livro WHERE ID = @Id";
-        //        SqlCommand comand = new SqlCommand(query, connection);
-        //        comand.Parameters.AddWithValue("@Id", id);
-        //        connection.Open();
+            //[HttpGet("search/{searchTerm}")]
+            //public ActionResult SearchLivro(string searchTerm)
+            //{
+            //    var Livros = new List<Livro>();
 
-        //        SqlDataReader reader = comand.ExecuteReader();
+            //    using (SqlConnection connection = new SqlConnection(StrConex))
+            //    {
+            //        connection.Open();
 
-        //        if (reader.Read())
-        //        {
-        //            Livro Livro = new Livro()
-        //            {
-        //                Id = Convert.ToInt32(reader["Id_Livro"]),
-        //                Nome = reader["Nome_Livro"].ToString(),
-        //                Sobrenome = reader["Sobrenome_Livro"].ToString(),
-        //                RM = reader["RM_Livro"]?.ToString() ?? string.Empty,
-        //                Telefone = reader["Telefone_Livro"].ToString(),
-        //                Curso = reader["Curso"].ToString(),
-        //                Status = reader["Status_Livro"].ToString()
-        //            };
-        //            reader.Close();
+            //        bool isNumero = int.TryParse(searchTerm, out int rmInt);
 
-        //            return Ok(Livro);
-        //        }
-        //        reader.Close();
-        //    }
-        //    return NotFound();
-        //}
+            //        string query;
+            //        SqlCommand command;
+
+            //        if (isNumero)
+            //        {
+            //            query = "SELECT * FROM Livro WHERE RM_Livro = @RM";
+            //            command = new SqlCommand(query, connection);
+            //            command.Parameters.AddWithValue("@RM", rmInt);
+            //        }
+            //        else
+            //        {
+            //            query = "SELECT * FROM Livro WHERE Nome_Livro LIKE @Nome";
+            //            command = new SqlCommand(query, connection);
+            //            command.Parameters.AddWithValue("@Nome", "%" + searchTerm + "%");
+            //        }
+
+            //        using (SqlDataReader reader = command.ExecuteReader())
+            //        {
+            //            while (reader.Read())
+            //            {
+            //                var Livro = new Livro
+            //                {
+            //                    Id = Convert.ToInt32(reader["Id_Livro"]),
+            //                    Nome = reader["Nome_Livro"] as string ?? string.Empty,
+            //                    Sobrenome = reader["Sobrenome_Livro"] as string ?? string.Empty,
+            //                    RM = reader["RM_Livro"]?.ToString() ?? string.Empty,
+            //                    Telefone = reader["Telefone_Livro"]?.ToString() ?? string.Empty,
+            //                    Curso = reader["Curso"]?.ToString() ?? string.Empty,
+            //                    Status = reader["Status_Livro"]?.ToString() ?? string.Empty
+            //                };
+            //                Livros.Add(Livro);
+            //            }
+            //        }
+            //    }
+
+            //    if (Livros.Count == 0)
+            //        return NotFound();
+
+            //    return Ok(Livros);
+            //}
 
 
-        [HttpGet("search")]
-        public IActionResult Search(string? termo)
-        {
-            var livros = new List<object>();
+            //[HttpGet("{id}", Name = "GetLivroID")]
 
-            using (SqlConnection conection = new SqlConnection(StrConex))
+            //public ActionResult GetLivroId(int id)
+            //{
+            //    using (SqlConnection connection = new SqlConnection(StrConex))
+            //    {
+            //        string query = "SELECT * FROM Livro WHERE ID = @Id";
+            //        SqlCommand comand = new SqlCommand(query, connection);
+            //        comand.Parameters.AddWithValue("@Id", id);
+            //        connection.Open();
+
+            //        SqlDataReader reader = comand.ExecuteReader();
+
+            //        if (reader.Read())
+            //        {
+            //            Livro Livro = new Livro()
+            //            {
+            //                Id = Convert.ToInt32(reader["Id_Livro"]),
+            //                Nome = reader["Nome_Livro"].ToString(),
+            //                Sobrenome = reader["Sobrenome_Livro"].ToString(),
+            //                RM = reader["RM_Livro"]?.ToString() ?? string.Empty,
+            //                Telefone = reader["Telefone_Livro"].ToString(),
+            //                Curso = reader["Curso"].ToString(),
+            //                Status = reader["Status_Livro"].ToString()
+            //            };
+            //            reader.Close();
+
+            //            return Ok(Livro);
+            //        }
+            //        reader.Close();
+            //    }
+            //    return NotFound();
+            //}
+
+
+            [HttpGet("search")]
+            public IActionResult Search(string? termo)
             {
-                conection.Open();
+                var livros = new List<object>();
 
-                string sql = @"
+                using (SqlConnection conection = new SqlConnection(StrConex))
+                {
+                    conection.Open();
+
+                    string sql = @"
         SELECT 
             l.Id_Livro, 
             l.Nome_Livro, 
@@ -207,41 +211,41 @@ namespace Biblioteca.Controllers
             l.Ano_Publicacao, l.ISBN, l.Assunto_Termo
         ORDER BY l.Nome_Livro";
 
-                using (SqlCommand cmd = new SqlCommand(sql, conection))
-                {
-                    cmd.Parameters.AddWithValue("@termo", (object)termo ?? DBNull.Value);
-
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (SqlCommand cmd = new SqlCommand(sql, conection))
                     {
-                        while (reader.Read())
+                        cmd.Parameters.AddWithValue("@termo", (object)termo ?? DBNull.Value);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            livros.Add(new
+                            while (reader.Read())
                             {
-                                Id_Livro = Convert.ToInt32(reader["Id_Livro"]),
-                                Nome_Livro = reader["Nome_Livro"].ToString(),
-                                Subtitulo = reader["Subtitulo"].ToString(),
-                                Indicacao_Responsabilidade = reader["Indicacao_Responsabilidade"].ToString(),
-                                Ano_Publicacao = reader["Ano_Publicacao"] != DBNull.Value ? Convert.ToInt32(reader["Ano_Publicacao"]) : (int?)null,
-                                ISBN = reader["ISBN"].ToString(),
-                                Assunto_Termo = reader["Assunto_Termo"].ToString(),
-                                Autores = reader["Autores"]?.ToString()
-                            });
+                                livros.Add(new
+                                {
+                                    Id_Livro = Convert.ToInt32(reader["Id_Livro"]),
+                                    Nome_Livro = reader["Nome_Livro"].ToString(),
+                                    Subtitulo = reader["Subtitulo"].ToString(),
+                                    Indicacao_Responsabilidade = reader["Indicacao_Responsabilidade"].ToString(),
+                                    Ano_Publicacao = reader["Ano_Publicacao"] != DBNull.Value ? Convert.ToInt32(reader["Ano_Publicacao"]) : (int?)null,
+                                    ISBN = reader["ISBN"].ToString(),
+                                    Assunto_Termo = reader["Assunto_Termo"].ToString(),
+                                    Autores = reader["Autores"]?.ToString()
+                                });
+                            }
                         }
                     }
                 }
+
+                return Ok(livros);
             }
 
-            return Ok(livros);
-        }
 
 
-
-        [HttpPost]
-        public ActionResult CreateLivro(Livro livro)
-        {
-            using (SqlConnection conection = new SqlConnection(StrConex))
+            [HttpPost]
+            public ActionResult CreateLivro(Livro livro)
             {
-                string query = @"INSERT INTO Livro (
+                using (SqlConnection conection = new SqlConnection(StrConex))
+                {
+                    string query = @"INSERT INTO Livro (
                     ISBN,
                     Condicoes_Encadernacao,
                     Agencia_Catalogadora,
@@ -335,72 +339,72 @@ namespace Biblioteca.Controllers
                     @Status_Emprestimo
                 )";
 
-                SqlCommand comand = new SqlCommand(query, conection);
-                comand.Parameters.AddWithValue("@ISBN", livro.ISBN);
-                comand.Parameters.AddWithValue("@Condicoes_Encadernacao", livro.Cond_Encardenacao);
-                comand.Parameters.AddWithValue("@Agencia_Catalogadora", livro.Agen_Catalogadora);
-                comand.Parameters.AddWithValue("@Idioma_Catalogacao", livro.Idi_Catalogacao);
-                comand.Parameters.AddWithValue("@Agencia_Transcricao", livro.Agen_Transcricao);
-                comand.Parameters.AddWithValue("@Agencia_Modificacao", livro.Agen_Modificacao);
-                comand.Parameters.AddWithValue("@Idioma_Texto", livro.Idi_Texto);
-                comand.Parameters.AddWithValue("@Idioma_Resumo", livro.Idi_Resumo);
-                comand.Parameters.AddWithValue("@Idioma_Legenda", livro.Idi_Legenda);
-                comand.Parameters.AddWithValue("@Numero_CDD", livro.Numero_CDD);
-                comand.Parameters.AddWithValue("@Numero_Item_CDD", livro.Numero_Item_CDD);
-                comand.Parameters.AddWithValue("@Numero_Chamada_Local", livro.Num_Cham_Local);
-                comand.Parameters.AddWithValue("@Numero_Item_Local", livro.Num_Item_Local);
-                comand.Parameters.AddWithValue("@Numero_Chamada_Secundaria", livro.Num_Cham_Secundaria);
-                comand.Parameters.AddWithValue("@Nome_Livro", livro.Nome);
-                comand.Parameters.AddWithValue("@Subtitulo", livro.Subtitulo);
-                comand.Parameters.AddWithValue("@Indicacao_Responsabilidade", livro.Indi_Responsabilidade);
-                comand.Parameters.AddWithValue("@Indicador_Artigo_Inicial", livro.Indi_Arti_Inicial);
-                comand.Parameters.AddWithValue("@Numero_Edicao", livro.Num_Edicao);
-                comand.Parameters.AddWithValue("@Mencao_Responsabilidade_Edicao", livro.Mencao_Responsa_Edicao);
-                comand.Parameters.AddWithValue("@Local_Publicacao", livro.Local_Publicacao);
-                comand.Parameters.AddWithValue("@Editora", livro.Editora);
-                comand.Parameters.AddWithValue("@Ano_Publicacao", livro.Ano_Publicacao);
-                comand.Parameters.AddWithValue("@Paginas", livro.Paginas);
-                comand.Parameters.AddWithValue("@Ilustracoes", livro.Ilustracoes);
-                comand.Parameters.AddWithValue("@Dimensoes", livro.Dimensoes);
-                comand.Parameters.AddWithValue("@Material_Adicional", livro.Material_Adicional);
-                comand.Parameters.AddWithValue("@Titulo_Serie", livro.Titulo_Serie);
-                comand.Parameters.AddWithValue("@Numero_Serie", livro.Num_Serie);
-                comand.Parameters.AddWithValue("@Notas_Gerais", livro.Notas_Gerais);
-                comand.Parameters.AddWithValue("@Nome_Pessoal_Assunto", livro.Nome_Pess_Assunto);
-                comand.Parameters.AddWithValue("@Datas_Pessoal", livro.Datas_Pessoais);
-                comand.Parameters.AddWithValue("@Funcao_Pessoal", livro.Funcao_Pessoal);
-                comand.Parameters.AddWithValue("@Topico_Pessoal", livro.Topico);
-                comand.Parameters.AddWithValue("@Titulo_Uniforme", livro.Titulo_Uniforme);
-                comand.Parameters.AddWithValue("@Forma_Uniforme", livro.Forma_Uniforme);
-                comand.Parameters.AddWithValue("@Periodo_Historico_Uniforme", livro.Periodo_Historico);
-                comand.Parameters.AddWithValue("@Periodo_Historico_Uniforme", livro.Periodo_Historico);
-                comand.Parameters.AddWithValue("@Localidade_Uniforme", livro.Local_Uniforme);
-                comand.Parameters.AddWithValue("@Assunto_Termo", livro.Assunto_Termo);
-                comand.Parameters.AddWithValue("@Forma_Termo", livro.Forma_Termo);
-                comand.Parameters.AddWithValue("@Periodo_Historico_Termo", livro.Periodo_Histo_Termo);
-                comand.Parameters.AddWithValue("@Localidade_Termo", livro.Local_Termo);
-                comand.Parameters.AddWithValue("@Informacao_Local", livro.Info_Local);
-                comand.Parameters.AddWithValue("@Status_Item", livro.Status_Item);
-                comand.Parameters.AddWithValue("@Status_Emprestimo", livro.Status_Emprestimos);
+                    SqlCommand comand = new SqlCommand(query, conection);
+                    comand.Parameters.AddWithValue("@ISBN", livro.ISBN);
+                    comand.Parameters.AddWithValue("@Condicoes_Encadernacao", livro.Cond_Encardenacao);
+                    comand.Parameters.AddWithValue("@Agencia_Catalogadora", livro.Agen_Catalogadora);
+                    comand.Parameters.AddWithValue("@Idioma_Catalogacao", livro.Idi_Catalogacao);
+                    comand.Parameters.AddWithValue("@Agencia_Transcricao", livro.Agen_Transcricao);
+                    comand.Parameters.AddWithValue("@Agencia_Modificacao", livro.Agen_Modificacao);
+                    comand.Parameters.AddWithValue("@Idioma_Texto", livro.Idi_Texto);
+                    comand.Parameters.AddWithValue("@Idioma_Resumo", livro.Idi_Resumo);
+                    comand.Parameters.AddWithValue("@Idioma_Legenda", livro.Idi_Legenda);
+                    comand.Parameters.AddWithValue("@Numero_CDD", livro.Numero_CDD);
+                    comand.Parameters.AddWithValue("@Numero_Item_CDD", livro.Numero_Item_CDD);
+                    comand.Parameters.AddWithValue("@Numero_Chamada_Local", livro.Num_Cham_Local);
+                    comand.Parameters.AddWithValue("@Numero_Item_Local", livro.Num_Item_Local);
+                    comand.Parameters.AddWithValue("@Numero_Chamada_Secundaria", livro.Num_Cham_Secundaria);
+                    comand.Parameters.AddWithValue("@Nome_Livro", livro.Nome);
+                    comand.Parameters.AddWithValue("@Subtitulo", livro.Subtitulo);
+                    comand.Parameters.AddWithValue("@Indicacao_Responsabilidade", livro.Indi_Responsabilidade);
+                    comand.Parameters.AddWithValue("@Indicador_Artigo_Inicial", livro.Indi_Arti_Inicial);
+                    comand.Parameters.AddWithValue("@Numero_Edicao", livro.Num_Edicao);
+                    comand.Parameters.AddWithValue("@Mencao_Responsabilidade_Edicao", livro.Mencao_Responsa_Edicao);
+                    comand.Parameters.AddWithValue("@Local_Publicacao", livro.Local_Publicacao);
+                    comand.Parameters.AddWithValue("@Editora", livro.Editora);
+                    comand.Parameters.AddWithValue("@Ano_Publicacao", livro.Ano_Publicacao);
+                    comand.Parameters.AddWithValue("@Paginas", livro.Paginas);
+                    comand.Parameters.AddWithValue("@Ilustracoes", livro.Ilustracoes);
+                    comand.Parameters.AddWithValue("@Dimensoes", livro.Dimensoes);
+                    comand.Parameters.AddWithValue("@Material_Adicional", livro.Material_Adicional);
+                    comand.Parameters.AddWithValue("@Titulo_Serie", livro.Titulo_Serie);
+                    comand.Parameters.AddWithValue("@Numero_Serie", livro.Num_Serie);
+                    comand.Parameters.AddWithValue("@Notas_Gerais", livro.Notas_Gerais);
+                    comand.Parameters.AddWithValue("@Nome_Pessoal_Assunto", livro.Nome_Pess_Assunto);
+                    comand.Parameters.AddWithValue("@Datas_Pessoal", livro.Datas_Pessoais);
+                    comand.Parameters.AddWithValue("@Funcao_Pessoal", livro.Funcao_Pessoal);
+                    comand.Parameters.AddWithValue("@Topico_Pessoal", livro.Topico);
+                    comand.Parameters.AddWithValue("@Titulo_Uniforme", livro.Titulo_Uniforme);
+                    comand.Parameters.AddWithValue("@Forma_Uniforme", livro.Forma_Uniforme);
+                    comand.Parameters.AddWithValue("@Periodo_Historico_Uniforme", livro.Periodo_Historico);
+                    comand.Parameters.AddWithValue("@Periodo_Historico_Uniforme", livro.Periodo_Historico);
+                    comand.Parameters.AddWithValue("@Localidade_Uniforme", livro.Local_Uniforme);
+                    comand.Parameters.AddWithValue("@Assunto_Termo", livro.Assunto_Termo);
+                    comand.Parameters.AddWithValue("@Forma_Termo", livro.Forma_Termo);
+                    comand.Parameters.AddWithValue("@Periodo_Historico_Termo", livro.Periodo_Histo_Termo);
+                    comand.Parameters.AddWithValue("@Localidade_Termo", livro.Local_Termo);
+                    comand.Parameters.AddWithValue("@Informacao_Local", livro.Info_Local);
+                    comand.Parameters.AddWithValue("@Status_Item", livro.Status_Item);
+                    comand.Parameters.AddWithValue("@Status_Emprestimo", livro.Status_Emprestimos);
 
-                conection.Open();
-                int rowsAffected = comand.ExecuteNonQuery();
+                    conection.Open();
+                    int rowsAffected = comand.ExecuteNonQuery();
 
-                if (rowsAffected > 0)
-                {
-                    return Ok();
+                    if (rowsAffected > 0)
+                    {
+                        return Ok();
+                    }
                 }
+                return BadRequest();
             }
-            return BadRequest();
-        }
 
 
-        [HttpPost("PostLivroLeigos")]
-        public ActionResult CreateLivroLeigos(Livro livro)
-        {
-            using (SqlConnection conection = new SqlConnection(StrConex))
+            [HttpPost("PostLivroLeigos")]
+            public ActionResult CreateLivroLeigos(Livro livro)
             {
-                string query = @"INSERT INTO Livro (
+                using (SqlConnection conection = new SqlConnection(StrConex))
+                {
+                    string query = @"INSERT INTO Livro (
                     Nome_Livro,
                     Editora,
                     Ano_Publicacao,
@@ -418,56 +422,56 @@ namespace Biblioteca.Controllers
                     @Status_Emprestimo
                 )";
 
-                SqlCommand comand = new SqlCommand(query, conection);
-                comand.Parameters.AddWithValue("@Nome_Livro", livro.Nome);
-                comand.Parameters.AddWithValue("@Editora", livro.Editora);
-                comand.Parameters.AddWithValue("@Ano_Publicacao", livro.Ano_Publicacao);
-                comand.Parameters.AddWithValue("@Paginas", livro.Paginas);
-                comand.Parameters.AddWithValue("@Notas_Gerais", livro.Notas_Gerais);
-                comand.Parameters.AddWithValue("@Assunto_Termo", livro.Assunto_Termo);
-                comand.Parameters.AddWithValue("@Status_Emprestimo", livro.Status_Emprestimos);
+                    SqlCommand comand = new SqlCommand(query, conection);
+                    comand.Parameters.AddWithValue("@Nome_Livro", livro.Nome);
+                    comand.Parameters.AddWithValue("@Editora", livro.Editora);
+                    comand.Parameters.AddWithValue("@Ano_Publicacao", livro.Ano_Publicacao);
+                    comand.Parameters.AddWithValue("@Paginas", livro.Paginas);
+                    comand.Parameters.AddWithValue("@Notas_Gerais", livro.Notas_Gerais);
+                    comand.Parameters.AddWithValue("@Assunto_Termo", livro.Assunto_Termo);
+                    comand.Parameters.AddWithValue("@Status_Emprestimo", livro.Status_Emprestimos);
 
-                conection.Open();
-                int rowsAffected = comand.ExecuteNonQuery();
+                    conection.Open();
+                    int rowsAffected = comand.ExecuteNonQuery();
 
-                if (rowsAffected > 0)
-                {
-                    return Ok();
+                    if (rowsAffected > 0)
+                    {
+                        return Ok();
+                    }
                 }
+                return BadRequest();
             }
-            return BadRequest();
         }
-    }
 
-    //[HttpPut("{id}")]
-    //[HttpPut]
+        //[HttpPut("{id}")]
+        //[HttpPut]
 
-    //public ActionResult UpdateLivro(int id, [FromBody] Livro Livro)
-    //{
-    //    using (SqlConnection connection = new SqlConnection(StrConex))
-    //    {
-    //        string query = "UPDATE Livro SET Nome_Livro = @Nome, Sobrenome_Livro = @Sobrenome,RM_Livro = @RM,Telefone_Livro = @Telefone,Curso = @Curso,Status_Livro = @Status WHERE Id_Livro = @Id";
-    //        SqlCommand comand = new SqlCommand(query, connection);
-    //        comand.Parameters.AddWithValue("@Nome", Livro.Nome);
-    //        comand.Parameters.AddWithValue("@Sobrenome", Livro.Sobrenome);
-    //        comand.Parameters.AddWithValue("@RM", Livro.RM);
-    //        comand.Parameters.AddWithValue("@Telefone", Livro.Telefone);
-    //        comand.Parameters.AddWithValue("@Curso", Livro.Curso);
-    //        comand.Parameters.AddWithValue("@Status", Livro.Status);
-    //        comand.Parameters.AddWithValue("@Id", id);
-    //        connection.Open();
+        //public ActionResult UpdateLivro(int id, [FromBody] Livro Livro)
+        //{
+        //    using (SqlConnection connection = new SqlConnection(StrConex))
+        //    {
+        //        string query = "UPDATE Livro SET Nome_Livro = @Nome, Sobrenome_Livro = @Sobrenome,RM_Livro = @RM,Telefone_Livro = @Telefone,Curso = @Curso,Status_Livro = @Status WHERE Id_Livro = @Id";
+        //        SqlCommand comand = new SqlCommand(query, connection);
+        //        comand.Parameters.AddWithValue("@Nome", Livro.Nome);
+        //        comand.Parameters.AddWithValue("@Sobrenome", Livro.Sobrenome);
+        //        comand.Parameters.AddWithValue("@RM", Livro.RM);
+        //        comand.Parameters.AddWithValue("@Telefone", Livro.Telefone);
+        //        comand.Parameters.AddWithValue("@Curso", Livro.Curso);
+        //        comand.Parameters.AddWithValue("@Status", Livro.Status);
+        //        comand.Parameters.AddWithValue("@Id", id);
+        //        connection.Open();
 
-    //        int rowsAffected = comand.ExecuteNonQuery();
+        //        int rowsAffected = comand.ExecuteNonQuery();
 
-    //        if (rowsAffected > 0)
-    //        {
-    //            return Ok();
-    //        }
-    //    }
-    //    return NotFound();
-    //}
+        //        if (rowsAffected > 0)
+        //        {
+        //            return Ok();
+        //        }
+        //    }
+        //    return NotFound();
+        //}
 
 
-}
+    } 
 
 

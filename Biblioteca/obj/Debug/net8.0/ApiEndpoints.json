@@ -186,6 +186,43 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Biblioteca.Controllers.BibliotecaController",
+    "Method": "GetLivro",
+    "RelativePath": "Biblioteca",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Biblioteca.Biblioteca, Biblioteca, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetLivroTotal"
+  },
+  {
+    "ContainingType": "Biblioteca.Controllers.BibliotecaController",
+    "Method": "Search",
+    "RelativePath": "Biblioteca/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "termo",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Biblioteca.Controllers.EntidadeController",
     "Method": "GetEntidade",
     "RelativePath": "Entidade",

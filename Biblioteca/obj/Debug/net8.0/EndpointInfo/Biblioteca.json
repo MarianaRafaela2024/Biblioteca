@@ -308,6 +308,66 @@
         }
       }
     },
+    "/Biblioteca": {
+      "get": {
+        "tags": [
+          "Biblioteca"
+        ],
+        "operationId": "GetLivroTotal",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Biblioteca"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Biblioteca"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Biblioteca"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Biblioteca/search": {
+      "get": {
+        "tags": [
+          "Biblioteca"
+        ],
+        "parameters": [
+          {
+            "name": "termo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Entidade": {
       "get": {
         "tags": [
@@ -805,6 +865,29 @@
           },
           "tipo_Autor": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Biblioteca": {
+        "type": "object",
+        "properties": {
+          "livro": {
+            "$ref": "#/components/schemas/Livro"
+          },
+          "autores": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Autor"
+            },
+            "nullable": true
+          },
+          "entidadesB": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Entidade_Corporativa"
+            },
             "nullable": true
           }
         },
