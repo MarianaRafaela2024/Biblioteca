@@ -50,6 +50,13 @@ body {
     border-radius: 50%;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+.voltar img{
+    width: 10%;
+    display: flex;
+    align-items:flex-start;
+    justify-content: right;
+    border: 1px;
+}
 
 h1 {
     color: #7f8c8d;
@@ -76,7 +83,7 @@ label {
 input[type="number"],
 input[type="password"] {
     width: 100%;
-    padding: 15px 20px;
+    padding: 15px 0px;
     background: rgba(255, 255, 255, 0.76);
     border: 2px solid rgba(127, 140, 141, 0.3);
     border-radius: 8px;
