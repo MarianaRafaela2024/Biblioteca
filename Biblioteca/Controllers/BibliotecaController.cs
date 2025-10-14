@@ -104,6 +104,8 @@ namespace Biblioteca.Controllers
             FROM Livro l
             LEFT JOIN Livro_Autor la ON l.Id_Livro = la.Id_Livro
             LEFT JOIN Autor a ON la.Id_Autor = a.Id_Autor
+            LEFT JOIN Livro_Entidade le  ON l.Id_Livro = le.Id_Entidade
+            LEFT JOIN Entidade_Corporativa e  ON le.Id_Entidade = e.Id_Entidade
             ORDER BY l.Id_Livro";
 
                 SqlCommand command = new SqlCommand(query, conection);
@@ -176,7 +178,8 @@ namespace Biblioteca.Controllers
                                 Status_Item = reader["Status_Item"]?.ToString() ?? string.Empty,
                                 Status_Emprestimos = reader["Status_Emprestimo"]?.ToString() ?? string.Empty
                             },
-                            Autores = new List<Autor>()
+                            Autores = new List<Autor>(),
+                            Entidades = new List<Entidade_Corporativa>()
                         };
 
                         idLivroAnterior = idLivro;
@@ -196,6 +199,18 @@ namespace Biblioteca.Controllers
                         };
 
                         bibliotecaAtual.Autores.Add(autor);
+                    }
+
+                    if (reader["Id_Entidade"] != DBNull.Value)
+                    {
+                        Entidade_Corporativa entidade = new Entidade_Corporativa()
+                        {
+                            Id = Convert.ToInt32(reader["Id_Autor"]),
+                            Nome_Entidade = reader["Nome_Entidade"]?.ToString() ?? string.Empty,
+                            Subordinacao = reader["Subordinacao"]?.ToString() ?? string.Empty,
+                        };
+
+                        bibliotecaAtual.Entidades.Add(entidade);
                     }
                 }
 

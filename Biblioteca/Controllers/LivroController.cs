@@ -241,7 +241,7 @@ namespace Biblioteca.Controllers
 
 
             [HttpPost]
-            public ActionResult CreateLivro(Livro livro)
+            public ActionResult CreateLivro(Livro livro,Autor autor,Entidade_Corporativa entidade)
             {
                 using (SqlConnection conection = new SqlConnection(StrConex))
                 {
@@ -337,7 +337,11 @@ namespace Biblioteca.Controllers
                     @Informacao_Local,
                     @Status_Item,
                     @Status_Emprestimo
-                )";
+                )
+
+                INSERT INTO Autor (Nome_Autor,Numero,Datas,Funcao,Tipo_Autor) VALUES (@Nome_Autor,@Numero,@Datas,@Funcao,@Tipo_Autor)
+
+                INSERT INTO Entidade_Corporativa (Nome_Entidade,Subordinacao) VALUES (@Nome_Entidade,@Subordicao)";
 
                     SqlCommand comand = new SqlCommand(query, conection);
                     comand.Parameters.AddWithValue("@ISBN", livro.ISBN);
@@ -386,6 +390,15 @@ namespace Biblioteca.Controllers
                     comand.Parameters.AddWithValue("@Informacao_Local", livro.Info_Local);
                     comand.Parameters.AddWithValue("@Status_Item", livro.Status_Item);
                     comand.Parameters.AddWithValue("@Status_Emprestimo", livro.Status_Emprestimos);
+                    //Autor
+                    comand.Parameters.AddWithValue("@Nome_Autor", autor.Nome_Autor);
+                    comand.Parameters.AddWithValue("@Numero", autor.Numero);
+                    comand.Parameters.AddWithValue("@Datas", autor.Datas);
+                    comand.Parameters.AddWithValue("@Funcao", autor.Funcao);
+                    comand.Parameters.AddWithValue("@Tipo_Autor", autor.Tipo_Autor);
+                //Entidade_Corporativa
+                    comand.Parameters.AddWithValue("@Nome_Entidade", entidade.Nome_Entidade);
+                    comand.Parameters.AddWithValue("@Subordinacao", entidade.Subordinacao);
 
                     conection.Open();
                     int rowsAffected = comand.ExecuteNonQuery();
