@@ -96,18 +96,6 @@ namespace Biblioteca
 
         public string Status_Emprestimos { get; set; }
 
-        //Autor
-
-        public int Id_Autor { get; set; }
-
-        public string Nome_Autor { get; set; }
-
-        public string Numero { get; set; }
-
-        public string Datas { get; set; }
-
-        public string Funcao { get; set; }
-
-        public string Tipo_Autor { get; set; }
+        
     }
 }

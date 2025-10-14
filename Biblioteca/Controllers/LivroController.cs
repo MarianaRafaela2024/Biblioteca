@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using System.Windows.Input;
 
 namespace Biblioteca.Controllers
 {
@@ -76,7 +77,7 @@ namespace Biblioteca.Controllers
                         Local_Termo = reader["Localidade_Termo"]?.ToString() ?? string.Empty,
                         Info_Local = reader["Informacao_Local"]?.ToString() ?? string.Empty,
                         Status_Item = reader["Status_Item"]?.ToString() ?? string.Empty,
-                        Status_Emprestimos = reader["Status_Emprestimo"]?.ToString() ?? string.Empty
+                        Status_Emprestimos = reader["Status_Emprestimos"]?.ToString() ?? string.Empty
                     };
                     Livros.Add(Livro);
                 }
@@ -86,333 +87,803 @@ namespace Biblioteca.Controllers
         }
 
 
+        //[HttpGet("{id}", Name = "GetLivroID")]
+
+        //public ActionResult GetLivroId(int id)
+        //{
+        //    using (SqlConnection connection = new SqlConnection(StrConex))
+        //    {
+        //        string query = "SELECT * FROM Livro WHERE ID = @Id";
+        //        SqlCommand comand = new SqlCommand(query, connection);
+        //        comand.Parameters.AddWithValue("@Id", id);
+        //        connection.Open();
+
+        //        SqlDataReader reader = comand.ExecuteReader();
+
+        //        if (reader.Read())
+        //        {
+        //            Livro Livro = new Livro()
+        //            {
+        //                Id = Convert.ToInt32(reader["Id_Livro"]),
+        //                Nome = reader["Nome_Livro"].ToString(),
+        //                Sobrenome = reader["Sobrenome_Livro"].ToString(),
+        //                RM = reader["RM_Livro"]?.ToString() ?? string.Empty,
+        //                Telefone = reader["Telefone_Livro"].ToString(),
+        //                Curso = reader["Curso"].ToString(),
+        //                Status = reader["Status_Livro"].ToString()
+        //            };
+        //            reader.Close();
+
+        //            return Ok(Livro);
+        //        }
+        //        reader.Close();
+        //    }
+        //    return NotFound();
+        //}
 
 
-            //[HttpGet("search/{searchTerm}")]
-            //public ActionResult SearchLivro(string searchTerm)
-            //{
-            //    var Livros = new List<Livro>();
+        [HttpGet("search")]
+        public IActionResult Search(string? termo)
+        {
+            var livros = new List<object>();
 
-            //    using (SqlConnection connection = new SqlConnection(StrConex))
-            //    {
-            //        connection.Open();
-
-            //        bool isNumero = int.TryParse(searchTerm, out int rmInt);
-
-            //        string query;
-            //        SqlCommand command;
-
-            //        if (isNumero)
-            //        {
-            //            query = "SELECT * FROM Livro WHERE RM_Livro = @RM";
-            //            command = new SqlCommand(query, connection);
-            //            command.Parameters.AddWithValue("@RM", rmInt);
-            //        }
-            //        else
-            //        {
-            //            query = "SELECT * FROM Livro WHERE Nome_Livro LIKE @Nome";
-            //            command = new SqlCommand(query, connection);
-            //            command.Parameters.AddWithValue("@Nome", "%" + searchTerm + "%");
-            //        }
-
-            //        using (SqlDataReader reader = command.ExecuteReader())
-            //        {
-            //            while (reader.Read())
-            //            {
-            //                var Livro = new Livro
-            //                {
-            //                    Id = Convert.ToInt32(reader["Id_Livro"]),
-            //                    Nome = reader["Nome_Livro"] as string ?? string.Empty,
-            //                    Sobrenome = reader["Sobrenome_Livro"] as string ?? string.Empty,
-            //                    RM = reader["RM_Livro"]?.ToString() ?? string.Empty,
-            //                    Telefone = reader["Telefone_Livro"]?.ToString() ?? string.Empty,
-            //                    Curso = reader["Curso"]?.ToString() ?? string.Empty,
-            //                    Status = reader["Status_Livro"]?.ToString() ?? string.Empty
-            //                };
-            //                Livros.Add(Livro);
-            //            }
-            //        }
-            //    }
-
-            //    if (Livros.Count == 0)
-            //        return NotFound();
-
-            //    return Ok(Livros);
-            //}
-
-
-            //[HttpGet("{id}", Name = "GetLivroID")]
-
-            //public ActionResult GetLivroId(int id)
-            //{
-            //    using (SqlConnection connection = new SqlConnection(StrConex))
-            //    {
-            //        string query = "SELECT * FROM Livro WHERE ID = @Id";
-            //        SqlCommand comand = new SqlCommand(query, connection);
-            //        comand.Parameters.AddWithValue("@Id", id);
-            //        connection.Open();
-
-            //        SqlDataReader reader = comand.ExecuteReader();
-
-            //        if (reader.Read())
-            //        {
-            //            Livro Livro = new Livro()
-            //            {
-            //                Id = Convert.ToInt32(reader["Id_Livro"]),
-            //                Nome = reader["Nome_Livro"].ToString(),
-            //                Sobrenome = reader["Sobrenome_Livro"].ToString(),
-            //                RM = reader["RM_Livro"]?.ToString() ?? string.Empty,
-            //                Telefone = reader["Telefone_Livro"].ToString(),
-            //                Curso = reader["Curso"].ToString(),
-            //                Status = reader["Status_Livro"].ToString()
-            //            };
-            //            reader.Close();
-
-            //            return Ok(Livro);
-            //        }
-            //        reader.Close();
-            //    }
-            //    return NotFound();
-            //}
-
-
-            [HttpGet("search")]
-            public IActionResult Search(string? termo)
+            using (SqlConnection conection = new SqlConnection(StrConex))
             {
-                var livros = new List<object>();
+                conection.Open();
 
-                using (SqlConnection conection = new SqlConnection(StrConex))
+                string sql = @"
+                        SELECT 
+                            l.Id_Livro,
+                            l.Nome_Livro,
+                            l.Subtitulo,
+                            l.Indicacao_Responsabilidade,
+                            l.Ano_Publicacao,
+                            l.ISBN,
+                            l.Assunto_Termo,
+                            l.Status_Emprestimos,
+                            STRING_AGG(a.Nome_Autor, ', ') AS Autores
+                        FROM Livro l
+                        LEFT JOIN Livro_Autor la ON l.Id_Livro = la.Id_Livro
+                        LEFT JOIN Autor a ON la.Id_Autor = a.Id_Autor
+                        WHERE (@termo IS NULL OR
+                            l.Nome_Livro LIKE '%' + @termo + '%' OR
+                            l.Subtitulo LIKE '%' + @termo + '%' OR
+                            l.Indicacao_Responsabilidade LIKE '%' + @termo + '%' OR
+                            l.Assunto_Termo LIKE '%' + @termo + '%' OR
+                            l.Status_Emprestimos LIKE '%' + @termo + '%' OR
+                            CAST(l.Ano_Publicacao AS NVARCHAR) = @termo OR
+                            a.Nome_Autor LIKE '%' + @termo + '%'
+                        )
+                        GROUP BY 
+                            l.Id_Livro, l.Nome_Livro, l.Subtitulo, l.Indicacao_Responsabilidade,
+                            l.Ano_Publicacao, l.ISBN, l.Assunto_Termo, l.Status_Emprestimos
+                        ORDER BY l.Nome_Livro";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conection))
                 {
-                    conection.Open();
+                    cmd.Parameters.AddWithValue("@termo", (object)termo ?? DBNull.Value);
 
-                    string sql = @"
-        SELECT 
-            l.Id_Livro, 
-            l.Nome_Livro, 
-            l.Subtitulo, 
-            l.Indicacao_Responsabilidade, 
-            l.Ano_Publicacao, 
-            l.ISBN, 
-            l.Assunto_Termo,
-            STRING_AGG(a.Nome_Autor, ', ') AS Autores
-        FROM Livro l
-        LEFT JOIN Livro_Autor la ON l.Id_Livro = la.Id_Livro
-        LEFT JOIN Autor a ON la.Id_Autor = a.Id_Autor
-        WHERE (@termo IS NULL OR
-               l.Nome_Livro LIKE '%' + @termo + '%' OR
-               l.Subtitulo LIKE '%' + @termo + '%' OR
-               l.Indicacao_Responsabilidade LIKE '%' + @termo + '%' OR
-               l.Assunto_Termo LIKE '%' + @termo + '%' OR
-               CAST(l.Ano_Publicacao AS NVARCHAR) = @termo OR
-               a.Nome_Autor LIKE '%' + @termo + '%'
-        )
-        GROUP BY 
-            l.Id_Livro, l.Nome_Livro, l.Subtitulo, l.Indicacao_Responsabilidade, 
-            l.Ano_Publicacao, l.ISBN, l.Assunto_Termo
-        ORDER BY l.Nome_Livro";
-
-                    using (SqlCommand cmd = new SqlCommand(sql, conection))
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        cmd.Parameters.AddWithValue("@termo", (object)termo ?? DBNull.Value);
-
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
+                            livros.Add(new
                             {
-                                livros.Add(new
+                                Id_Livro = Convert.ToInt32(reader["Id_Livro"]),
+                                Nome_Livro = reader["Nome_Livro"].ToString(),
+                                Subtitulo = reader["Subtitulo"].ToString(),
+                                Indicacao_Responsabilidade = reader["Indicacao_Responsabilidade"].ToString(),
+                                Ano_Publicacao = reader["Ano_Publicacao"] != DBNull.Value ? Convert.ToInt32(reader["Ano_Publicacao"]) : (int?)null,
+                                ISBN = reader["ISBN"].ToString(),
+                                Assunto_Termo = reader["Assunto_Termo"].ToString(),
+                                Autores = reader["Autores"]?.ToString(),
+                                Status_Emprestimos = reader["Status_Emprestimos"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+
+            return Ok(livros);
+        }
+
+
+
+        //[HttpPost]
+        //public ActionResult CreateLivro(BibliotecaRequest CreateL)
+        //{
+        //    using (SqlConnection conection = new SqlConnection(StrConex))
+        //    {
+        //        string query = @"INSERT INTO Livro (
+        //            ISBN,
+        //            Condicoes_Encadernacao,
+        //            Agencia_Catalogadora,
+        //            Idioma_Catalogacao,
+        //            Agencia_Transcricao,
+        //            Agencia_Modificacao,
+        //            Idioma_Texto,
+        //            Idioma_Resumo,
+        //            Idioma_Legenda,
+        //            Numero_CDD,
+        //            Numero_Item_CDD,
+        //            Numero_Chamada_Local,
+        //            Numero_Item_Local,
+        //            Numero_Chamada_Secundaria,
+        //            Nome_Livro,
+        //            Subtitulo,
+        //            Indicacao_Responsabilidade,
+        //            Indicador_Artigo_Inicial,
+        //            Numero_Edicao,
+        //            Mencao_Responsabilidade_Edicao,
+        //            Local_Publicacao,
+        //            Editora,
+        //            Ano_Publicacao,
+        //            Paginas,
+        //            Ilustracoes,
+        //            Dimensoes,
+        //            Material_Adicional,
+        //            Titulo_Serie,
+        //            Numero_Serie,
+        //            Notas_Gerais,
+        //            Nome_Pessoal_Assunto,
+        //            Datas_Pessoal,
+        //            Funcao_Pessoal,
+        //            Topico_Pessoal,
+        //            Titulo_Uniforme,
+        //            Forma_Uniforme,
+        //            Periodo_Historico_Uniforme,
+        //            Localidade_Uniforme,
+        //            Assunto_Termo,
+        //            Forma_Termo,
+        //            Periodo_Historico_Termo,
+        //            Localidade_Termo,
+        //            Informacao_Local,
+        //            Status_Item,
+        //            Status_Emprestimo
+        //        ) VALUES (
+        //            @ISBN,
+        //            @Condicoes_Encadernacao,
+        //            @Agencia_Catalogadora,
+        //            @Idioma_Catalogacao,
+        //            @Agencia_Transcricao,
+        //            @Agencia_Modificacao,
+        //            @Idioma_Texto,
+        //            @Idioma_Resumo,
+        //            @Idioma_Legenda,
+        //            @Numero_CDD,
+        //            @Numero_Item_CDD,
+        //            @Numero_Chamada_Local,
+        //            @Numero_Item_Local,
+        //            @Numero_Chamada_Secundaria,
+        //            @Nome_Livro,
+        //            @Subtitulo,
+        //            @Indicacao_Responsabilidade,
+        //            @Indicador_Artigo_Inicial,
+        //            @Numero_Edicao,
+        //            @Mencao_Responsabilidade_Edicao,
+        //            @Local_Publicacao,
+        //            @Editora,
+        //            @Ano_Publicacao,
+        //            @Paginas,
+        //            @Ilustracoes,
+        //            @Dimensoes,
+        //            @Material_Adicional,
+        //            @Titulo_Serie,
+        //            @Numero_Serie,
+        //            @Notas_Gerais,
+        //            @Nome_Pessoal_Assunto,
+        //            @Datas_Pessoal,
+        //            @Funcao_Pessoal,
+        //            @Topico_Pessoal,
+        //            @Titulo_Uniforme,
+        //            @Forma_Uniforme,
+        //            @Periodo_Historico_Uniforme,
+        //            @Localidade_Uniforme,
+        //            @Assunto_Termo,
+        //            @Forma_Termo,
+        //            @Periodo_Historico_Termo,
+        //            @Localidade_Termo,
+        //            @Informacao_Local,
+        //            @Status_Item,
+        //            @Status_Emprestimo
+        //        )
+
+        //        INSERT INTO Autor (Nome_Autor,Numero,Datas,Funcao,Tipo_Autor) VALUES (@Nome_Autor,@Numero,@Datas,@Funcao,@Tipo_Autor)
+
+        //        INSERT INTO Entidade_Corporativa (Nome_Entidade,Subordinacao) VALUES (@Nome_Entidade,@Subordinacao)";
+
+        //        SqlCommand comand = new SqlCommand(query, conection);
+        //        comand.Parameters.AddWithValue("@ISBN", CreateL.livro.ISBN);
+        //        comand.Parameters.AddWithValue("@Condicoes_Encadernacao", CreateL.livro.Cond_Encardenacao);
+        //        comand.Parameters.AddWithValue("@Agencia_Catalogadora", CreateL.livro.Agen_Catalogadora);
+        //        comand.Parameters.AddWithValue("@Idioma_Catalogacao", CreateL.livro.Idi_Catalogacao);
+        //        comand.Parameters.AddWithValue("@Agencia_Transcricao", CreateL.livro.Agen_Transcricao);
+        //        comand.Parameters.AddWithValue("@Agencia_Modificacao", CreateL.livro.Agen_Modificacao);
+        //        comand.Parameters.AddWithValue("@Idioma_Texto", CreateL.livro.Idi_Texto);
+        //        comand.Parameters.AddWithValue("@Idioma_Resumo", CreateL.livro.Idi_Resumo);
+        //        comand.Parameters.AddWithValue("@Idioma_Legenda", CreateL.livro.Idi_Legenda);
+        //        comand.Parameters.AddWithValue("@Numero_CDD", CreateL.livro.Numero_CDD);
+        //        comand.Parameters.AddWithValue("@Numero_Item_CDD", CreateL.livro.Numero_Item_CDD);
+        //        comand.Parameters.AddWithValue("@Numero_Chamada_Local", CreateL.livro.Num_Cham_Local);
+        //        comand.Parameters.AddWithValue("@Numero_Item_Local", CreateL.livro.Num_Item_Local);
+        //        comand.Parameters.AddWithValue("@Numero_Chamada_Secundaria", CreateL.livro.Num_Cham_Secundaria);
+        //        comand.Parameters.AddWithValue("@Nome_Livro", CreateL.livro.Nome);
+        //        comand.Parameters.AddWithValue("@Subtitulo", CreateL.livro.Subtitulo);
+        //        comand.Parameters.AddWithValue("@Indicacao_Responsabilidade", CreateL.livro.Indi_Responsabilidade);
+        //        comand.Parameters.AddWithValue("@Indicador_Artigo_Inicial", CreateL.livro.Indi_Arti_Inicial);
+        //        comand.Parameters.AddWithValue("@Numero_Edicao", CreateL.livro.Num_Edicao);
+        //        comand.Parameters.AddWithValue("@Mencao_Responsabilidade_Edicao", CreateL.livro.Mencao_Responsa_Edicao);
+        //        comand.Parameters.AddWithValue("@Local_Publicacao", CreateL.livro.Local_Publicacao);
+        //        comand.Parameters.AddWithValue("@Editora", CreateL.livro.Editora);
+        //        comand.Parameters.AddWithValue("@Ano_Publicacao", CreateL.livro.Ano_Publicacao);
+        //        comand.Parameters.AddWithValue("@Paginas", CreateL.livro.Paginas);
+        //        comand.Parameters.AddWithValue("@Ilustracoes", CreateL.livro.Ilustracoes);
+        //        comand.Parameters.AddWithValue("@Dimensoes", CreateL.livro.Dimensoes);
+        //        comand.Parameters.AddWithValue("@Material_Adicional", CreateL.livro.Material_Adicional);
+        //        comand.Parameters.AddWithValue("@Titulo_Serie", CreateL.livro.Titulo_Serie);
+        //        comand.Parameters.AddWithValue("@Numero_Serie", CreateL.livro.Num_Serie);
+        //        comand.Parameters.AddWithValue("@Notas_Gerais", CreateL.livro.Notas_Gerais);
+        //        comand.Parameters.AddWithValue("@Nome_Pessoal_Assunto", CreateL.livro.Nome_Pess_Assunto);
+        //        comand.Parameters.AddWithValue("@Datas_Pessoal", CreateL.livro.Datas_Pessoais);
+        //        comand.Parameters.AddWithValue("@Funcao_Pessoal", CreateL.livro.Funcao_Pessoal);
+        //        comand.Parameters.AddWithValue("@Topico_Pessoal", CreateL.livro.Topico);
+        //        comand.Parameters.AddWithValue("@Titulo_Uniforme", CreateL.livro.Titulo_Uniforme);
+        //        comand.Parameters.AddWithValue("@Forma_Uniforme", CreateL.livro.Forma_Uniforme);
+        //        comand.Parameters.AddWithValue("@Periodo_Historico_Uniforme", CreateL.livro.Periodo_Historico);
+        //        comand.Parameters.AddWithValue("@Localidade_Uniforme", CreateL.livro.Local_Uniforme);
+        //        comand.Parameters.AddWithValue("@Assunto_Termo", CreateL.livro.Assunto_Termo);
+        //        comand.Parameters.AddWithValue("@Forma_Termo", CreateL.livro.Forma_Termo);
+        //        comand.Parameters.AddWithValue("@Periodo_Historico_Termo", CreateL.livro.Periodo_Histo_Termo);
+        //        comand.Parameters.AddWithValue("@Localidade_Termo", CreateL.livro.Local_Termo);
+        //        comand.Parameters.AddWithValue("@Informacao_Local", CreateL.livro.Info_Local);
+        //        comand.Parameters.AddWithValue("@Status_Item", CreateL.livro.Status_Item);
+        //        comand.Parameters.AddWithValue("@Status_Emprestimo", CreateL.livro.Status_Emprestimos);
+        //        Autor
+        //            comand.Parameters.AddWithValue("@Nome_Autor", CreateL.autor.Nome_Autor);
+        //        comand.Parameters.AddWithValue("@Numero", CreateL.autor.Numero);
+        //        comand.Parameters.AddWithValue("@Datas", CreateL.autor.Datas);
+        //        comand.Parameters.AddWithValue("@Funcao", CreateL.autor.Funcao);
+        //        comand.Parameters.AddWithValue("@Tipo_Autor", CreateL.autor.Tipo_Autor);
+        //        Entidade_Corporativa
+        //            comand.Parameters.AddWithValue("@Nome_Entidade", CreateL.entidade.Nome_Entidade);
+        //        comand.Parameters.AddWithValue("@Subordinacao", CreateL.entidade.Subordinacao);
+
+        //        conection.Open();
+        //        int rowsAffected = comand.ExecuteNonQuery();
+
+        //        if (rowsAffected > 0)
+        //        {
+        //            return Ok();
+        //        }
+        //    }
+        //    return BadRequest();
+        //}
+
+        [HttpPost]
+        public ActionResult CreateLivro(BibliotecaRequest CreateL)
+        {
+            using (SqlConnection connection = new SqlConnection(StrConex))
+            {
+                connection.Open();
+                SqlTransaction transaction = connection.BeginTransaction();
+
+                try
+                {
+                    int autorId = 0;
+                    int entidadeId = 0;
+                    int livroId = 0;
+
+                    // ========== VERIFICAR E INSERIR AUTOR ==========
+                    if (!string.IsNullOrEmpty(CreateL.autor?.Nome_Autor))
+                    {
+                        string checkAutorQuery = "SELECT Id_Autor FROM Autor WHERE Nome_Autor = @Nome_Autor";
+                        using (SqlCommand checkCmd = new SqlCommand(checkAutorQuery, connection, transaction))
+                        {
+                            checkCmd.Parameters.AddWithValue("@Nome_Autor", CreateL.autor.Nome_Autor);
+                            var result = checkCmd.ExecuteScalar();
+
+                            if (result != null)
+                            {
+                                autorId = Convert.ToInt32(result);
+                            }
+                            else
+                            {
+                                string insertAutorQuery = @"
+                            INSERT INTO Autor (Nome_Autor, Numero, Datas, Funcao, Tipo_Autor) 
+                            VALUES (@Nome_Autor, @Numero, @Datas, @Funcao, @Tipo_Autor);
+                            SELECT CAST(SCOPE_IDENTITY() AS INT);";
+
+                                using (SqlCommand insertCmd = new SqlCommand(insertAutorQuery, connection, transaction))
                                 {
-                                    Id_Livro = Convert.ToInt32(reader["Id_Livro"]),
-                                    Nome_Livro = reader["Nome_Livro"].ToString(),
-                                    Subtitulo = reader["Subtitulo"].ToString(),
-                                    Indicacao_Responsabilidade = reader["Indicacao_Responsabilidade"].ToString(),
-                                    Ano_Publicacao = reader["Ano_Publicacao"] != DBNull.Value ? Convert.ToInt32(reader["Ano_Publicacao"]) : (int?)null,
-                                    ISBN = reader["ISBN"].ToString(),
-                                    Assunto_Termo = reader["Assunto_Termo"].ToString(),
-                                    Autores = reader["Autores"]?.ToString()
+                                    insertCmd.Parameters.AddWithValue("@Nome_Autor", CreateL.autor.Nome_Autor);
+                                    insertCmd.Parameters.AddWithValue("@Numero", CreateL.autor.Numero ?? (object)DBNull.Value);
+                                    insertCmd.Parameters.AddWithValue("@Datas", CreateL.autor.Datas ?? (object)DBNull.Value);
+                                    insertCmd.Parameters.AddWithValue("@Funcao", CreateL.autor.Funcao ?? (object)DBNull.Value);
+                                    insertCmd.Parameters.AddWithValue("@Tipo_Autor", CreateL.autor.Tipo_Autor ?? (object)DBNull.Value);
+
+                                    autorId = (int)insertCmd.ExecuteScalar();
+                                }
+                            }
+                        }
+                    }
+
+                    // ========== VERIFICAR E INSERIR ENTIDADE ==========
+                    if (!string.IsNullOrEmpty(CreateL.entidade?.Nome_Entidade))
+                    {
+                        string checkEntidadeQuery = "SELECT Id_Entidade FROM Entidade_Corporativa WHERE Nome_Entidade = @Nome_Entidade";
+                        using (SqlCommand checkCmd = new SqlCommand(checkEntidadeQuery, connection, transaction))
+                        {
+                            checkCmd.Parameters.AddWithValue("@Nome_Entidade", CreateL.entidade.Nome_Entidade);
+                            var result = checkCmd.ExecuteScalar();
+
+                            if (result != null || CreateL.entidade.Nome_Entidade.ToString() == "string" || CreateL.entidade.Nome_Entidade.ToString() == null)
+                            {
+                                entidadeId = Convert.ToInt32(result);
+                            }
+                            else
+                            {
+                                string insertEntidadeQuery = @"
+                            INSERT INTO Entidade_Corporativa (Nome_Entidade, Subordinacao) 
+                            VALUES (@Nome_Entidade, @Subordinacao);
+                            SELECT CAST(SCOPE_IDENTITY() AS INT);";
+
+                                using (SqlCommand insertCmd = new SqlCommand(insertEntidadeQuery, connection, transaction))
+                                {
+                                    insertCmd.Parameters.AddWithValue("@Nome_Entidade", CreateL.entidade.Nome_Entidade);
+                                    insertCmd.Parameters.AddWithValue("@Subordinacao", CreateL.entidade.Subordinacao ?? (object)DBNull.Value);
+
+                                    entidadeId = (int)insertCmd.ExecuteScalar();
+                                }
+                            }
+                        }
+                    }
+
+                    // ========== VERIFICAR SE LIVRO JÁ EXISTE PELO ISBN ==========
+                    if (!string.IsNullOrEmpty(CreateL.livro?.ISBN))
+                    {
+                        string checkLivroQuery = "SELECT Id_Livro FROM Livro WHERE ISBN = @ISBN";
+                        using (SqlCommand checkCmd = new SqlCommand(checkLivroQuery, connection, transaction))
+                        {
+                            checkCmd.Parameters.AddWithValue("@ISBN", CreateL.livro.ISBN);
+                            var result = checkCmd.ExecuteScalar();
+
+                            if (result != null)
+                            {
+                                livroId = Convert.ToInt32(result);
+                                transaction.Rollback();
+                                return BadRequest(new
+                                {
+                                    message = "Livro com este ISBN já existe!",
+                                    livroId = livroId,
+                                    isbn = CreateL.livro.ISBN
                                 });
                             }
                         }
                     }
-                }
 
-                return Ok(livros);
-            }
-
-
-
-            [HttpPost]
-            public ActionResult CreateLivro(Livro livro,Autor autor,Entidade_Corporativa entidade)
-            {
-                using (SqlConnection conection = new SqlConnection(StrConex))
-                {
-                    string query = @"INSERT INTO Livro (
-                    ISBN,
-                    Condicoes_Encadernacao,
-                    Agencia_Catalogadora,
-                    Idioma_Catalogacao,
-                    Agencia_Transcricao,
-                    Agencia_Modificacao,
-                    Idioma_Texto,
-                    Idioma_Resumo,
-                    Idioma_Legenda,
-                    Numero_CDD,
-                    Numero_Item_CDD,
-                    Numero_Chamada_Local,
-                    Numero_Item_Local,
-                    Numero_Chamada_Secundaria,
-                    Nome_Livro,
-                    Subtitulo,
-                    Indicacao_Responsabilidade,
-                    Indicador_Artigo_Inicial,
-                    Numero_Edicao,
-                    Mencao_Responsabilidade_Edicao,
-                    Local_Publicacao,
-                    Editora,
-                    Ano_Publicacao,
-                    Paginas,
-                    Ilustracoes,
-                    Dimensoes,
-                    Material_Adicional,
-                    Titulo_Serie,
-                    Numero_Serie,
-                    Notas_Gerais,
-                    Nome_Pessoal_Assunto,
-                    Datas_Pessoal,
-                    Funcao_Pessoal,
-                    Topico_Pessoal,
-                    Titulo_Uniforme,
-                    Forma_Uniforme,
-                    Periodo_Historico_Uniforme,
-                    Localidade_Uniforme,
-                    Assunto_Termo,
-                    Forma_Termo,
-                    Periodo_Historico_Termo,
-                    Localidade_Termo,
-                    Informacao_Local,
-                    Status_Item,
-                    Status_Emprestimo
+                    // ========== INSERIR LIVRO ==========
+                    string insertLivroQuery = @"
+                INSERT INTO Livro (
+                    ISBN, Condicoes_Encadernacao, Agencia_Catalogadora, Idioma_Catalogacao,
+                    Agencia_Transcricao, Agencia_Modificacao, Idioma_Texto, Idioma_Resumo,
+                    Idioma_Legenda, Numero_CDD, Numero_Item_CDD, Numero_Chamada_Local,
+                    Numero_Item_Local, Numero_Chamada_Secundaria, Nome_Livro, Subtitulo,
+                    Indicacao_Responsabilidade, Indicador_Artigo_Inicial, Numero_Edicao,
+                    Mencao_Responsabilidade_Edicao, Local_Publicacao, Editora, Ano_Publicacao,
+                    Paginas, Ilustracoes, Dimensoes, Material_Adicional, Titulo_Serie,
+                    Numero_Serie, Notas_Gerais, Nome_Pessoal_Assunto, Datas_Pessoal,
+                    Funcao_Pessoal, Topico_Pessoal, Titulo_Uniforme, Forma_Uniforme,
+                    Periodo_Historico_Uniforme, Localidade_Uniforme, Assunto_Termo,
+                    Forma_Termo, Periodo_Historico_Termo, Localidade_Termo, Informacao_Local,
+                    Status_Item, Status_Emprestimos
                 ) VALUES (
-                    @ISBN,
-                    @Condicoes_Encadernacao,
-                    @Agencia_Catalogadora,
-                    @Idioma_Catalogacao,
-                    @Agencia_Transcricao,
-                    @Agencia_Modificacao,
-                    @Idioma_Texto,
-                    @Idioma_Resumo,
-                    @Idioma_Legenda,
-                    @Numero_CDD,
-                    @Numero_Item_CDD,
-                    @Numero_Chamada_Local,
-                    @Numero_Item_Local,
-                    @Numero_Chamada_Secundaria,
-                    @Nome_Livro,
-                    @Subtitulo,
-                    @Indicacao_Responsabilidade,
-                    @Indicador_Artigo_Inicial,
-                    @Numero_Edicao,
-                    @Mencao_Responsabilidade_Edicao,
-                    @Local_Publicacao,
-                    @Editora,
-                    @Ano_Publicacao,
-                    @Paginas,
-                    @Ilustracoes,
-                    @Dimensoes,
-                    @Material_Adicional,
-                    @Titulo_Serie,
-                    @Numero_Serie,
-                    @Notas_Gerais,
-                    @Nome_Pessoal_Assunto,
-                    @Datas_Pessoal,
-                    @Funcao_Pessoal,
-                    @Topico_Pessoal,
-                    @Titulo_Uniforme,
-                    @Forma_Uniforme,
-                    @Periodo_Historico_Uniforme,
-                    @Localidade_Uniforme,
-                    @Assunto_Termo,
-                    @Forma_Termo,
-                    @Periodo_Historico_Termo,
-                    @Localidade_Termo,
-                    @Informacao_Local,
-                    @Status_Item,
-                    @Status_Emprestimo
-                )
+                    @ISBN, @Condicoes_Encadernacao, @Agencia_Catalogadora, @Idioma_Catalogacao,
+                    @Agencia_Transcricao, @Agencia_Modificacao, @Idioma_Texto, @Idioma_Resumo,
+                    @Idioma_Legenda, @Numero_CDD, @Numero_Item_CDD, @Numero_Chamada_Local,
+                    @Numero_Item_Local, @Numero_Chamada_Secundaria, @Nome_Livro, @Subtitulo,
+                    @Indicacao_Responsabilidade, @Indicador_Artigo_Inicial, @Numero_Edicao,
+                    @Mencao_Responsabilidade_Edicao, @Local_Publicacao, @Editora, @Ano_Publicacao,
+                    @Paginas, @Ilustracoes, @Dimensoes, @Material_Adicional, @Titulo_Serie,
+                    @Numero_Serie, @Notas_Gerais, @Nome_Pessoal_Assunto, @Datas_Pessoal,
+                    @Funcao_Pessoal, @Topico_Pessoal, @Titulo_Uniforme, @Forma_Uniforme,
+                    @Periodo_Historico_Uniforme, @Localidade_Uniforme, @Assunto_Termo,
+                    @Forma_Termo, @Periodo_Historico_Termo, @Localidade_Termo, @Informacao_Local,
+                    @Status_Item, @Status_Emprestimos
+                );
+                SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
-                INSERT INTO Autor (Nome_Autor,Numero,Datas,Funcao,Tipo_Autor) VALUES (@Nome_Autor,@Numero,@Datas,@Funcao,@Tipo_Autor)
-
-                INSERT INTO Entidade_Corporativa (Nome_Entidade,Subordinacao) VALUES (@Nome_Entidade,@Subordicao)";
-
-                    SqlCommand comand = new SqlCommand(query, conection);
-                    comand.Parameters.AddWithValue("@ISBN", livro.ISBN);
-                    comand.Parameters.AddWithValue("@Condicoes_Encadernacao", livro.Cond_Encardenacao);
-                    comand.Parameters.AddWithValue("@Agencia_Catalogadora", livro.Agen_Catalogadora);
-                    comand.Parameters.AddWithValue("@Idioma_Catalogacao", livro.Idi_Catalogacao);
-                    comand.Parameters.AddWithValue("@Agencia_Transcricao", livro.Agen_Transcricao);
-                    comand.Parameters.AddWithValue("@Agencia_Modificacao", livro.Agen_Modificacao);
-                    comand.Parameters.AddWithValue("@Idioma_Texto", livro.Idi_Texto);
-                    comand.Parameters.AddWithValue("@Idioma_Resumo", livro.Idi_Resumo);
-                    comand.Parameters.AddWithValue("@Idioma_Legenda", livro.Idi_Legenda);
-                    comand.Parameters.AddWithValue("@Numero_CDD", livro.Numero_CDD);
-                    comand.Parameters.AddWithValue("@Numero_Item_CDD", livro.Numero_Item_CDD);
-                    comand.Parameters.AddWithValue("@Numero_Chamada_Local", livro.Num_Cham_Local);
-                    comand.Parameters.AddWithValue("@Numero_Item_Local", livro.Num_Item_Local);
-                    comand.Parameters.AddWithValue("@Numero_Chamada_Secundaria", livro.Num_Cham_Secundaria);
-                    comand.Parameters.AddWithValue("@Nome_Livro", livro.Nome);
-                    comand.Parameters.AddWithValue("@Subtitulo", livro.Subtitulo);
-                    comand.Parameters.AddWithValue("@Indicacao_Responsabilidade", livro.Indi_Responsabilidade);
-                    comand.Parameters.AddWithValue("@Indicador_Artigo_Inicial", livro.Indi_Arti_Inicial);
-                    comand.Parameters.AddWithValue("@Numero_Edicao", livro.Num_Edicao);
-                    comand.Parameters.AddWithValue("@Mencao_Responsabilidade_Edicao", livro.Mencao_Responsa_Edicao);
-                    comand.Parameters.AddWithValue("@Local_Publicacao", livro.Local_Publicacao);
-                    comand.Parameters.AddWithValue("@Editora", livro.Editora);
-                    comand.Parameters.AddWithValue("@Ano_Publicacao", livro.Ano_Publicacao);
-                    comand.Parameters.AddWithValue("@Paginas", livro.Paginas);
-                    comand.Parameters.AddWithValue("@Ilustracoes", livro.Ilustracoes);
-                    comand.Parameters.AddWithValue("@Dimensoes", livro.Dimensoes);
-                    comand.Parameters.AddWithValue("@Material_Adicional", livro.Material_Adicional);
-                    comand.Parameters.AddWithValue("@Titulo_Serie", livro.Titulo_Serie);
-                    comand.Parameters.AddWithValue("@Numero_Serie", livro.Num_Serie);
-                    comand.Parameters.AddWithValue("@Notas_Gerais", livro.Notas_Gerais);
-                    comand.Parameters.AddWithValue("@Nome_Pessoal_Assunto", livro.Nome_Pess_Assunto);
-                    comand.Parameters.AddWithValue("@Datas_Pessoal", livro.Datas_Pessoais);
-                    comand.Parameters.AddWithValue("@Funcao_Pessoal", livro.Funcao_Pessoal);
-                    comand.Parameters.AddWithValue("@Topico_Pessoal", livro.Topico);
-                    comand.Parameters.AddWithValue("@Titulo_Uniforme", livro.Titulo_Uniforme);
-                    comand.Parameters.AddWithValue("@Forma_Uniforme", livro.Forma_Uniforme);
-                    comand.Parameters.AddWithValue("@Periodo_Historico_Uniforme", livro.Periodo_Historico);
-                    comand.Parameters.AddWithValue("@Periodo_Historico_Uniforme", livro.Periodo_Historico);
-                    comand.Parameters.AddWithValue("@Localidade_Uniforme", livro.Local_Uniforme);
-                    comand.Parameters.AddWithValue("@Assunto_Termo", livro.Assunto_Termo);
-                    comand.Parameters.AddWithValue("@Forma_Termo", livro.Forma_Termo);
-                    comand.Parameters.AddWithValue("@Periodo_Historico_Termo", livro.Periodo_Histo_Termo);
-                    comand.Parameters.AddWithValue("@Localidade_Termo", livro.Local_Termo);
-                    comand.Parameters.AddWithValue("@Informacao_Local", livro.Info_Local);
-                    comand.Parameters.AddWithValue("@Status_Item", livro.Status_Item);
-                    comand.Parameters.AddWithValue("@Status_Emprestimo", livro.Status_Emprestimos);
-                    //Autor
-                    comand.Parameters.AddWithValue("@Nome_Autor", autor.Nome_Autor);
-                    comand.Parameters.AddWithValue("@Numero", autor.Numero);
-                    comand.Parameters.AddWithValue("@Datas", autor.Datas);
-                    comand.Parameters.AddWithValue("@Funcao", autor.Funcao);
-                    comand.Parameters.AddWithValue("@Tipo_Autor", autor.Tipo_Autor);
-                //Entidade_Corporativa
-                    comand.Parameters.AddWithValue("@Nome_Entidade", entidade.Nome_Entidade);
-                    comand.Parameters.AddWithValue("@Subordinacao", entidade.Subordinacao);
-
-                    conection.Open();
-                    int rowsAffected = comand.ExecuteNonQuery();
-
-                    if (rowsAffected > 0)
+                    using (SqlCommand comandLA = new SqlCommand(insertLivroQuery, connection, transaction))
                     {
-                        return Ok();
+                        // Adicionar todos os parâmetros com verificação de NULL
+                        comandLA.Parameters.AddWithValue("@ISBN", CreateL.livro.ISBN ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Condicoes_Encadernacao", CreateL.livro.Cond_Encardenacao ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Agencia_Catalogadora", CreateL.livro.Agen_Catalogadora ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Idioma_Catalogacao", CreateL.livro.Idi_Catalogacao ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Agencia_Transcricao", CreateL.livro.Agen_Transcricao ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Agencia_Modificacao", CreateL.livro.Agen_Modificacao ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Idioma_Texto", CreateL.livro.Idi_Texto ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Idioma_Resumo", CreateL.livro.Idi_Resumo ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Idioma_Legenda", CreateL.livro.Idi_Legenda ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Numero_CDD", CreateL.livro.Numero_CDD ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Numero_Item_CDD", CreateL.livro.Numero_Item_CDD ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Numero_Chamada_Local", CreateL.livro.Num_Cham_Local ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Numero_Item_Local", CreateL.livro.Num_Item_Local ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Numero_Chamada_Secundaria", CreateL.livro.Num_Cham_Secundaria ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Nome_Livro", CreateL.livro.Nome ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Subtitulo", CreateL.livro.Subtitulo ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Indicacao_Responsabilidade", CreateL.livro.Indi_Responsabilidade ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Indicador_Artigo_Inicial", CreateL.livro.Indi_Arti_Inicial ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Numero_Edicao", CreateL.livro.Num_Edicao ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Mencao_Responsabilidade_Edicao", CreateL.livro.Mencao_Responsa_Edicao ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Local_Publicacao", CreateL.livro.Local_Publicacao ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Editora", CreateL.livro.Editora ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Ano_Publicacao", CreateL.livro.Ano_Publicacao > 0 ? CreateL.livro.Ano_Publicacao : (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Paginas", CreateL.livro.Paginas ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Ilustracoes", CreateL.livro.Ilustracoes ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Dimensoes", CreateL.livro.Dimensoes ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Material_Adicional", CreateL.livro.Material_Adicional ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Titulo_Serie", CreateL.livro.Titulo_Serie ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Numero_Serie", CreateL.livro.Num_Serie ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Notas_Gerais", CreateL.livro.Notas_Gerais ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Nome_Pessoal_Assunto", CreateL.livro.Nome_Pess_Assunto ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Datas_Pessoal", CreateL.livro.Datas_Pessoais ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Funcao_Pessoal", CreateL.livro.Funcao_Pessoal ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Topico_Pessoal", CreateL.livro.Topico ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Titulo_Uniforme", CreateL.livro.Titulo_Uniforme ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Forma_Uniforme", CreateL.livro.Forma_Uniforme ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Periodo_Historico_Uniforme", CreateL.livro.Periodo_Historico ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Localidade_Uniforme", CreateL.livro.Local_Uniforme ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Assunto_Termo", CreateL.livro.Assunto_Termo ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Forma_Termo", CreateL.livro.Forma_Termo ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Periodo_Historico_Termo", CreateL.livro.Periodo_Histo_Termo ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Localidade_Termo", CreateL.livro.Local_Termo ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Informacao_Local", CreateL.livro.Info_Local ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Status_Item", CreateL.livro.Status_Item ?? (object)DBNull.Value);
+                        comandLA.Parameters.AddWithValue("@Status_Emprestimos", CreateL.livro.Status_Emprestimos);
+
+                        livroId = (int)comandLA.ExecuteScalar();
                     }
+
+                    // ========== INSERIR RELACIONAMENTO LIVRO-AUTOR ==========
+                    if (autorId > 0)
+                    {
+                        string livroAutorInsert = "INSERT INTO Livro_Autor (Id_Autor, Id_Livro) VALUES (@Id_Autor, @Id_Livro)";
+                        using (SqlCommand comandLA = new SqlCommand(livroAutorInsert, connection, transaction))
+                        {
+                            comandLA.Parameters.AddWithValue("@Id_Autor", autorId);
+                            comandLA.Parameters.AddWithValue("@Id_Livro", livroId);
+                            comandLA.ExecuteNonQuery();
+                        }
+                    }
+
+                    // ========== INSERIR RELACIONAMENTO LIVRO-ENTIDADE ==========
+                    if (entidadeId > 0)
+                    {
+                        string livroEntidadeInsert = "INSERT INTO Livro_Entidade (Id_Entidade, Id_Livro) VALUES (@Id_Entidade, @Id_Livro)";
+                        using (SqlCommand comandLE = new SqlCommand(livroEntidadeInsert, connection, transaction))
+                        {
+                            comandLE.Parameters.AddWithValue("@Id_Entidade", entidadeId);
+                            comandLE.Parameters.AddWithValue("@Id_Livro", livroId);
+                            comandLE.ExecuteNonQuery();
+                        }
+                    }
+
+                    // Confirma a transação
+                    transaction.Commit();
+                    return Ok(new
+                    {
+                        message = "Livro cadastrado com sucesso!",
+                        livroId = livroId,
+                        autorId = autorId,
+                        entidadeId = entidadeId
+                    });
                 }
-                return BadRequest();
+                catch (Exception ex)
+                {
+                    // Desfaz todas as alterações
+                    transaction.Rollback();
+                    return BadRequest(new
+                    {
+                        message = "Erro ao cadastrar livro",
+                        error = ex.Message,
+                        stackTrace = ex.StackTrace
+                    });
+                }
             }
+        }
+        //[HttpPost]
+        //public ActionResult CreateLivro(BibliotecaRequest CreateL)
+        //{
+        //    using (SqlConnection connection = new SqlConnection(StrConex))
+        //    {
+        //        connection.Open();
+        //        SqlTransaction transaction = connection.BeginTransaction();
+
+        //        try
+        //        {
+        //            int autorId = 0;
+        //            int entidadeId = 0;
+        //            int LivroId = 0;
+
+        //            // ========== VERIFICAR E INSERIR AUTOR ==========
+        //            if (!string.IsNullOrEmpty(CreateL.autor.Nome_Autor))
+        //            {
+        //                // Verificar se autor já existe
+        //                string checkAutorQuery = "SELECT Id_Autor FROM Autor WHERE Nome_Autor = @Nome_Autor";
+        //                using (SqlCommand checkCmd = new SqlCommand(checkAutorQuery, connection, transaction))
+        //                {
+        //                    checkCmd.Parameters.AddWithValue("@Nome_Autor", CreateL.autor.Nome_Autor);
+        //                    var result = checkCmd.ExecuteScalar();
+
+        //                    if (result != null)
+        //                    {
+        //                        // Autor já existe
+        //                        autorId = Convert.ToInt32(result);
+        //                    }
+        //                    else
+        //                    {
+        //                        // Inserir novo autor
+        //                        string insertAutorQuery = @"
+        //                    INSERT INTO Autor (Nome_Autor, Numero, Datas, Funcao, Tipo_Autor) 
+        //                    VALUES (@Nome_Autor, @Numero, @Datas, @Funcao, @Tipo_Autor);
+        //                    SELECT CAST(SCOPE_IDENTITY() AS INT);";
+
+        //                        using (SqlCommand insertCmd = new SqlCommand(insertAutorQuery, connection, transaction))
+        //                        {
+        //                            insertCmd.Parameters.AddWithValue("@Nome_Autor", CreateL.autor.Nome_Autor);
+        //                            insertCmd.Parameters.AddWithValue("@Numero", CreateL.autor.Numero ?? (object)DBNull.Value);
+        //                            insertCmd.Parameters.AddWithValue("@Datas", CreateL.autor.Datas ?? (object)DBNull.Value);
+        //                            insertCmd.Parameters.AddWithValue("@Funcao", CreateL.autor.Funcao ?? (object)DBNull.Value);
+        //                            insertCmd.Parameters.AddWithValue("@Tipo_Autor", CreateL.autor.Tipo_Autor ?? (object)DBNull.Value);
+
+        //                            autorId = (int)insertCmd.ExecuteScalar();
+        //                        }
+        //                    }
+        //                }
+        //            }
+
+        //            // ========== VERIFICAR E INSERIR ENTIDADE ==========
+        //            if (!string.IsNullOrEmpty(CreateL.entidade.Nome_Entidade))
+        //            {
+        //                // Verificar se entidade já existe
+        //                string checkEntidadeQuery = "SELECT Id_Entidade FROM Entidade_Corporativa WHERE Nome_Entidade = @Nome_Entidade";
+        //                using (SqlCommand checkCmd = new SqlCommand(checkEntidadeQuery, connection, transaction))
+        //                {
+        //                    checkCmd.Parameters.AddWithValue("@Nome_Entidade", CreateL.entidade.Nome_Entidade);
+        //                    var result = checkCmd.ExecuteScalar();
+
+        //                    if (result != null)
+        //                    {
+        //                        // Entidade já existe
+        //                        entidadeId = Convert.ToInt32(result);
+        //                    }
+        //                    else
+        //                    {
+        //                        // Inserir nova entidade
+        //                        string insertEntidadeQuery = @"
+        //                    INSERT INTO Entidade_Corporativa (Nome_Entidade, Subordinacao) 
+        //                    VALUES (@Nome_Entidade, @Subordinacao);
+        //                    SELECT CAST(SCOPE_IDENTITY() AS INT);";
+
+        //                        using (SqlCommand insertCmd = new SqlCommand(insertEntidadeQuery, connection, transaction))
+        //                        {
+        //                            insertCmd.Parameters.AddWithValue("@Nome_Entidade", CreateL.entidade.Nome_Entidade);
+        //                            insertCmd.Parameters.AddWithValue("@Subordinacao", CreateL.entidade.Subordinacao ?? (object)DBNull.Value);
+
+        //                            entidadeId = (int)insertCmd.ExecuteScalar();
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //            if (!string.IsNullOrEmpty(CreateL.livro.ISBN))
+        //            {
+        //                // Verificar se livro já existe
+        //                string checkLivroQuery = "SELECT ISBN FROM Livro WHERE ISBN = @ISBN";
+        //                using (SqlCommand checkCmd = new SqlCommand(checkLivroQuery, connection, transaction))
+        //                {
+        //                    checkCmd.Parameters.AddWithValue("@ISBN", CreateL.livro.ISBN);
+        //                    var result = checkCmd.ExecuteScalar();
+
+        //                    if (result != null)
+        //                    {
+        //                        // livro já existe
+        //                        LivroId = Convert.ToInt32(result);
+        //                    }
+        //                    else
+        //                    {
+        //                        // ========== INSERIR LIVRO ==========
+        //                        string insertLivroQuery = @"INSERT INTO Livro (
+        //                            ISBN,
+        //                            Condicoes_Encadernacao,
+        //                            Agencia_Catalogadora,
+        //                            Idioma_Catalogacao,
+        //                            Agencia_Transcricao,
+        //                            Agencia_Modificacao,
+        //                            Idioma_Texto,
+        //                            Idioma_Resumo,
+        //                            Idioma_Legenda,
+        //                            Numero_CDD,
+        //                            Numero_Item_CDD,
+        //                            Numero_Chamada_Local,
+        //                            Numero_Item_Local,
+        //                            Numero_Chamada_Secundaria,
+        //                            Nome_Livro,
+        //                            Subtitulo,
+        //                            Indicacao_Responsabilidade,
+        //                            Indicador_Artigo_Inicial,
+        //                            Numero_Edicao,
+        //                            Mencao_Responsabilidade_Edicao,
+        //                            Local_Publicacao,
+        //                            Editora,
+        //                            Ano_Publicacao,
+        //                            Paginas,
+        //                            Ilustracoes,
+        //                            Dimensoes,
+        //                            Material_Adicional,
+        //                            Titulo_Serie,
+        //                            Numero_Serie,
+        //                            Notas_Gerais,
+        //                            Nome_Pessoal_Assunto,
+        //                            Datas_Pessoal,
+        //                            Funcao_Pessoal,
+        //                            Topico_Pessoal,
+        //                            Titulo_Uniforme,
+        //                            Forma_Uniforme,
+        //                            Periodo_Historico_Uniforme,
+        //                            Localidade_Uniforme,
+        //                            Assunto_Termo,
+        //                            Forma_Termo,
+        //                            Periodo_Historico_Termo,
+        //                            Localidade_Termo,
+        //                            Informacao_Local,
+        //                            Status_Item,
+        //                            Status_Emprestimo,
+        //                            Id_Autor,
+        //                            Id_Entidade
+        //                        ) VALUES (
+        //                            @ISBN,
+        //                            @Condicoes_Encadernacao,
+        //                            @Agencia_Catalogadora,
+        //                            @Idioma_Catalogacao,
+        //                            @Agencia_Transcricao,
+        //                            @Agencia_Modificacao,
+        //                            @Idioma_Texto,
+        //                            @Idioma_Resumo,
+        //                            @Idioma_Legenda,
+        //                            @Numero_CDD,
+        //                            @Numero_Item_CDD,
+        //                            @Numero_Chamada_Local,
+        //                            @Numero_Item_Local,
+        //                            @Numero_Chamada_Secundaria,
+        //                            @Nome_Livro,
+        //                            @Subtitulo,
+        //                            @Indicacao_Responsabilidade,
+        //                            @Indicador_Artigo_Inicial,
+        //                            @Numero_Edicao,
+        //                            @Mencao_Responsabilidade_Edicao,
+        //                            @Local_Publicacao,
+        //                            @Editora,
+        //                            @Ano_Publicacao,
+        //                            @Paginas,
+        //                            @Ilustracoes,
+        //                            @Dimensoes,
+        //                            @Material_Adicional,
+        //                            @Titulo_Serie,
+        //                            @Numero_Serie,
+        //                            @Notas_Gerais,
+        //                            @Nome_Pessoal_Assunto,
+        //                            @Datas_Pessoal,
+        //                            @Funcao_Pessoal,
+        //                            @Topico_Pessoal,
+        //                            @Titulo_Uniforme,
+        //                            @Forma_Uniforme,
+        //                            @Periodo_Historico_Uniforme,
+        //                            @Localidade_Uniforme,
+        //                            @Assunto_Termo,
+        //                            @Forma_Termo,
+        //                            @Periodo_Historico_Termo,
+        //                            @Localidade_Termo,
+        //                            @Informacao_Local,
+        //                            @Status_Item,
+        //                            @Status_Emprestimo,
+        //                            @Id_Autor,
+        //                            @Id_Entidade
+        //                        );
+        //                        SELECT CAST(SCOPE_IDENTITY() AS INT);";
+
+        //                        using (SqlCommand comandLA = new SqlCommand(insertLivroQuery, connection, transaction))
+        //                        {
+        //                            comandLA.Parameters.AddWithValue("@ISBN", CreateL.livro.ISBN);
+        //                            comandLA.Parameters.AddWithValue("@Condicoes_Encadernacao", CreateL.livro.Cond_Encardenacao);
+        //                            comandLA.Parameters.AddWithValue("@Agencia_Catalogadora", CreateL.livro.Agen_Catalogadora);
+        //                            comandLA.Parameters.AddWithValue("@Idioma_Catalogacao", CreateL.livro.Idi_Catalogacao);
+        //                            comandLA.Parameters.AddWithValue("@Agencia_Transcricao", CreateL.livro.Agen_Transcricao);
+        //                            comandLA.Parameters.AddWithValue("@Agencia_Modificacao", CreateL.livro.Agen_Modificacao);
+        //                            comandLA.Parameters.AddWithValue("@Idioma_Texto", CreateL.livro.Idi_Texto);
+        //                            comandLA.Parameters.AddWithValue("@Idioma_Resumo", CreateL.livro.Idi_Resumo);
+        //                            comandLA.Parameters.AddWithValue("@Idioma_Legenda", CreateL.livro.Idi_Legenda);
+        //                            comandLA.Parameters.AddWithValue("@Numero_CDD", CreateL.livro.Numero_CDD);
+        //                            comandLA.Parameters.AddWithValue("@Numero_Item_CDD", CreateL.livro.Numero_Item_CDD);
+        //                            comandLA.Parameters.AddWithValue("@Numero_Chamada_Local", CreateL.livro.Num_Cham_Local);
+        //                            comandLA.Parameters.AddWithValue("@Numero_Item_Local", CreateL.livro.Num_Item_Local);
+        //                            comandLA.Parameters.AddWithValue("@Numero_Chamada_Secundaria", CreateL.livro.Num_Cham_Secundaria);
+        //                            comandLA.Parameters.AddWithValue("@Nome_Livro", CreateL.livro.Nome);
+        //                            comandLA.Parameters.AddWithValue("@Subtitulo", CreateL.livro.Subtitulo);
+        //                            comandLA.Parameters.AddWithValue("@Indicacao_Responsabilidade", CreateL.livro.Indi_Responsabilidade);
+        //                            comandLA.Parameters.AddWithValue("@Indicador_Artigo_Inicial", CreateL.livro.Indi_Arti_Inicial);
+        //                            comandLA.Parameters.AddWithValue("@Numero_Edicao", CreateL.livro.Num_Edicao);
+        //                            comandLA.Parameters.AddWithValue("@Mencao_Responsabilidade_Edicao", CreateL.livro.Mencao_Responsa_Edicao);
+        //                            comandLA.Parameters.AddWithValue("@Local_Publicacao", CreateL.livro.Local_Publicacao);
+        //                            comandLA.Parameters.AddWithValue("@Editora", CreateL.livro.Editora);
+        //                            comandLA.Parameters.AddWithValue("@Ano_Publicacao", CreateL.livro.Ano_Publicacao);
+        //                            comandLA.Parameters.AddWithValue("@Paginas", CreateL.livro.Paginas);
+        //                            comandLA.Parameters.AddWithValue("@Ilustracoes", CreateL.livro.Ilustracoes);
+        //                            comandLA.Parameters.AddWithValue("@Dimensoes", CreateL.livro.Dimensoes);
+        //                            comandLA.Parameters.AddWithValue("@Material_Adicional", CreateL.livro.Material_Adicional);
+        //                            comandLA.Parameters.AddWithValue("@Titulo_Serie", CreateL.livro.Titulo_Serie);
+        //                            comandLA.Parameters.AddWithValue("@Numero_Serie", CreateL.livro.Num_Serie);
+        //                            comandLA.Parameters.AddWithValue("@Notas_Gerais", CreateL.livro.Notas_Gerais);
+        //                            comandLA.Parameters.AddWithValue("@Nome_Pessoal_Assunto", CreateL.livro.Nome_Pess_Assunto);
+        //                            comandLA.Parameters.AddWithValue("@Datas_Pessoal", CreateL.livro.Datas_Pessoais);
+        //                            comandLA.Parameters.AddWithValue("@Funcao_Pessoal", CreateL.livro.Funcao_Pessoal);
+        //                            comandLA.Parameters.AddWithValue("@Topico_Pessoal", CreateL.livro.Topico);
+        //                            comandLA.Parameters.AddWithValue("@Titulo_Uniforme", CreateL.livro.Titulo_Uniforme);
+        //                            comandLA.Parameters.AddWithValue("@Forma_Uniforme", CreateL.livro.Forma_Uniforme);
+        //                            comandLA.Parameters.AddWithValue("@Periodo_Historico_Uniforme", CreateL.livro.Periodo_Historico);
+        //                            comandLA.Parameters.AddWithValue("@Localidade_Uniforme", CreateL.livro.Local_Uniforme);
+        //                            comandLA.Parameters.AddWithValue("@Assunto_Termo", CreateL.livro.Assunto_Termo);
+        //                            comandLA.Parameters.AddWithValue("@Forma_Termo", CreateL.livro.Forma_Termo);
+        //                            comandLA.Parameters.AddWithValue("@Periodo_Historico_Termo", CreateL.livro.Periodo_Histo_Termo);
+        //                            comandLA.Parameters.AddWithValue("@Localidade_Termo", CreateL.livro.Local_Termo);
+        //                            comandLA.Parameters.AddWithValue("@Informacao_Local", CreateL.livro.Info_Local);
+        //                            comandLA.Parameters.AddWithValue("@Status_Item", CreateL.livro.Status_Item);
+        //                            comandLA.Parameters.AddWithValue("@Status_Emprestimo", CreateL.livro.Status_Emprestimos);
+
+        //                            LivroId = (int)comandLA.ExecuteScalar();
 
 
-            [HttpPost("PostLivroLeigos")]
+        //                            comandLA.ExecuteNonQuery();
+        //                        }
+
+        //                        // Se tudo deu certo, confirma a transação
+        //                        transaction.Commit();
+        //                        return Ok(new { message = "Livro cadastrado com sucesso!" });
+        //                    }
+        //                }
+
+        //            }
+        //            if (CreateL.autor.Nome_Autor.ToString() == string.Empty || CreateL.autor.Nome_Autor.ToString() == null || CreateL.autor.Nome_Autor.ToString() == "")
+        //            {
+        //                string LivroAutorInsert = "INSERT INTO Livro_Autor (Id_Autor,Id_Livro) VALUES (@Id_Autor,@Id_Livro)";
+        //                using(SqlCommand comandLA = new SqlCommand(LivroAutorInsert, connection, transaction))
+        //                {
+        //                    comandLA.Parameters.AddWithValue("@Id_Autor", autorId);
+        //                    comandLA.Parameters.AddWithValue("@Id_Livro", entidadeId);
+        //                }
+
+        //            }
+        //            else
+        //            {
+        //                string LivroEntidadeInsert = "INSERT INTO Livro_Entidade (Id_Autor,Id_Livro) VALUES (@Id_Entidade,@Id_Livro)";
+        //                using (SqlCommand comandLA = new SqlCommand(LivroEntidadeInsert, connection, transaction))
+        //                {
+        //                    comandLA.Parameters.AddWithValue("@Id_Entidade", entidadeId);
+        //                    comandLA.Parameters.AddWithValue("@Id_Livro", entidadeId);
+        //                }
+        //            }
+        //        }
+
+
+        //        catch (Exception ex)
+        //        {
+        //            // Se algo deu errado, desfaz todas as alterações
+        //            transaction.Rollback();
+        //            return BadRequest(new { message = "Erro ao cadastrar livro", error = ex.Message });
+        //        }
+        //    }
+        //} 
+
+        [HttpPost("PostLivroLeigos")]
             public ActionResult CreateLivroLeigos(Livro livro)
             {
                 using (SqlConnection conection = new SqlConnection(StrConex))
@@ -424,7 +895,7 @@ namespace Biblioteca.Controllers
                     Paginas,
                     Notas_Gerais,
                     Assunto_Termo,
-                    Status_Emprestimo
+                    Status_Emprestimos
                 ) VALUES (
                     @Nome_Livro,
                     @Editora,
@@ -432,7 +903,7 @@ namespace Biblioteca.Controllers
                     @Paginas,
                     @Notas_Gerais,
                     @Assunto_Termo,
-                    @Status_Emprestimo
+                    @Status_Emprestimos
                 )";
 
                     SqlCommand comand = new SqlCommand(query, conection);
@@ -442,7 +913,7 @@ namespace Biblioteca.Controllers
                     comand.Parameters.AddWithValue("@Paginas", livro.Paginas);
                     comand.Parameters.AddWithValue("@Notas_Gerais", livro.Notas_Gerais);
                     comand.Parameters.AddWithValue("@Assunto_Termo", livro.Assunto_Termo);
-                    comand.Parameters.AddWithValue("@Status_Emprestimo", livro.Status_Emprestimos);
+                    comand.Parameters.AddWithValue("@Status_Emprestimos", livro.Status_Emprestimos);
 
                     conection.Open();
                     int rowsAffected = comand.ExecuteNonQuery();
@@ -454,37 +925,28 @@ namespace Biblioteca.Controllers
                 }
                 return BadRequest();
             }
+
+        [HttpDelete("{id}")]
+        [HttpDelete]
+        public ActionResult DeleteLivro(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(StrConex))
+            {
+                string query = "DELETE FROM Livro l WHERE l.Id_Livro = @Id " +
+                    " DELETE FROM Livro_Autor la WHERE la.Id_Livro = @Id";
+                SqlCommand comand = new SqlCommand(query, connection);
+                comand.Parameters.AddWithValue("@Id", id);
+                connection.Open();
+                int rowsAffected = comand.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    return Ok();
+                }
+            }
+            return NotFound();
         }
-
-        //[HttpPut("{id}")]
-        //[HttpPut]
-
-        //public ActionResult UpdateLivro(int id, [FromBody] Livro Livro)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(StrConex))
-        //    {
-        //        string query = "UPDATE Livro SET Nome_Livro = @Nome, Sobrenome_Livro = @Sobrenome,RM_Livro = @RM,Telefone_Livro = @Telefone,Curso = @Curso,Status_Livro = @Status WHERE Id_Livro = @Id";
-        //        SqlCommand comand = new SqlCommand(query, connection);
-        //        comand.Parameters.AddWithValue("@Nome", Livro.Nome);
-        //        comand.Parameters.AddWithValue("@Sobrenome", Livro.Sobrenome);
-        //        comand.Parameters.AddWithValue("@RM", Livro.RM);
-        //        comand.Parameters.AddWithValue("@Telefone", Livro.Telefone);
-        //        comand.Parameters.AddWithValue("@Curso", Livro.Curso);
-        //        comand.Parameters.AddWithValue("@Status", Livro.Status);
-        //        comand.Parameters.AddWithValue("@Id", id);
-        //        connection.Open();
-
-        //        int rowsAffected = comand.ExecuteNonQuery();
-
-        //        if (rowsAffected > 0)
-        //        {
-        //            return Ok();
-        //        }
-        //    }
-        //    return NotFound();
-        //}
-
-
+    }
     } 
 
 

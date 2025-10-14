@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Empréstimos - Biblioteca</title>
+  <link rel="stylesheet" href="styleEmprestimo.css">
+  <link rel="icon" type="image/jpg" href="midia/emprestimo.png">
+</head>
+<body>
+  <!-- Overlay -->
+  <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <h2>Biblioteca</h2>
+      <p>Sistema de Gestão</p>
+      <button class="sidebar-close-btn" onclick="toggleSidebar()">×</button>
+    </div>
+    <div class="sidebar-nav">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="CadLivro.html">Catalogação</a></li>
+        <li><a href="acervo.html">Consulta ao Acervo</a></li>
+        <li><a href="CadUser.html">Usuários</a></li>
+        <li><a href="emprestimo.html" class="active">Empréstimos</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-footer">
+      <a href="login.html" class="login-link">Login</a>
+    </div>
+  </nav>
+
+  <!-- Botão mobile -->
+  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+  <!-- Conteúdo principal -->
+  <div class="main-content">
+    <div class="page-header">
+      <h1>Cadastro de Empréstimo</h1>
+      <p>Registre o empréstimo de um livro a um aluno</p>
+    </div>
+
+    <div class="actions">
+      <button onclick="openModal('addEmprestimo')">+ Novo Empréstimo</button>
+    </div>
+
+    <div class="table-container">
+      <table id="emprestimoTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Aluno</th>
+            <th>Livro</th>
+            <th>Data Empréstimo</th>
+            <th>Data Devolução</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Linhas serão preenchidas pelo JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal de cadastro -->
+  <div id="addEmprestimo" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('addEmprestimo')">&times;</span>
+      <h3>Novo Empréstimo</h3>
+      <form id="formEmprestimo">
+        <label for="aluno">RM do aluno:</label>
+        <input type="number" id="RM" placeholder="19876">
+
+        <label for="livro">Livro:</label>
+        <input type="text" id="livro" placeholder="Harry Potter">
+
+        <label for="dataEmprestimo">Data de Empréstimo:</label>
+        <input type="date" id="dataEmprestimo" required>
+
+        <label for="dataDevolucao">Data de Devolução:</label>
+        <input type="date" id="dataDevolucao" required>
+
+        <label for="status">Status:</label>
+        <select id="status" required>
+          <option value="Ativo">Ativo</option>
+          <option value="Devolvido">Devolvido</option>
+          <option value="Atrasado">Atrasado</option>
+        </select>
+
+        <button type="button" onclick="addEmprestimo()">Cadastrar Empréstimo</button>
+      </form>
+    </div>
+  </div>
+
+  <a href="#" id="btnTopo" class="voltar-topo">
+    <img src="midia/ancora.png" alt="Início da página">
+  </a>
+
+  <script src="function.js"></script>
+</body>
+</html>

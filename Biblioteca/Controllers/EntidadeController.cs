@@ -43,93 +43,7 @@ namespace Biblioteca.Controllers
                 return Entidades;
             }
 
-            //[HttpGet("search/{searchTerm}")]
-            //public ActionResult SearchEntidade(string searchTerm)
-            //{
-            //    var Entidades = new List<Entidade>();
-
-            //    using (SqlConnection connection = new SqlConnection(StrConex))
-            //    {
-            //        connection.Open();
-
-            //        bool isNumero = int.TryParse(searchTerm, out int rmInt);
-
-            //        string query;
-            //        SqlCommand command;
-
-            //        if (isNumero)
-            //        {
-            //            query = "SELECT * FROM Entidade WHERE RM_Entidade = @RM";
-            //            command = new SqlCommand(query, connection);
-            //            command.Parameters.AddWithValue("@RM", rmInt);
-            //        }
-            //        else
-            //        {
-            //            query = "SELECT * FROM Entidade WHERE Nome_Entidade LIKE @Nome";
-            //            command = new SqlCommand(query, connection);
-            //            command.Parameters.AddWithValue("@Nome", "%" + searchTerm + "%");
-            //        }
-
-            //        using (SqlDataReader reader = command.ExecuteReader())
-            //        {
-            //            while (reader.Read())
-            //            {
-            //                var Entidade = new Entidade
-            //                {
-            //                    Id = Convert.ToInt32(reader["Id_Entidade"]),
-            //                    Nome = reader["Nome_Entidade"] as string ?? string.Empty,
-            //                    Sobrenome = reader["Sobrenome_Entidade"] as string ?? string.Empty,
-            //                    RM = reader["RM_Entidade"]?.ToString() ?? string.Empty,
-            //                    Telefone = reader["Telefone_Entidade"]?.ToString() ?? string.Empty,
-            //                    Curso = reader["Curso"]?.ToString() ?? string.Empty,
-            //                    Status = reader["Status_Entidade"]?.ToString() ?? string.Empty
-            //                };
-            //                Entidades.Add(Entidade);
-            //            }
-            //        }
-            //    }
-
-            //    if (Entidades.Count == 0)
-            //        return NotFound();
-
-            //    return Ok(Entidades);
-            //}
-
-
-            //[HttpGet("{id}", Name = "GetEntidadeID")]
-
-            //public ActionResult GetEntidadeId(int id)
-            //{
-            //    using (SqlConnection connection = new SqlConnection(StrConex))
-            //    {
-            //        string query = "SELECT * FROM Entidade WHERE ID = @Id";
-            //        SqlCommand comand = new SqlCommand(query, connection);
-            //        comand.Parameters.AddWithValue("@Id", id);
-            //        connection.Open();
-
-            //        SqlDataReader reader = comand.ExecuteReader();
-
-            //        if (reader.Read())
-            //        {
-            //            Entidade Entidade = new Entidade()
-            //            {
-            //                Id = Convert.ToInt32(reader["Id_Entidade"]),
-            //                Nome = reader["Nome_Entidade"].ToString(),
-            //                Sobrenome = reader["Sobrenome_Entidade"].ToString(),
-            //                RM = reader["RM_Entidade"]?.ToString() ?? string.Empty,
-            //                Telefone = reader["Telefone_Entidade"].ToString(),
-            //                Curso = reader["Curso"].ToString(),
-            //                Status = reader["Status_Entidade"].ToString()
-            //            };
-            //            reader.Close();
-
-            //            return Ok(Entidade);
-            //        }
-            //        reader.Close();
-            //    }
-            //    return NotFound();
-            //}
-
+           
 
             [HttpGet("search")]
             public IActionResult Search(string? termo)
@@ -197,60 +111,12 @@ namespace Biblioteca.Controllers
 
 
 
-            [HttpPost]
-            public ActionResult CreateEntidade(Entidade_Corporativa Entidade)
-            {
-                using (SqlConnection conection = new SqlConnection(StrConex))
-                {
-                    string query = "INSERT INTO Entidade_Corporativa (Nome_Entidade,Subordinacao) VALUES (@Nome_Entidade,@Subordinacao)";
-
-                    SqlCommand comand = new SqlCommand(query, conection);
-
-                    comand.Parameters.AddWithValue("@Nome_Entidade", Entidade.Nome_Entidade);
-                    comand.Parameters.AddWithValue("@Subordinacao", Entidade.Subordinacao);
-
-                    conection.Open();
-                    int rowsAffected = comand.ExecuteNonQuery();
-
-                    if (rowsAffected > 0)
-                    {
-                        return Ok();
-                    }
-                }
-                return BadRequest();
-            }
+            
 
 
 
         }
 
-        //[HttpPut("{id}")]
-        //[HttpPut]
-
-        //public ActionResult UpdateEntidade(int id, [FromBody] Entidade Entidade)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(StrConex))
-        //    {
-        //        string query = "UPDATE Entidade SET Nome_Entidade = @Nome, Sobrenome_Entidade = @Sobrenome,RM_Entidade = @RM,Telefone_Entidade = @Telefone,Curso = @Curso,Status_Entidade = @Status WHERE Id_Entidade = @Id";
-        //        SqlCommand comand = new SqlCommand(query, connection);
-        //        comand.Parameters.AddWithValue("@Nome", Entidade.Nome);
-        //        comand.Parameters.AddWithValue("@Sobrenome", Entidade.Sobrenome);
-        //        comand.Parameters.AddWithValue("@RM", Entidade.RM);
-        //        comand.Parameters.AddWithValue("@Telefone", Entidade.Telefone);
-        //        comand.Parameters.AddWithValue("@Curso", Entidade.Curso);
-        //        comand.Parameters.AddWithValue("@Status", Entidade.Status);
-        //        comand.Parameters.AddWithValue("@Id", id);
-        //        connection.Open();
-
-        //        int rowsAffected = comand.ExecuteNonQuery();
-
-        //        if (rowsAffected > 0)
-        //        {
-        //            return Ok();
-        //        }
-        //    }
-        //    return NotFound();
-        //}
 
 
     }

@@ -305,8 +305,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "livro",
-        "Type": "Biblioteca.Livro",
+        "Name": "CreateL",
+        "Type": "Biblioteca.BibliotecaRequest",
         "IsRequired": true
       }
     ],

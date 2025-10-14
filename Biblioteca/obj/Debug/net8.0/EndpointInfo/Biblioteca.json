@@ -503,17 +503,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Livro"
+                "$ref": "#/components/schemas/BibliotecaRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Livro"
+                "$ref": "#/components/schemas/BibliotecaRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Livro"
+                "$ref": "#/components/schemas/BibliotecaRequest"
               }
             }
           }
@@ -883,12 +883,27 @@
             },
             "nullable": true
           },
-          "entidadesB": {
+          "entidades": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Entidade_Corporativa"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BibliotecaRequest": {
+        "type": "object",
+        "properties": {
+          "livro": {
+            "$ref": "#/components/schemas/Livro"
+          },
+          "autor": {
+            "$ref": "#/components/schemas/Autor"
+          },
+          "entidade": {
+            "$ref": "#/components/schemas/Entidade_Corporativa"
           }
         },
         "additionalProperties": false
@@ -1095,6 +1110,30 @@
             "nullable": true
           },
           "status_Emprestimos": {
+            "type": "string",
+            "nullable": true
+          },
+          "id_Autor": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome_Autor": {
+            "type": "string",
+            "nullable": true
+          },
+          "numero": {
+            "type": "string",
+            "nullable": true
+          },
+          "datas": {
+            "type": "string",
+            "nullable": true
+          },
+          "funcao": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo_Autor": {
             "type": "string",
             "nullable": true
           }

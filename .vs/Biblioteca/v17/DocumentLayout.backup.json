@@ -1,82 +1,82 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\User\\Softwares\\Biblioteca\\",
+  "WorkspaceRootPath": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\controllers\\bibliotecacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\195192024\\downloads\\biblioteca-main\\biblioteca\\controllers\\bibliotecacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\bibliotecacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\biblioteca.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\biblioteca.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\aluno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\aluno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\controllers\\autorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\autorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\bibliotecarequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\bibliotecarequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\controllers\\livro_autorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\livro_autorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\controllers\\entidadecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\195192024\\downloads\\biblioteca-main\\biblioteca\\controllers\\entidadecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\entidadecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\livro_autorrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\livro_autorrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\195192024\\downloads\\biblioteca-main\\biblioteca\\controllers\\livro_autorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\livro_autorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\controllers\\livrocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\195192024\\downloads\\biblioteca-main\\biblioteca\\controllers\\livrocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\livrocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\livro_autor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\195192024\\downloads\\biblioteca-main\\biblioteca\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\195192024\\downloads\\biblioteca-main\\biblioteca\\biblioteca.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\biblioteca.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\195192024\\downloads\\biblioteca-main\\biblioteca\\aluno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\aluno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\195192024\\downloads\\biblioteca-main\\biblioteca\\controllers\\autorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\autorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\195192024\\downloads\\biblioteca-main\\biblioteca\\bibliotecarequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\bibliotecarequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\195192024\\downloads\\biblioteca-main\\biblioteca\\livro_autorrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\livro_autorrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\195192024\\downloads\\biblioteca-main\\biblioteca\\livro_autor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\livro_autor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\195192024\\downloads\\biblioteca-main\\biblioteca\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\autor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\195192024\\downloads\\biblioteca-main\\biblioteca\\autor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\autor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\entidade_corporativa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\195192024\\downloads\\biblioteca-main\\biblioteca\\entidade_corporativa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\entidade_corporativa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Biblioteca/True/SqlTable/dbo.Autor.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\livro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\195192024\\downloads\\biblioteca-main\\biblioteca\\livro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\livro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\dotnet\\sdk\\9.0.300\\Sdks\\Microsoft.NET.Sdk.StaticWebAssets\\targets\\Microsoft.NET.Sdk.StaticWebAssets.JSModules.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\controllers\\alunocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\195192024\\downloads\\biblioteca-main\\biblioteca\\controllers\\alunocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\alunocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Biblioteca/True/SqlTable/dbo.Livro.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\195192024\\downloads\\biblioteca-main\\biblioteca\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -87,93 +87,64 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Livro_AutorController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\Livro_AutorController.cs",
-              "RelativeDocumentMoniker": "Biblioteca\\Controllers\\Livro_AutorController.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\Livro_AutorController.cs",
-              "RelativeToolTip": "Biblioteca\\Controllers\\Livro_AutorController.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAMgAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-07T14:01:31.244Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Biblioteca.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Biblioteca.cs",
-              "RelativeDocumentMoniker": "Biblioteca\\Biblioteca.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Biblioteca.cs",
-              "RelativeToolTip": "Biblioteca\\Biblioteca.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-12T18:45:15.04Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "BibliotecaRequest.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\BibliotecaRequest.cs",
+              "DocumentMoniker": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\BibliotecaRequest.cs",
               "RelativeDocumentMoniker": "Biblioteca\\BibliotecaRequest.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\BibliotecaRequest.cs",
+              "ToolTip": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\BibliotecaRequest.cs",
               "RelativeToolTip": "Biblioteca\\BibliotecaRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-12T18:35:33.169Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-12T18:35:33.169Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "BibliotecaController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\BibliotecaController.cs",
+              "DocumentMoniker": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Controllers\\BibliotecaController.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Controllers\\BibliotecaController.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\BibliotecaController.cs",
+              "ToolTip": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Controllers\\BibliotecaController.cs",
               "RelativeToolTip": "Biblioteca\\Controllers\\BibliotecaController.cs",
-              "ViewState": "AgIAAGgAAAAAAAAAAAAQwNMAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAMkAAAAAAAAAAAAiwNMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-12T18:30:28.866Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "Livro_AutorRequest.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Livro_AutorRequest.cs",
+              "DocumentMoniker": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Livro_AutorRequest.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Livro_AutorRequest.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Livro_AutorRequest.cs",
+              "ToolTip": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Livro_AutorRequest.cs",
               "RelativeToolTip": "Biblioteca\\Livro_AutorRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T02:50:42.429Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T02:50:42.429Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Livro_Autor.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Livro_Autor.cs",
+              "DocumentMoniker": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Livro_Autor.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Livro_Autor.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Livro_Autor.cs",
+              "ToolTip": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Livro_Autor.cs",
               "RelativeToolTip": "Biblioteca\\Livro_Autor.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T02:14:14.269Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T02:14:14.269Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "EntidadeController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\EntidadeController.cs",
+              "DocumentMoniker": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Controllers\\EntidadeController.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Controllers\\EntidadeController.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\EntidadeController.cs",
+              "ToolTip": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Controllers\\EntidadeController.cs",
               "RelativeToolTip": "Biblioteca\\Controllers\\EntidadeController.cs",
               "ViewState": "AgIAABMAAAAAAAAAAAAgwBQAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -182,7 +153,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "dbo.Autor.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Biblioteca/True/SqlTable/dbo.Autor.sql",
               "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Biblioteca/True/SqlTable/dbo.Autor.sql",
@@ -191,24 +162,23 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "AutorController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\AutorController.cs",
+              "DocumentMoniker": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Controllers\\AutorController.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Controllers\\AutorController.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\AutorController.cs",
+              "ToolTip": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Controllers\\AutorController.cs",
               "RelativeToolTip": "Biblioteca\\Controllers\\AutorController.cs",
               "ViewState": "AgIAAL8AAAAAAAAAAAAAAA8AAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-06T01:53:35.693Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-06T01:53:35.693Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "Entidade_Corporativa.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Entidade_Corporativa.cs",
+              "DocumentMoniker": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Entidade_Corporativa.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Entidade_Corporativa.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Entidade_Corporativa.cs",
+              "ToolTip": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Entidade_Corporativa.cs",
               "RelativeToolTip": "Biblioteca\\Entidade_Corporativa.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -216,7 +186,58 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 4,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Controllers\\LoginController.cs",
+              "RelativeDocumentMoniker": "Biblioteca\\Controllers\\LoginController.cs",
+              "ToolTip": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Controllers\\LoginController.cs",
+              "RelativeToolTip": "Biblioteca\\Controllers\\LoginController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwA0AAAD5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T14:12:12.881Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Livro_AutorController.cs",
+              "DocumentMoniker": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Controllers\\Livro_AutorController.cs",
+              "RelativeDocumentMoniker": "Biblioteca\\Controllers\\Livro_AutorController.cs",
+              "ToolTip": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Controllers\\Livro_AutorController.cs",
+              "RelativeToolTip": "Biblioteca\\Controllers\\Livro_AutorController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAMgAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T14:01:31.244Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Biblioteca.cs",
+              "DocumentMoniker": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Biblioteca.cs",
+              "RelativeDocumentMoniker": "Biblioteca\\Biblioteca.cs",
+              "ToolTip": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Biblioteca.cs",
+              "RelativeToolTip": "Biblioteca\\Biblioteca.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-12T18:45:15.04Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LivroController.cs",
+              "DocumentMoniker": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Controllers\\LivroController.cs",
+              "RelativeDocumentMoniker": "Biblioteca\\Controllers\\LivroController.cs",
+              "ToolTip": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Controllers\\LivroController.cs",
+              "RelativeToolTip": "Biblioteca\\Controllers\\LivroController.cs",
+              "ViewState": "AgIAALsBAAAAAAAAAAAmwN0BAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T20:48:18.863Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
               "Title": "Microsoft.NET.Sdk.StaticWebAssets.JSModules.targets",
               "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\9.0.300\\Sdks\\Microsoft.NET.Sdk.StaticWebAssets\\targets\\Microsoft.NET.Sdk.StaticWebAssets.JSModules.targets",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Program Files\\dotnet\\sdk\\9.0.300\\Sdks\\Microsoft.NET.Sdk.StaticWebAssets\\targets\\Microsoft.NET.Sdk.StaticWebAssets.JSModules.targets",
@@ -228,11 +249,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "Livro.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Livro.cs",
+              "DocumentMoniker": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Livro.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Livro.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Livro.cs",
+              "ToolTip": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Livro.cs",
               "RelativeToolTip": "Biblioteca\\Livro.cs",
               "ViewState": "AgIAAEQAAAAAAAAAAAAiwBIAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -240,20 +261,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "LivroController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\LivroController.cs",
-              "RelativeDocumentMoniker": "Biblioteca\\Controllers\\LivroController.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\LivroController.cs",
-              "RelativeToolTip": "Biblioteca\\Controllers\\LivroController.cs",
-              "ViewState": "AgIAALsBAAAAAAAAAAAmwN0BAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T20:48:18.863Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "dbo.Livro.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Biblioteca/True/SqlTable/dbo.Livro.sql",
               "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Biblioteca/True/SqlTable/dbo.Livro.sql",
@@ -262,11 +270,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "Autor.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Autor.cs",
+              "DocumentMoniker": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Autor.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Autor.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Autor.cs",
+              "ToolTip": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Autor.cs",
               "RelativeToolTip": "Biblioteca\\Autor.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -274,11 +282,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Program.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Program.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Program.cs",
+              "ToolTip": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Program.cs",
               "RelativeToolTip": "Biblioteca\\Program.cs",
               "ViewState": "AgIAAB8AAAAAAAAAAAAnwDMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -286,36 +294,23 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "Aluno.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Aluno.cs",
+              "DocumentMoniker": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Aluno.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Aluno.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Aluno.cs",
+              "ToolTip": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Aluno.cs",
               "RelativeToolTip": "Biblioteca\\Aluno.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-20T20:53:38.057Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "LoginController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\LoginController.cs",
-              "RelativeDocumentMoniker": "Biblioteca\\Controllers\\LoginController.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\LoginController.cs",
-              "RelativeToolTip": "Biblioteca\\Controllers\\LoginController.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAA1wA0AAAD5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T14:12:12.881Z"
+              "WhenOpened": "2025-09-20T20:53:38.057Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 19,
               "Title": "Login.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Login.cs",
+              "DocumentMoniker": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Login.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Login.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Login.cs",
+              "ToolTip": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Login.cs",
               "RelativeToolTip": "Biblioteca\\Login.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -323,11 +318,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "AlunoController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\AlunoController.cs",
+              "DocumentMoniker": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Controllers\\AlunoController.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Controllers\\AlunoController.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\AlunoController.cs",
+              "ToolTip": "C:\\Users\\195192024\\Downloads\\Biblioteca-main\\Biblioteca\\Controllers\\AlunoController.cs",
               "RelativeToolTip": "Biblioteca\\Controllers\\AlunoController.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAwAAAD5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

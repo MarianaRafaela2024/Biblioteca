@@ -15,12 +15,10 @@
     
 
     API'S
-
-        cadastro livro e aluno(post)
+    
         cadastro de emprestimo(post)
-        altera livro e aluno e emprestimo(put)
-        buscar livro e aluno(get)
-        deleta livro e aluno e emprestimo(delete)
+        altera emprestimo(put)
+        deleta livro e emprestimo(delete)
 */
 
 body {

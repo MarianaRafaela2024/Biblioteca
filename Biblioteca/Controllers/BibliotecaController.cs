@@ -16,74 +16,6 @@ namespace Biblioteca.Controllers
             _logger = logger;
         }
 
-        //[HttpGet(Name = "GetLivroTotal")]
-        //public IEnumerable<Biblioteca> GetLivroCompletos()
-        //{
-
-        //    List<Biblioteca> Livros = new List<Biblioteca>();
-        //    using (SqlConnection conection = new SqlConnection(StrConex))
-        //    {
-        //        string query = "SELECT * FROM Livro";
-        //        SqlCommand command = new SqlCommand(query, conection);
-        //        conection.Open();
-        //        SqlDataReader reader = command.ExecuteReader();
-        //        while (reader.Read())
-        //        {
-        //            Biblioteca Livro = new Biblioteca()
-        //            {
-        //                LivrosB.Id = Convert.ToInt32(reader["Id_Livro"]),
-        //                LivrosB.ISBN = reader["ISBN"]?.ToString() ?? string.Empty,
-        //                Cond_Encardenacao = reader["Condicoes_Encadernacao"]?.ToString() ?? string.Empty,
-        //                Agen_Catalogadora = reader["Agencia_Catalogadora"]?.ToString() ?? string.Empty,
-        //                Idi_Catalogacao = reader["Idioma_Catalogacao"]?.ToString() ?? string.Empty,
-        //                Agen_Transcricao = reader["Agencia_Transcricao"]?.ToString() ?? string.Empty,
-        //                Agen_Modificacao = reader["Agencia_Modificacao"]?.ToString() ?? string.Empty,
-        //                Idi_Texto = reader["Idioma_Texto"]?.ToString() ?? string.Empty,
-        //                Idi_Resumo = reader["Idioma_Resumo"]?.ToString() ?? string.Empty,
-        //                Idi_Legenda = reader["Idioma_Legenda"]?.ToString() ?? string.Empty,
-        //                Numero_CDD = reader["Numero_CDD"]?.ToString() ?? string.Empty,
-        //                Numero_Item_CDD = reader["Numero_Item_CDD"]?.ToString() ?? string.Empty,
-        //                Num_Cham_Local = reader["Numero_Chamada_Local"]?.ToString() ?? string.Empty,
-        //                Num_Item_Local = reader["Numero_Item_Local"]?.ToString() ?? string.Empty,
-        //                Num_Cham_Secundaria = reader["Numero_Chamada_Secundaria"]?.ToString() ?? string.Empty,
-        //                Nome = reader["Nome_Livro"]?.ToString() ?? string.Empty,
-        //                Subtitulo = reader["Subtitulo"]?.ToString() ?? string.Empty,
-        //                Indi_Responsabilidade = reader["Indicacao_Responsabilidade"]?.ToString() ?? string.Empty,
-        //                Indi_Arti_Inicial = reader["Indicador_Artigo_Inicial"]?.ToString() ?? string.Empty,
-        //                Num_Edicao = reader["Numero_Edicao"]?.ToString() ?? string.Empty,
-        //                Mencao_Responsa_Edicao = reader["Mencao_Responsabilidade_Edicao"]?.ToString() ?? string.Empty,
-        //                Local_Publicacao = reader["Local_Publicacao"]?.ToString() ?? string.Empty,
-        //                Editora = reader["Editora"]?.ToString() ?? string.Empty,
-        //                Ano_Publicacao = reader["Ano_Publicacao"] != DBNull.Value ? Convert.ToInt32(reader["Ano_Publicacao"]) : 0,
-        //                Paginas = reader["Paginas"]?.ToString() ?? string.Empty,
-        //                Ilustracoes = reader["Ilustracoes"]?.ToString() ?? string.Empty,
-        //                Dimensoes = reader["Dimensoes"]?.ToString() ?? string.Empty,
-        //                Material_Adicional = reader["Material_Adicional"]?.ToString() ?? string.Empty,
-        //                Titulo_Serie = reader["Titulo_Serie"]?.ToString() ?? string.Empty,
-        //                Num_Serie = reader["Numero_Serie"]?.ToString() ?? string.Empty,
-        //                Notas_Gerais = reader["Notas_Gerais"]?.ToString() ?? string.Empty,
-        //                Nome_Pess_Assunto = reader["Nome_Pessoal_Assunto"]?.ToString() ?? string.Empty,
-        //                Datas_Pessoais = reader["Datas_Pessoal"]?.ToString() ?? string.Empty,
-        //                Funcao_Pessoal = reader["Funcao_Pessoal"]?.ToString() ?? string.Empty,
-        //                Topico = reader["Topico_Pessoal"]?.ToString() ?? string.Empty,
-        //                Titulo_Uniforme = reader["Titulo_Uniforme"]?.ToString() ?? string.Empty,
-        //                Forma_Uniforme = reader["Forma_Uniforme"]?.ToString() ?? string.Empty,
-        //                Periodo_Historico = reader["Periodo_Historico_Uniforme"]?.ToString() ?? string.Empty,
-        //                Local_Uniforme = reader["Localidade_Uniforme"]?.ToString() ?? string.Empty,
-        //                Assunto_Termo = reader["Assunto_Termo"]?.ToString() ?? string.Empty,
-        //                Forma_Termo = reader["Forma_Termo"]?.ToString() ?? string.Empty,
-        //                Periodo_Histo_Termo = reader["Periodo_Historico_Termo"]?.ToString() ?? string.Empty,
-        //                Local_Termo = reader["Localidade_Termo"]?.ToString() ?? string.Empty,
-        //                Info_Local = reader["Informacao_Local"]?.ToString() ?? string.Empty,
-        //                Status_Item = reader["Status_Item"]?.ToString() ?? string.Empty,
-        //                Status_Emprestimos = reader["Status_Emprestimo"]?.ToString() ?? string.Empty
-        //            };
-        //            Livros.Add(Livro);
-        //        }
-
-        //        return Livros;
-        //    }
-
 
         [HttpGet(Name = "GetLivroTotal")]
         public IEnumerable<Biblioteca> GetLivro()
@@ -176,7 +108,7 @@ namespace Biblioteca.Controllers
                                 Local_Termo = reader["Localidade_Termo"]?.ToString() ?? string.Empty,
                                 Info_Local = reader["Informacao_Local"]?.ToString() ?? string.Empty,
                                 Status_Item = reader["Status_Item"]?.ToString() ?? string.Empty,
-                                Status_Emprestimos = reader["Status_Emprestimo"]?.ToString() ?? string.Empty
+                                Status_Emprestimos = reader["Status_Emprestimos"]?.ToString() ?? string.Empty
                             },
                             Autores = new List<Autor>(),
                             Entidades = new List<Entidade_Corporativa>()
@@ -201,17 +133,17 @@ namespace Biblioteca.Controllers
                         bibliotecaAtual.Autores.Add(autor);
                     }
 
-                    if (reader["Id_Entidade"] != DBNull.Value)
-                    {
-                        Entidade_Corporativa entidade = new Entidade_Corporativa()
-                        {
-                            Id = Convert.ToInt32(reader["Id_Autor"]),
-                            Nome_Entidade = reader["Nome_Entidade"]?.ToString() ?? string.Empty,
-                            Subordinacao = reader["Subordinacao"]?.ToString() ?? string.Empty,
-                        };
+                    //if (reader["Id_Entidade"] != DBNull.Value)
+                    //{
+                    //    Entidade_Corporativa entidade = new Entidade_Corporativa()
+                    //    {
+                    //        Id = Convert.ToInt32(reader["Id_Autor"]),
+                    //        Nome_Entidade = reader["Nome_Entidade"]?.ToString() ?? string.Empty,
+                    //        Subordinacao = reader["Subordinacao"]?.ToString() ?? string.Empty,
+                    //    };
 
-                        bibliotecaAtual.Entidades.Add(entidade);
-                    }
+                    //    bibliotecaAtual.Entidades.Add(entidade);
+                    //}
                 }
 
                 // Adiciona o último item
@@ -378,14 +310,6 @@ namespace Biblioteca.Controllers
 
             return Ok(livros);
         }
-
-
-
-        
-
-
-
-
 
     }
 }

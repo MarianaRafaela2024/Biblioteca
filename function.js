@@ -37,7 +37,7 @@ function getAluno() {
                 statusCell.textContent = aluno.status;
                 row.appendChild(statusCell);
 
-                 const actionCell = document.createElement('td');
+                const actionCell = document.createElement('td');
                 actionCell.innerHTML = `
                     <div class="action">
                         <button class="btn-edit" onclick="abrirEdicao(${aluno.id}, '${aluno.nome}', '${aluno.sobrenome}', '${aluno.telefone}', '${aluno.rm}', '${aluno.curso}', '${aluno.status}')">Editar</button>
@@ -59,7 +59,7 @@ function abrirEdicao(id, nome, sobrenome, telefone, rm, curso, status) {
     document.getElementById('upRM').value = rm;
     document.getElementById('upcurso').value = curso;
     document.getElementById('upstatus').value = status;
-    
+
     openModal('editModal');
 }
 
@@ -108,7 +108,7 @@ function addAluno() {
         });
 
     console.log('Adicionar aluno');
-    
+
 }
 
 
@@ -126,13 +126,13 @@ function deleteAluno() {
     showNotification('Usuário excluído com sucesso!', 'error');
 }
 
-function openModal(id){ document.getElementById(id).style.display='block'; }
-function closeModal(id){ document.getElementById(id).style.display='none'; }
-function confirmDelete(){
-   if(confirm("Deseja realmente excluir este usuário?")){
-       deleteAluno();
-       closeModal('deleteModal');
-   }
+function openModal(id) { document.getElementById(id).style.display = 'block'; }
+function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+function confirmDelete() {
+    if (confirm("Deseja realmente excluir este usuário?")) {
+        deleteAluno();
+        closeModal('deleteModal');
+    }
 }
 
 function updateAluno() {
@@ -154,7 +154,7 @@ function updateAluno() {
         Telefone: upTelefone,
         Curso: upCurso,
         Status: upStatus
-        
+
     };
 
     fetch(`https://localhost:7139/Aluno/${upId}`, {
@@ -207,7 +207,7 @@ function login() {
         .then(data => {
             if (data) {
                 localStorage.setItem('authenticated', 'true');
-                window.location.href = 'CadUser.html';
+                window.location.href = 'indexBibli.html';
             } else {
                 alert('Login falhou');
             }
@@ -317,6 +317,16 @@ function addLivro() {
     const Status_Item = document.getElementById('controle_status').value.toString();
     const Status_Emprestimos = document.getElementById('status_emprestimo').value.toString();
 
+    //  DADOS DO AUTOR 
+    const Nome_Autor = document.getElementById('autor_nome').value;
+    const Numero = document.getElementById('autor_numero').value;
+    const Datas = document.getElementById('autor_datas').value;
+    const Funcao = document.getElementById('autor_funcao').value;
+
+    //  DADOS DA ENTIDADE
+    const Nome_Entidade = document.getElementById('entidade_nome').value;
+    const Subordinacao = document.getElementById('entidade_subordinacao').value
+
     // Objeto com os mesmos nomes da classe C# Livro.cs
     const livro = {
         ISBN: ISBN,
@@ -366,37 +376,56 @@ function addLivro() {
         Status_Emprestimos: Status_Emprestimos
     };
 
-    console.log('Dados do livro:', livro);
+    const autor = {
+        Nome_Autor: Nome_Autor,
+        Numero: Numero_Autor,
+        Datas: Datas_Autor,
+        Funcao: Funcao_Autor,
+        Tipo_Autor: Tipo_Autor
+    };
+
+    const entidade = {
+        Nome_Entidade: Nome_Entidade,
+        Subordinacao: Subordinacao
+    };
+
+    const BibliotecaRequest = {
+        livro: livro,
+        autor: autor,
+        entidade: entidade
+    };
+
+    console.log('Dados do livro:', BibliotecaRequest);
+
 
     fetch('https://localhost:7139/Livro', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(livro)
+        body: JSON.stringify(bibliotecaRequest)
     })
-    .then(response => {
-        if (response.ok) {
-            alert('Livro cadastrado com sucesso!');
-            // Limpar formulário
-            document.querySelector('form').reset();
-        } else {
-            response.text().then(text => {
-                console.error('Erro do servidor:', text);
-                alert('Erro ao cadastrar livro. Verifique o console para detalhes.');
-            });
-        }
-    })
-    .catch(error => {
-        console.error('Erro na requisição:', error);
-        alert('Erro ao conectar com o servidor!');
-    });
+        .then(response => {
+            if (response.ok) {
+                alert('Livro cadastrado com sucesso!');
+                document.querySelector('form').reset();
+            } else {
+                response.text().then(text => {
+                    console.error('Erro do servidor:', text);
+                    alert('Erro ao cadastrar livro. Verifique o console para detalhes.');
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Erro na requisição:', error);
+            alert('Erro ao conectar com o servidor!');
+        });
 }
 
 function contarCaracteres(input) {
-  const max = input.getAttribute("maxlength");
-  const contador = input.parentElement.querySelector(".input-counter");
-  contador.textContent = `${input.value.length}/${max}`;
+    const max = input.getAttribute("maxlength");
+    const contador = input.parentElement.querySelector(".input-counter");
+    contador.textContent = `${input.value.length}/${max}`;
 }
 
 
@@ -424,12 +453,11 @@ async function buscarLivros() {
         lista.style.listStyle = "none";
 
         livros.forEach(livro => {
-            console.log('Dados do livro:', livro);
             const card = document.createElement('div');
             card.className = 'livro-card';
             card.innerHTML = `
-                <strong>${livro.nome_Livro}</strong> (${livro.ano_Publicacao || 'Ano não informado'})<br>
-                ${livro.subtitulo ? livro.subtitulo + '<br>' : ''}
+                <strong>${livro.nome_Livro}</strong> ${livro.subtitulo ? livro.subtitulo + '<br>' : ''}
+                (${livro.ano_Publicacao || 'Ano não informado'})<br>
                 <strong>Autor/Responsável:</strong> ${livro.indicacao_Responsabilidade || 'Não informado'}<br>
                 <strong>Autores:</strong> ${livro.autores || 'Não informado'}<br>
                 <strong>ISBN:</strong> ${livro.isbn || 'Não informado'}<br>
@@ -438,52 +466,78 @@ async function buscarLivros() {
             `;
             lista.appendChild(card);
         });
-        
+
+
         resultadosDiv.appendChild(lista);
 
     } catch (error) {
         resultadosDiv.innerHTML = `<p style="color:red;">${error.message}</p>`;
         console.error(error);
     }
+    // Função de limpar busca do acervo
+    async function limparBuscar() {
+        document.getElementById('busca').value = '';
+        document.getElementById('resultados').innerHTML = '';
+        showNotification('Busca limpa com sucesso!', 'info');
+    };
 }
 
- // Função de limpar busca do acervo
- async function limparBuscar() {
-      document.getElementById('busca').value = '';
-      document.getElementById('resultados').innerHTML = '';
-      showNotification('Busca limpa com sucesso!', 'info');
+//Emprestimo
+function addEmprestimo() {
+    const emprestimo = {
+        RM: document.getElementById('RM').value,
+        Livro_nome: document.getElementById('livro').value,
+        DataEmprestimo: document.getElementById('dataEmprestimo').value,
+        DataDevolucao: document.getElementById('dataDevolucao').value,
+        Status: document.getElementById('status').value
     };
+
+    fetch('https://localhost:7139/Emprestimo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(emprestimo)
+    })
+        .then(r => {
+            if (r.ok) {
+                alert('Empréstimo cadastrado com sucesso!');
+                document.getElementById('formEmprestimo').reset();
+                closeModal('addEmprestimo');
+            } else {
+                alert('Erro ao cadastrar empréstimo');
+            }
+        })
+        .catch(e => console.error(e));
+}
 
 
 // ancora
 
 document.addEventListener('DOMContentLoaded', () => {
     const btnTopo = document.getElementById('btnTopo');
-  
+
     function verificarRolagem() {
-      const scrolled = window.scrollY;
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-  
-      // só mostra se houver rolagem real e o usuário tiver descido
-      if (totalScroll > 0 && scrolled > 0) {
-        btnTopo.classList.add('mostrar');
-      } else {
-        btnTopo.classList.remove('mostrar');
-      }
+        const scrolled = window.scrollY;
+        const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+        // só mostra se houver rolagem real e o usuário tiver descido
+        if (totalScroll > 0 && scrolled > 0) {
+            btnTopo.classList.add('mostrar');
+        } else {
+            btnTopo.classList.remove('mostrar');
+        }
     }
-  
+
     // quando clicar, volta suavemente ao topo
     btnTopo.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
-  
+
     window.addEventListener('scroll', verificarRolagem);
     window.addEventListener('resize', verificarRolagem);
     verificarRolagem(); // executa ao carregar
-  });
-  
-  
+});
+

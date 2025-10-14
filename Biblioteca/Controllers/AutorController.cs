@@ -45,93 +45,7 @@ namespace Biblioteca.Controllers
             return Autors;
         }
 
-        //[HttpGet("search/{searchTerm}")]
-        //public ActionResult SearchAutor(string searchTerm)
-        //{
-        //    var Autors = new List<Autor>();
-
-        //    using (SqlConnection connection = new SqlConnection(StrConex))
-        //    {
-        //        connection.Open();
-
-        //        bool isNumero = int.TryParse(searchTerm, out int rmInt);
-
-        //        string query;
-        //        SqlCommand command;
-
-        //        if (isNumero)
-        //        {
-        //            query = "SELECT * FROM Autor WHERE RM_Autor = @RM";
-        //            command = new SqlCommand(query, connection);
-        //            command.Parameters.AddWithValue("@RM", rmInt);
-        //        }
-        //        else
-        //        {
-        //            query = "SELECT * FROM Autor WHERE Nome_Autor LIKE @Nome";
-        //            command = new SqlCommand(query, connection);
-        //            command.Parameters.AddWithValue("@Nome", "%" + searchTerm + "%");
-        //        }
-
-        //        using (SqlDataReader reader = command.ExecuteReader())
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                var Autor = new Autor
-        //                {
-        //                    Id = Convert.ToInt32(reader["Id_Autor"]),
-        //                    Nome = reader["Nome_Autor"] as string ?? string.Empty,
-        //                    Sobrenome = reader["Sobrenome_Autor"] as string ?? string.Empty,
-        //                    RM = reader["RM_Autor"]?.ToString() ?? string.Empty,
-        //                    Telefone = reader["Telefone_Autor"]?.ToString() ?? string.Empty,
-        //                    Curso = reader["Curso"]?.ToString() ?? string.Empty,
-        //                    Status = reader["Status_Autor"]?.ToString() ?? string.Empty
-        //                };
-        //                Autors.Add(Autor);
-        //            }
-        //        }
-        //    }
-
-        //    if (Autors.Count == 0)
-        //        return NotFound();
-
-        //    return Ok(Autors);
-        //}
-
-
-        //[HttpGet("{id}", Name = "GetAutorID")]
-
-        //public ActionResult GetAutorId(int id)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(StrConex))
-        //    {
-        //        string query = "SELECT * FROM Autor WHERE ID = @Id";
-        //        SqlCommand comand = new SqlCommand(query, connection);
-        //        comand.Parameters.AddWithValue("@Id", id);
-        //        connection.Open();
-
-        //        SqlDataReader reader = comand.ExecuteReader();
-
-        //        if (reader.Read())
-        //        {
-        //            Autor Autor = new Autor()
-        //            {
-        //                Id = Convert.ToInt32(reader["Id_Autor"]),
-        //                Nome = reader["Nome_Autor"].ToString(),
-        //                Sobrenome = reader["Sobrenome_Autor"].ToString(),
-        //                RM = reader["RM_Autor"]?.ToString() ?? string.Empty,
-        //                Telefone = reader["Telefone_Autor"].ToString(),
-        //                Curso = reader["Curso"].ToString(),
-        //                Status = reader["Status_Autor"].ToString()
-        //            };
-        //            reader.Close();
-
-        //            return Ok(Autor);
-        //        }
-        //        reader.Close();
-        //    }
-        //    return NotFound();
-        //}
-
+       
 
         [HttpGet("search")]
         public IActionResult Search(string? termo)
@@ -199,31 +113,7 @@ namespace Biblioteca.Controllers
 
 
 
-        [HttpPost]
-        public ActionResult CreateAutor(Autor Autor)
-        {
-            using (SqlConnection conection = new SqlConnection(StrConex))
-            {
-                string query = "INSERT INTO Autor (Nome_Autor,Numero,Datas,Funcao,Tipo_Autor) VALUES (@Nome_Autor,@Numero,@Datas,@Funcao,@Tipo_Autor)";
-
-                SqlCommand comand = new SqlCommand(query, conection);
-
-                comand.Parameters.AddWithValue("@Nome_Autor", Autor.Nome_Autor);
-                comand.Parameters.AddWithValue("@Numero", Autor.Numero);
-                comand.Parameters.AddWithValue("@Datas", Autor.Datas);
-                comand.Parameters.AddWithValue("@Funcao", Autor.Funcao);
-                comand.Parameters.AddWithValue("@Tipo_Autor", Autor.Tipo_Autor);
-
-                conection.Open();
-                int rowsAffected = comand.ExecuteNonQuery();
-
-                if (rowsAffected > 0)
-                {
-                    return Ok();
-                }
-            }
-            return BadRequest();
-        }
+       
 
 
         

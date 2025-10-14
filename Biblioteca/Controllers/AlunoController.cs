@@ -104,40 +104,7 @@ namespace Biblioteca.Controllers
         }
 
 
-        [HttpGet("{id}", Name = "GetAlunoID")]
-
-        public ActionResult GetAlunoId(int id)
-        {
-            using (SqlConnection connection = new SqlConnection(StrConex))
-            {
-                string query = "SELECT * FROM Aluno WHERE ID = @Id";
-                SqlCommand comand = new SqlCommand(query, connection);
-                comand.Parameters.AddWithValue("@Id", id);
-                connection.Open();
-
-                SqlDataReader reader = comand.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    Aluno aluno = new Aluno()
-                    {
-                        Id = Convert.ToInt32(reader["Id_Aluno"]),
-                        Nome = reader["Nome_Aluno"].ToString(),
-                        Sobrenome = reader["Sobrenome_Aluno"].ToString(),
-                        RM = reader["RM_Aluno"]?.ToString() ?? string.Empty,
-                        Telefone = reader["Telefone_Aluno"].ToString(),
-                        Curso = reader["Curso"].ToString(),
-                        Status = reader["Status_Aluno"].ToString()
-                    };
-                    reader.Close();
-
-                    return Ok(aluno);
-                }
-                reader.Close();
-            }
-            return NotFound();
-        }
-
+        
         [HttpPost]
 
         public ActionResult CreateAluno(Aluno aluno)
@@ -190,15 +157,15 @@ namespace Biblioteca.Controllers
             }
             return NotFound();
         }
-        [HttpDelete("{id}")]
+        [HttpDelete("{RM}")]
         [HttpDelete]
-        public ActionResult DeleteAluno(int id)
+        public ActionResult DeleteAluno(int rm)
         {
             using (SqlConnection connection = new SqlConnection(StrConex))
             {
-                string query = "DELETE FROM Aluno WHERE Id_Aluno = @Id";
+                string query = "DELETE FROM Aluno WHERE RM_Aluno = @RM";
                 SqlCommand comand = new SqlCommand(query, connection);
-                comand.Parameters.AddWithValue("@Id", id);
+                comand.Parameters.AddWithValue("@RM", rm);
                 connection.Open();
                 int rowsAffected = comand.ExecuteNonQuery();
 
