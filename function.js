@@ -453,3 +453,37 @@ async function buscarLivros() {
       document.getElementById('resultados').innerHTML = '';
       showNotification('Busca limpa com sucesso!', 'info');
     };
+
+
+// ancora
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btnTopo = document.getElementById('btnTopo');
+  
+    function verificarRolagem() {
+      const scrolled = window.scrollY;
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+  
+      // só mostra se houver rolagem real e o usuário tiver descido
+      if (totalScroll > 0 && scrolled > 0) {
+        btnTopo.classList.add('mostrar');
+      } else {
+        btnTopo.classList.remove('mostrar');
+      }
+    }
+  
+    // quando clicar, volta suavemente ao topo
+    btnTopo.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  
+    window.addEventListener('scroll', verificarRolagem);
+    window.addEventListener('resize', verificarRolagem);
+    verificarRolagem(); // executa ao carregar
+  });
+  
+  
