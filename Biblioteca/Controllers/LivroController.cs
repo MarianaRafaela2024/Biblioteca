@@ -567,7 +567,17 @@ namespace Biblioteca.Controllers
                             comandLE.ExecuteNonQuery();
                         }
                     }
-
+                    string exemplaresInsert = "INSERT INTO Exemplares_Automaticos (Id_Livro,Numero_Exemplares,Numero_Volume,Numero_Exemplares_Total,Data_Aquisicao,Biblioteca_Depositaria,Tipo_Aquisicao) VALUES (@Id_Livro,@Numero_Exemplares,@Numero_Volume,@Numero_Exemplares_Total,@Data_Aquisicao,@Biblioteca_Depositaria,@Tipo_Aquisicao)";
+                    using (SqlCommand comandEx = new SqlCommand(exemplaresInsert, connection, transaction))
+                    {
+                        comandEx.Parameters.AddWithValue("@Id_Livro",livroId);
+                        comandEx.Parameters.AddWithValue("@Numero_Exemplares", CreateL.Exemplares.Numero_Exemplares);
+                        comandEx.Parameters.AddWithValue("@Numero_Volume", CreateL.Exemplares.Numero_Volume);
+                        comandEx.Parameters.AddWithValue("@Numero_Exemplares_Total", CreateL.Exemplares.Numero_Exemplares_Total);
+                        comandEx.Parameters.AddWithValue("@Data_Aquisicao", CreateL.Exemplares.Data_Aquisicao);
+                        comandEx.Parameters.AddWithValue("@Biblioteca_Depositaria", CreateL.Exemplares.Biblioteca_Depositaria);
+                        comandEx.Parameters.AddWithValue("@Tipo_Aquisicao", CreateL.Exemplares.Tipo_Aquisicao);
+                    }
                     // Confirma a transação
                     transaction.Commit();
                     return Ok(new
@@ -932,12 +942,15 @@ namespace Biblioteca.Controllers
         {
             using (SqlConnection connection = new SqlConnection(StrConex))
             {
-                string query = "DELETE FROM Livro l WHERE l.Id_Livro = @Id " +
-                    " DELETE FROM Livro_Autor la WHERE la.Id_Livro = @Id";
-                SqlCommand comand = new SqlCommand(query, connection);
-                comand.Parameters.AddWithValue("@Id", id);
                 connection.Open();
-                int rowsAffected = comand.ExecuteNonQuery();
+                SqlCommand comand1 = new SqlCommand("DELETE FROM Livro_Autor WHERE Id_Livro = @Id", connection);
+                comand1.Parameters.AddWithValue("@Id", id);
+                comand1.ExecuteNonQuery();
+
+                // Segundo DELETE
+                SqlCommand comand2 = new SqlCommand("DELETE FROM Livro WHERE Id_Livro = @Id", connection);
+                comand2.Parameters.AddWithValue("@Id", id);
+                int rowsAffected = comand2.ExecuteNonQuery();
 
                 if (rowsAffected > 0)
                 {

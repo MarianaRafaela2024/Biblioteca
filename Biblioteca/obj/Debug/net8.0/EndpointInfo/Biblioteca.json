@@ -135,28 +135,6 @@
       }
     },
     "/Aluno/{id}": {
-      "get": {
-        "tags": [
-          "Aluno"
-        ],
-        "operationId": "GetAlunoID",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
       "put": {
         "tags": [
           "Aluno"
@@ -196,14 +174,16 @@
             "description": "OK"
           }
         }
-      },
+      }
+    },
+    "/Aluno/{RM}": {
       "delete": {
         "tags": [
           "Aluno"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "rm",
             "in": "path",
             "required": true,
             "schema": {
@@ -254,35 +234,6 @@
                 }
               }
             }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Autor"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Autor"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Autor"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Autor"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
           }
         }
       }
@@ -405,35 +356,6 @@
             }
           }
         }
-      },
-      "post": {
-        "tags": [
-          "Entidade"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Entidade_Corporativa"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Entidade_Corporativa"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Entidade_Corporativa"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
       }
     },
     "/Entidade/search": {
@@ -523,6 +445,16 @@
             "description": "OK"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Livro"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/Livro/search": {
@@ -577,6 +509,29 @@
         }
       }
     },
+    "/Livro/{id}": {
+      "delete": {
+        "tags": [
+          "Livro"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Livro_Autor": {
       "get": {
         "tags": [
@@ -612,56 +567,6 @@
                 }
               }
             }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Livro_Autor"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LivroAutorRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LivroAutorRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/LivroAutorRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/Livro_Autor/search": {
-      "get": {
-        "tags": [
-          "Livro_Autor"
-        ],
-        "parameters": [
-          {
-            "name": "termo",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
           }
         }
       }
@@ -701,35 +606,6 @@
                 }
               }
             }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Livro_Entidade"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Livro_EntidadeRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Livro_EntidadeRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Livro_EntidadeRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
           }
         }
       }
@@ -904,6 +780,12 @@
           },
           "entidade": {
             "$ref": "#/components/schemas/Entidade_Corporativa"
+          },
+          "livro_Autor": {
+            "$ref": "#/components/schemas/Livro_Autor"
+          },
+          "exemplares": {
+            "$ref": "#/components/schemas/Exemplares_Automaticos"
           }
         },
         "additionalProperties": false
@@ -920,6 +802,44 @@
             "nullable": true
           },
           "subordinacao": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Exemplares_Automaticos": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "id_Livro": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numero_Exemplares": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numero_Volume": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numero_Exemplares_Total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "data_Aquisicao": {
+            "type": "string",
+            "format": "date"
+          },
+          "biblioteca_Depositaria": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo_Aquisicao": {
             "type": "string",
             "nullable": true
           }
@@ -1112,44 +1032,6 @@
           "status_Emprestimos": {
             "type": "string",
             "nullable": true
-          },
-          "id_Autor": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome_Autor": {
-            "type": "string",
-            "nullable": true
-          },
-          "numero": {
-            "type": "string",
-            "nullable": true
-          },
-          "datas": {
-            "type": "string",
-            "nullable": true
-          },
-          "funcao": {
-            "type": "string",
-            "nullable": true
-          },
-          "tipo_Autor": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "LivroAutorRequest": {
-        "type": "object",
-        "properties": {
-          "isbn": {
-            "type": "string",
-            "nullable": true
-          },
-          "nome_Autor": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1186,20 +1068,6 @@
           "id_Entidade": {
             "type": "integer",
             "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "Livro_EntidadeRequest": {
-        "type": "object",
-        "properties": {
-          "isbn": {
-            "type": "string",
-            "nullable": true
-          },
-          "nome_Entidade": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false

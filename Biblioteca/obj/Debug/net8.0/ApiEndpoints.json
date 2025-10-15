@@ -64,23 +64,6 @@
   },
   {
     "ContainingType": "Biblioteca.Controllers.AlunoController",
-    "Method": "GetAlunoId",
-    "RelativePath": "Aluno/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [],
-    "EndpointName": "GetAlunoID"
-  },
-  {
-    "ContainingType": "Biblioteca.Controllers.AlunoController",
     "Method": "UpdateAluno",
     "RelativePath": "Aluno/{id}",
     "HttpMethod": "PUT",
@@ -103,13 +86,13 @@
   {
     "ContainingType": "Biblioteca.Controllers.AlunoController",
     "Method": "DeleteAluno",
-    "RelativePath": "Aluno/{id}",
+    "RelativePath": "Aluno/{RM}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "rm",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -152,22 +135,6 @@
       }
     ],
     "EndpointName": "GetAutor"
-  },
-  {
-    "ContainingType": "Biblioteca.Controllers.AutorController",
-    "Method": "CreateAutor",
-    "RelativePath": "Autor",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Autor",
-        "Type": "Biblioteca.Autor",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "Biblioteca.Controllers.AutorController",
@@ -245,22 +212,6 @@
   },
   {
     "ContainingType": "Biblioteca.Controllers.EntidadeController",
-    "Method": "CreateEntidade",
-    "RelativePath": "Entidade",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Entidade",
-        "Type": "Biblioteca.Entidade_Corporativa",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Biblioteca.Controllers.EntidadeController",
     "Method": "Search",
     "RelativePath": "Entidade/search",
     "HttpMethod": "GET",
@@ -313,6 +264,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Biblioteca.Controllers.LivroController",
+    "Method": "DeleteLivro",
+    "RelativePath": "Livro",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Biblioteca.Controllers.Livro_AutorController",
     "Method": "GetLivro_Livro_Autor",
     "RelativePath": "Livro_Autor",
@@ -332,38 +293,6 @@
       }
     ],
     "EndpointName": "GetLivro_Livro_Autor"
-  },
-  {
-    "ContainingType": "Biblioteca.Controllers.Livro_AutorController",
-    "Method": "CreateLivro_Autor",
-    "RelativePath": "Livro_Autor",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "Biblioteca.LivroAutorRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Biblioteca.Controllers.Livro_AutorController",
-    "Method": "Search",
-    "RelativePath": "Livro_Autor/search",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "termo",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "Biblioteca.Controllers.Livro_EntidadeController",
@@ -388,22 +317,6 @@
   },
   {
     "ContainingType": "Biblioteca.Controllers.Livro_EntidadeController",
-    "Method": "CreateLivro_Autor",
-    "RelativePath": "Livro_Entidade",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "Biblioteca.Livro_EntidadeRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Biblioteca.Controllers.Livro_EntidadeController",
     "Method": "Search",
     "RelativePath": "Livro_Entidade/search",
     "HttpMethod": "GET",
@@ -414,6 +327,22 @@
         "Name": "termo",
         "Type": "System.String",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Biblioteca.Controllers.LivroController",
+    "Method": "DeleteLivro",
+    "RelativePath": "Livro/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
