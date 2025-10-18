@@ -20,22 +20,22 @@
     </div>
     <div class="sidebar-nav">
       <ul>
-        <li><a href="index.html">Início</a></li>
+        <li><a href="indexBibli.html">Início</a></li>
         <li><a href="CadLivro.html">Catalogação</a></li>
-        <li><a href="acervo.html">Consulta ao Acervo</a></li>
+        <li><a href="acervoBibli.html">Consulta ao Acervo</a></li>
         <li><a href="CadUser.html">Usuários</a></li>
         <li><a href="emprestimo.html" class="active">Empréstimos</a></li>
       </ul>
     </div>
     <div class="sidebar-footer">
-      <a href="login.html" class="login-link">Login</a>
-    </div>
+      <a href="#" id="logoutButton" onclick="logout(); return false;" class="login-link" style="display: none;">
+        Sair
+      </a>
+      </div>
   </nav>
 
-  <!-- Botão mobile -->
   <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
 
-  <!-- Conteúdo principal -->
   <div class="main-content">
     <div class="page-header">
       <h1>Cadastro de Empréstimo</h1>

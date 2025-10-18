@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Início - Biblioteca</title>
   <link rel="stylesheet" href="styleIndex.css">
-  <link rel="icon"  type="image/jpg" href="midia/home.png">
+  <link rel="icon" type="image/jpg" href="midia/home.png">
 </head>
 
 <body>
@@ -22,19 +22,21 @@
     </div>
     <div class="sidebar-nav">
       <ul>
-        <li><a href="index.html" class="active">Início</a></li>
+        <li><a href="indexBibli.html" class="active">Início</a></li>
         <li><a href="CadLivro.html">Catalogação</a></li>
         <li><a href="acervoBibli.html">Consulta ao Acervo</a></li>
         <li><a href="CadUser.html">Cadastro de Usuários</a></li>
-        <li><a href="emprestimos.html">Empréstimo</a></li>
+        <li><a href="emprestimos.html">Empréstimos</a></li>
 
         <!--<li><a href="admin.html">Administração</a></li>-->
       </ul>
     </div>
-      <div class="sidebar-footer">
-        <a href="login.html" class="login-link">Login</a>
-      </div>
-    </nav>
+    <div class="sidebar-footer">
+      <a href="#" id="logoutButton" onclick="logout(); return false;" class="login-link" style="display: none;">
+        Sair
+      </a>
+    </div>
+  </nav>
 
   <div class="main-content">
     <div class="page-header">
@@ -63,6 +65,7 @@
     </div>
   </div>
   <script src="animation.js"></script>
+  <script src="function.js"></script>
 </body>
 
 </html>
