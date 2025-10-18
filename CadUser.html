@@ -12,10 +12,8 @@ cadUser html
 <body>
     
 
-    <!-- Sidebar Overlay (Mobile) -->
     <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
-    <!-- Sidebar Navigation -->
     <nav class="sidebar">
       <div class="sidebar-header">
         <h2>Biblioteca</h2>
@@ -28,13 +26,15 @@ cadUser html
           <li><a href="CadLivro.html">Catalogação</a></li>
           <li><a href="acervoBibli.html">Consulta ao Acervo</a></li>
           <li><a href="CadUser.html" class="active">Cadastro de Usuários</a></li>
-          <li><a href="emprestimos.html">Empréstimo</a></li>
+          <li><a href="emprestimos.html">Empréstimos</a></li>
 
         <!--<li><a href="admin.html">Administração</a></li>-->
       </ul>
       </div>
       <div class="sidebar-footer">
-        <a href="login.html" class="login-link">Login</a>
+      <a href="#" id="logoutButton" onclick="logout(); return false;" class="login-link" style="display: none;">
+        Sair
+      </a>
       </div>
     </nav>
     <button class="menu-toggle" onclick="toggleSidebar()">☰</button>

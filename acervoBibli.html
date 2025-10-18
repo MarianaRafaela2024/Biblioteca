@@ -8,10 +8,8 @@
   <link rel="icon" type="image/jpg" href="midia/acervo.png">
 </head>
 <body>
-  <!-- Sidebar Overlay (Mobile) -->
   <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
-  <!-- Sidebar Navigation -->
   <nav class="sidebar">
     <div class="sidebar-header">
       <h2>Biblioteca</h2>
@@ -24,20 +22,20 @@
         <li><a href="CadLivro.html">Catalogação</a></li>
         <li><a href="acervoBibli.html" class="active">Consulta ao Acervo</a></li>
         <li><a href="CadUser.html">Cadastro de Usuários</a></li>
-        <li><a href="emprestimos.html">Empréstimo</a></li>
+        <li><a href="emprestimos.html">Empréstimos</a></li>
 
         <!--<li><a href="admin.html">Administração</a></li>-->
       </ul>
     </div>
     <div class="sidebar-footer">
-    <a href="login.html" class="login-link">Login</a>
-  </div>
+      <a href="#" id="logoutButton" onclick="logout(); return false;" class="login-link" style="display: none;">
+        Sair
+      </a>
+    </div>
 </nav>
 
-  <!-- Botão Mobile -->
   <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
 
-  <!-- Conteúdo Principal -->
   <div class="main-content">
     <div class="page-header">
       <h1>Consulta ao Acervo</h1>

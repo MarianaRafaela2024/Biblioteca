@@ -187,54 +187,84 @@ getAluno();
 
 //login//
 
-function login() {
-    const RM = document.getElementById("username").value;
-    const Senha = document.getElementById("senha").value;
+async function login(e) {
+    if (e) e.preventDefault();
 
-    const login = {
-        RM: RM,
-        Senha: Senha
+    const rm = document.getElementById('username').value;
+    const senha = document.getElementById('senha').value;
+
+    try {
+        const response = await fetch('https://localhost:7139/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ rm, senha })
+        });
+
+        const isAuthenticated = await response.json();
+
+        if (response.ok && isAuthenticated === true) {
+            localStorage.setItem('authenticated', 'true');
+            localStorage.setItem('rm', rm);
+
+            alert('Login realizado com sucesso!');
+            window.location.href = 'indexBibli.html';
+        } else {
+            alert('RM ou senha inválidos!');
+        }
+    } catch (error) {
+        console.error('❌ Erro:', error);
+        alert('Erro ao conectar com o servidor.');
     }
-
-    fetch('https://localhost:7139/Login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(login)
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data) {
-                localStorage.setItem('authenticated', 'true');
-                window.location.href = 'indexBibli.html';
-            } else {
-                alert('Login falhou');
-            }
-        })
-        .catch(error => {
-            console.error('Erro', error);
-        })
 }
 
-// function checkAuthentication(){
-//     const isAuthenticated = localStorage.getItem('authenticated');
+function checkAuthentication() {
+    const isAuthenticated = localStorage.getItem('authenticated');
+    return isAuthenticated === 'true';
+}
 
-//     return isAuthenticated === 'true';
-// }
+function logout() {
+    localStorage.setItem('authenticated', 'false');
+    localStorage.removeItem('rm');
 
-// window.addEventListener('DOMContentLoaded', () => {
-//     if(!checkAuthentication()){
-//         window.location.href = 'login.html';
-//     }
-// });
+    alert('Logout realizado com sucesso!');
+    window.location.href = 'login.html';
+}
 
-// //fazer lougout, rodapé, retira admin, cadastro em botao e pop-up, arrumar o dashboard
-// function logout(){
-//     localStorage.setItem('authenticated', 'false');
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('loginForm');
+    const logoutButton = document.getElementById('logoutButton');
 
-//     window.location.href = 'login.html';
-// }
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // IMPEDE O RELOAD
+            await login(e); // Passa o evento para a função
+        });
+    }
+
+    const paginaAtual = window.location.pathname;
+    const paginasPublicas = ['login.html', 'index.html', 'acervo.html'];
+
+    const isPaginaPublica = paginasPublicas.some(pagina =>
+        paginaAtual.includes(pagina) || paginaAtual === '/' || paginaAtual === ''
+    );
+
+    if (!isPaginaPublica) {
+        if (!checkAuthentication()) {
+            alert('Você precisa fazer login para acessar esta página!');
+            window.location.href = 'login.html';
+        }
+    }
+
+    if (logoutButton) {
+        const isAuthenticated = localStorage.getItem('authenticated') === 'true';
+        logoutButton.style.display = isAuthenticated ? 'inline-block' : 'none';
+    }
+});
+
+
+
 
 
 //CadLivro

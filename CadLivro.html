@@ -26,13 +26,15 @@
         <li><a href="CadLivro.html" class="active">Catalogação</a></li>
         <li><a href="acervoBibli.html">Consulta ao Acervo</a></li>
         <li><a href="CadUser.html">Cadastro de Usuários</a></li>
-        <li><a href="emprestimos.html">Empréstimo</a></li>
-        <!--<li><a href="admin.html">Administração</a></li>-->
+        <li><a href="emprestimos.html">Empréstimos</a></li>
       </ul>
     </div>
     <div class="sidebar-footer">
-      <a href="login.html" class="login-link">Login</a>
+      <a href="#" id="logoutButton" onclick="logout(); return false;" class="login-link" style="display: none;">
+        Sair
+      </a>
     </div>
+
   </nav>
   <main>
     <div class="main-content cataloging">
@@ -49,13 +51,15 @@
               <summary>Campo 020 - ISBN</summary>
               <label for="isbn_a">ISBN (‡a)</label>
               <div class="input-wrapper">
-                <input type="text" id="isbn_a" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)" placeholder="978-85-1234-567-8" />
+                <input type="text" id="isbn_a" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)"
+                  placeholder="978-85-1234-567-8" />
                 <span class="input-counter" id="contador">0/20</span>
               </div>
 
               <div class="input-wrapper">
                 <label for="isbn_c">Condições de Encadernação/Preço (‡c)</label>
-                <input type="text" id="isbn_c" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)" placeholder="Brochura" />
+                <input type="text" id="isbn_c" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)"
+                  placeholder="Brochura" />
                 <span class="input-counter" id="contador">0/50</span>
               </div>
             </details>
@@ -64,28 +68,32 @@
             <details>
               <summary>Campo 040 - Fonte da Catalogação</summary>
               <div class="input-wrapper">
-              <label for="agencia">Agência Catalogadora (‡a)</label>
-              <input type="text" id="agencia" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)" placeholder="BR-RjBN" />
-              <span class="input-counter" id="contador">0/50</span>
-              
+                <label for="agencia">Agência Catalogadora (‡a)</label>
+                <input type="text" id="agencia" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)"
+                  placeholder="BR-RjBN" />
+                <span class="input-counter" id="contador">0/50</span>
+
               </div>
 
               <div class="input-wrapper">
-              <label for="idioma_catalogacao">Idioma da Catalogação (‡b)</label>
-              <input type="text" id="idioma_catalogacao" name="campoContagem" maxlength="3" oninput="contarCaracteres(this)" placeholder="por" />
-              <span class="input-counter" id="contador">0/50</span>
+                <label for="idioma_catalogacao">Idioma da Catalogação (‡b)</label>
+                <input type="text" id="idioma_catalogacao" name="campoContagem" maxlength="3"
+                  oninput="contarCaracteres(this)" placeholder="por" />
+                <span class="input-counter" id="contador">0/50</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="agencia_transcricao">Agência de Transcrição (‡c)</label>
-              <input type="text" id="agencia_transcricao" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)" />
-              <span class="input-counter" id="contador">0/50</span>
+                <label for="agencia_transcricao">Agência de Transcrição (‡c)</label>
+                <input type="text" id="agencia_transcricao" name="campoContagem" maxlength="50"
+                  oninput="contarCaracteres(this)" />
+                <span class="input-counter" id="contador">0/50</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="agencia_modificacao">Agência de Modificação (‡d)</label>
-              <input type="text" id="agencia_modificacao" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)"/>
-              <span class="input-counter" id="contador">0/50</span>
+                <label for="agencia_modificacao">Agência de Modificação (‡d)</label>
+                <input type="text" id="agencia_modificacao" name="campoContagem" maxlength="50"
+                  oninput="contarCaracteres(this)" />
+                <span class="input-counter" id="contador">0/50</span>
               </div>
             </details>
 
@@ -93,21 +101,24 @@
             <details>
               <summary>Campo 041 - Código de Idioma</summary>
               <div class="input-wrapper">
-              <label for="idioma_texto">Idioma do Texto (‡a)</label>
-              <input type="text" id="idioma_texto" name="campoContagem" maxlength="3" oninput="contarCaracteres(this)"placeholder="por" />
-              <span class="input-counter" id="contador">0/3</span>
+                <label for="idioma_texto">Idioma do Texto (‡a)</label>
+                <input type="text" id="idioma_texto" name="campoContagem" maxlength="3" oninput="contarCaracteres(this)"
+                  placeholder="por" />
+                <span class="input-counter" id="contador">0/3</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="idioma_resumo">Idioma do Resumo (‡b)</label>
-              <input type="text" id="idioma_resumo" name="campoContagem" maxlength="3" oninput="contarCaracteres(this)" placeholder="eng" />
-              <span class="input-counter" id="contador">0/3</span>
+                <label for="idioma_resumo">Idioma do Resumo (‡b)</label>
+                <input type="text" id="idioma_resumo" name="campoContagem" maxlength="3"
+                  oninput="contarCaracteres(this)" placeholder="eng" />
+                <span class="input-counter" id="contador">0/3</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="idioma_legenda">Idioma da Legenda (‡j)</label>
-              <input type="text" id="idioma_legenda" name="campoContagem" maxlength="3" oninput="contarCaracteres(this)" />
-              <span class="input-counter" id="contador">0/3</span>
+                <label for="idioma_legenda">Idioma da Legenda (‡j)</label>
+                <input type="text" id="idioma_legenda" name="campoContagem" maxlength="3"
+                  oninput="contarCaracteres(this)" />
+                <span class="input-counter" id="contador">0/3</span>
               </div>
             </details>
 
@@ -115,15 +126,17 @@
             <details>
               <summary>Campo 082 - Classificação CDD</summary>
               <div class="input-wrapper">
-              <label for="cdd">Número da CDD (‡a)</label>
-              <input type="text" id="cdd" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)" placeholder="004.678" />
-              <span class="input-counter" id="contador">0/20</span>
+                <label for="cdd">Número da CDD (‡a)</label>
+                <input type="text" id="cdd" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)"
+                  placeholder="004.678" />
+                <span class="input-counter" id="contador">0/20</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="cdd_numero">Número do Item (‡b)</label>
-              <input type="text" id="cdd_numero" name="campoContagem" maxlength="10" oninput="contarCaracteres(this)" />
-              <span class="input-counter" id="contador">0/10</span>
+                <label for="cdd_numero">Número do Item (‡b)</label>
+                <input type="text" id="cdd_numero" name="campoContagem" maxlength="10"
+                  oninput="contarCaracteres(this)" />
+                <span class="input-counter" id="contador">0/10</span>
               </div>
             </details>
 
@@ -131,15 +144,17 @@
             <details>
               <summary>Campo 090 - Classificação Local</summary>
               <div class="input-wrapper">
-              <label for="classificacao_local">Número de Chamada Local (‡a)</label>
-              <input type="text" id="classificacao_local" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)" placeholder="004.678 S586c" />
-              <span class="input-counter" id="contador">0/50</span>
+                <label for="classificacao_local">Número de Chamada Local (‡a)</label>
+                <input type="text" id="classificacao_local" name="campoContagem" maxlength="50"
+                  oninput="contarCaracteres(this)" placeholder="004.678 S586c" />
+                <span class="input-counter" id="contador">0/50</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="classificacao_local_b">Número do Item (‡b)</label>
-              <input type="text" id="classificacao_local_b" name="campoContagem" maxlength="10" oninput="contarCaracteres(this)" />
-              <span class="input-counter" id="contador">0/10</span>
+                <label for="classificacao_local_b">Número do Item (‡b)</label>
+                <input type="text" id="classificacao_local_b" name="campoContagem" maxlength="10"
+                  oninput="contarCaracteres(this)" />
+                <span class="input-counter" id="contador">0/10</span>
               </div>
             </details>
 
@@ -147,9 +162,10 @@
             <details>
               <summary>Campo 095 - Classificação Local Secundária</summary>
               <div class="input-wrapper">
-              <label for="classificacao_local_sec">Número de Chamada (‡a)</label>
-              <input type="text" id="classificacao_local_sec" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)" />
-              <span class="input-counter" id="contador">0/50</span>
+                <label for="classificacao_local_sec">Número de Chamada (‡a)</label>
+                <input type="text" id="classificacao_local_sec" name="campoContagem" maxlength="50"
+                  oninput="contarCaracteres(this)" />
+                <span class="input-counter" id="contador">0/50</span>
               </div>
             </details>
 
@@ -157,27 +173,31 @@
             <details>
               <summary>Campo 100 - Autor Principal</summary>
               <div class="input-wrapper">
-              <label for="autor_nome">Nome do Autor (‡a)</label>
-              <input type="text" id="autor_nome" name="campoContagem" maxlength="200" oninput="contarCaracteres(this)" placeholder="Silva, João da" />
-              <span class="input-counter" id="contador">0/200</span>
+                <label for="autor_nome">Nome do Autor (‡a)</label>
+                <input type="text" id="autor_nome" name="campoContagem" maxlength="200" oninput="contarCaracteres(this)"
+                  placeholder="Silva, João da" />
+                <span class="input-counter" id="contador">0/200</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="autor_numero">Número (‡b)</label>
-              <input type="text" id="autor_numero" name="campoContagem" maxlength="200" oninput="contarCaracteres(this)" />
-              <span class="input-counter" id="contador">0/200</span>
+                <label for="autor_numero">Número (‡b)</label>
+                <input type="text" id="autor_numero" name="campoContagem" maxlength="200"
+                  oninput="contarCaracteres(this)" />
+                <span class="input-counter" id="contador">0/200</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="autor_datas">Datas (‡d)</label>
-              <input type="text" id="autor_datas" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)"placeholder="1980-" />
-              <span class="input-counter" id="contador">0/20</span>
+                <label for="autor_datas">Datas (‡d)</label>
+                <input type="text" id="autor_datas" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)"
+                  placeholder="1980-" />
+                <span class="input-counter" id="contador">0/20</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="autor_funcao">Função (‡e)</label>
-              <input type="text" id="autor_funcao" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)" placeholder="autor" />
-              <span class="input-counter" id="contador">0/20</span>
+                <label for="autor_funcao">Função (‡e)</label>
+                <input type="text" id="autor_funcao" name="campoContagem" maxlength="20"
+                  oninput="contarCaracteres(this)" placeholder="autor" />
+                <span class="input-counter" id="contador">0/20</span>
               </div>
             </details>
 
@@ -185,38 +205,42 @@
             <details>
               <summary>Campo 110 - Entidade Corporativa</summary>
               <div class="input-wrapper">
-              <label for="entidade">Nome da Entidade (‡a)</label>
-              <input type="text" id="entidade_nome" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)" placeholder="Universidade de São Paulo" />
-              <span class="input-counter" id="contador">0/20</span>
+                <label for="entidade">Nome da Entidade (‡a)</label>
+                <input type="text" id="entidade_nome" name="campoContagem" maxlength="20"
+                  oninput="contarCaracteres(this)" placeholder="Universidade de São Paulo" />
+                <span class="input-counter" id="contador">0/20</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="entidade_subordinada">Subordinação (‡b)</label>
-              <input type="text" id="entidade_subordinada" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)"
-                placeholder="Faculdade de Filosofia" />
+                <label for="entidade_subordinada">Subordinação (‡b)</label>
+                <input type="text" id="entidade_subordinada" name="campoContagem" maxlength="20"
+                  oninput="contarCaracteres(this)" placeholder="Faculdade de Filosofia" />
                 <span class="input-counter" id="contador">0/20</span>
-                </div>
+              </div>
             </details>
 
             <!-- Campo 245 - Título -->
             <details>
               <summary>Campo 245 - Título</summary>
               <div class="input-wrapper">
-              <label for="titulo">Título Principal (‡a)</label>
-              <input type="text" id="titulo" name="campoContagem" maxlength="200" oninput="contarCaracteres(this)" placeholder="Programação em Python" required />
-              <span class="input-counter" id="contador">0/200</span>
+                <label for="titulo">Título Principal (‡a)</label>
+                <input type="text" id="titulo" name="campoContagem" maxlength="200" oninput="contarCaracteres(this)"
+                  placeholder="Programação em Python" required />
+                <span class="input-counter" id="contador">0/200</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="subtitulo">Subtítulo (‡b)</label>
-              <input type="text" id="subtitulo" name="campoContagem" maxlength="200" oninput="contarCaracteres(this)" placeholder="guia prático para iniciantes" />
-              <span class="input-counter" id="contador">0/200</span>
+                <label for="subtitulo">Subtítulo (‡b)</label>
+                <input type="text" id="subtitulo" name="campoContagem" maxlength="200" oninput="contarCaracteres(this)"
+                  placeholder="guia prático para iniciantes" />
+                <span class="input-counter" id="contador">0/200</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="responsabilidade">Indicação de Responsabilidade (‡c)</label>
-              <input type="text" id="responsabilidade" name="campoContagem" maxlength="100" oninput="contarCaracteres(this)" placeholder="João da Silva" />
-              <span class="input-counter" id="contador">0/100</span>
+                <label for="responsabilidade">Indicação de Responsabilidade (‡c)</label>
+                <input type="text" id="responsabilidade" name="campoContagem" maxlength="100"
+                  oninput="contarCaracteres(this)" placeholder="João da Silva" />
+                <span class="input-counter" id="contador">0/100</span>
               </div>
 
               <label for="indicador">Indicador de Artigo Inicial</label>
@@ -238,15 +262,17 @@
             <details>
               <summary>Campo 250 - Edição</summary>
               <div class="input-wrapper">
-              <label for="edicao">Número da Edição (‡a)</label>
-              <input type="text" id="edicao" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)" placeholder="3. ed." />
-              <span class="input-counter" id="contador">0/20</span>
+                <label for="edicao">Número da Edição (‡a)</label>
+                <input type="text" id="edicao" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)"
+                  placeholder="3. ed." />
+                <span class="input-counter" id="contador">0/20</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="edicao_mencao">Menção de Responsabilidade (‡b)</label>
-              <input type="text" id="edicao_mencao" name="campoContagem" maxlength="100" oninput="contarCaracteres(this)" placeholder="revisada e ampliada" />
-              <span class="input-counter" id="contador">0/100</span>
+                <label for="edicao_mencao">Menção de Responsabilidade (‡b)</label>
+                <input type="text" id="edicao_mencao" name="campoContagem" maxlength="100"
+                  oninput="contarCaracteres(this)" placeholder="revisada e ampliada" />
+                <span class="input-counter" id="contador">0/100</span>
               </div>
             </details>
 
@@ -254,15 +280,17 @@
             <details>
               <summary>Campo 260 - Publicação</summary>
               <div class="input-wrapper">
-              <label for="local">Local (‡a)</label>
-              <input type="text" id="local" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)" placeholder="São Paulo" />
-              <span class="input-counter" id="contador">0/50</span>
+                <label for="local">Local (‡a)</label>
+                <input type="text" id="local" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)"
+                  placeholder="São Paulo" />
+                <span class="input-counter" id="contador">0/50</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="editora">Editora (‡b)</label>
-              <input type="text" id="editora" name="campoContagem" maxlength="100" oninput="contarCaracteres(this)" placeholder="Editora Exemplo" />
-              <span class="input-counter" id="contador">0/100</span>
+                <label for="editora">Editora (‡b)</label>
+                <input type="text" id="editora" name="campoContagem" maxlength="100" oninput="contarCaracteres(this)"
+                  placeholder="Editora Exemplo" />
+                <span class="input-counter" id="contador">0/100</span>
               </div>
 
               <label for="ano">Ano (‡c)</label>
@@ -273,27 +301,31 @@
             <details>
               <summary>Campo 300 - Descrição Física</summary>
               <div class="input-wrapper">
-              <label for="paginas">Páginas (‡a)</label>
-              <input type="text" id="paginas" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)" placeholder="256 p." />
-              <span class="input-counter" id="contador">0/20</span>
+                <label for="paginas">Páginas (‡a)</label>
+                <input type="text" id="paginas" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)"
+                  placeholder="256 p." />
+                <span class="input-counter" id="contador">0/20</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="ilustracoes">Ilustrações (‡b)</label>
-              <input type="text" id="ilustracoes" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)" placeholder="il., gráf." />
-              <span class="input-counter" id="contador">0/50</span>
+                <label for="ilustracoes">Ilustrações (‡b)</label>
+                <input type="text" id="ilustracoes" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)"
+                  placeholder="il., gráf." />
+                <span class="input-counter" id="contador">0/50</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="dimensoes">Dimensões (‡c)</label>
-              <input type="text" id="dimensoes" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)" placeholder="23 cm" />
-              <span class="input-counter" id="contador">0/20</span>
+                <label for="dimensoes">Dimensões (‡c)</label>
+                <input type="text" id="dimensoes" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)"
+                  placeholder="23 cm" />
+                <span class="input-counter" id="contador">0/20</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="material_adicional">Material Adicional (‡e)</label>
-              <input type="text" id="material_adicional" name="campoContagem" maxlength="100" oninput="contarCaracteres(this)" placeholder="1 CD-ROM" />
-              <span class="input-counter" id="contador">0/100</span>
+                <label for="material_adicional">Material Adicional (‡e)</label>
+                <input type="text" id="material_adicional" name="campoContagem" maxlength="100"
+                  oninput="contarCaracteres(this)" placeholder="1 CD-ROM" />
+                <span class="input-counter" id="contador">0/100</span>
               </div>
             </details>
 
@@ -301,15 +333,17 @@
             <details>
               <summary>Campo 490 - Série</summary>
               <div class="input-wrapper">
-              <label for="serie">Título da Série (‡a)</label>
-              <input type="text" id="serie" name="campoContagem" maxlength="100" oninput="contarCaracteres(this)" placeholder="Coleção Programação" />
-              <span class="input-counter" id="contador">0/100</span>
+                <label for="serie">Título da Série (‡a)</label>
+                <input type="text" id="serie" name="campoContagem" maxlength="100" oninput="contarCaracteres(this)"
+                  placeholder="Coleção Programação" />
+                <span class="input-counter" id="contador">0/100</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="serie_numero">Número da Série (‡v)</label>
-              <input type="text" id="serie_numero" name="campoContagem" maxlength="10" oninput="contarCaracteres(this)" placeholder="v. 3" />
-              <span class="input-counter" id="contador">0/10</span>
+                <label for="serie_numero">Número da Série (‡v)</label>
+                <input type="text" id="serie_numero" name="campoContagem" maxlength="10"
+                  oninput="contarCaracteres(this)" placeholder="v. 3" />
+                <span class="input-counter" id="contador">0/10</span>
               </div>
             </details>
 
@@ -317,35 +351,40 @@
             <details>
               <summary>Campo 500 - Notas Gerais</summary>
               <div class="input-wrapper">
-              <label for="nota">Nota (‡a)</label><!--maxlength="20" oninput="contarCaracteres(this)" ????-->
-              <textarea id="nota" name="campoContagem"  rows="4" placeholder="Inclui bibliografia e índice remissivo"></textarea>
+                <label for="nota">Nota (‡a)</label><!--maxlength="20" oninput="contarCaracteres(this)" ????-->
+                <textarea id="nota" name="campoContagem" rows="4"
+                  placeholder="Inclui bibliografia e índice remissivo"></textarea>
               </div>
             </details>
             <!-- Campo 600 - Assunto - Nome Pessoal -->
             <details>
               <summary>Campo 600 - Assunto - Nome Pessoal</summary>
               <div class="input-wrapper">
-              <label for="assunto_nome">Nome Pessoal (‡a)</label>
-              <input type="text" id="assunto_nome" name="campoContagem" maxlength="100" oninput="contarCaracteres(this)" />
-              <span class="input-counter" id="contador">0/100</span>
+                <label for="assunto_nome">Nome Pessoal (‡a)</label>
+                <input type="text" id="assunto_nome" name="campoContagem" maxlength="100"
+                  oninput="contarCaracteres(this)" />
+                <span class="input-counter" id="contador">0/100</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="assunto_datas">Datas (‡d)</label>
-              <input type="text" id="assunto_datas" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)" />
-              <span class="input-counter" id="contador">0/20</span>
+                <label for="assunto_datas">Datas (‡d)</label>
+                <input type="text" id="assunto_datas" name="campoContagem" maxlength="20"
+                  oninput="contarCaracteres(this)" />
+                <span class="input-counter" id="contador">0/20</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="assunto_funcao">Função (‡e)</label>
-              <input type="text" id="assunto_funcao" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)" />
-              <span class="input-counter" id="contador">0/50</span>
+                <label for="assunto_funcao">Função (‡e)</label>
+                <input type="text" id="assunto_funcao" name="campoContagem" maxlength="50"
+                  oninput="contarCaracteres(this)" />
+                <span class="input-counter" id="contador">0/50</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="assunto_topico">Tópico (‡x)</label>
-              <input type="text" id="assunto_topico" name="campoContagem" maxlength="100" oninput="contarCaracteres(this)" />
-              <span class="input-counter" id="contador">0/100</span>
+                <label for="assunto_topico">Tópico (‡x)</label>
+                <input type="text" id="assunto_topico" name="campoContagem" maxlength="100"
+                  oninput="contarCaracteres(this)" />
+                <span class="input-counter" id="contador">0/100</span>
               </div>
             </details>
 
@@ -353,27 +392,31 @@
             <details>
               <summary>Campo 630 - Assunto - Título Uniforme</summary>
               <div class="input-wrapper">
-              <label for="assunto_titulo">Título Uniforme (‡a)</label>
-              <input type="text" id="assunto_titulo" name="campoContagem" maxlength="200" oninput="contarCaracteres(this)" />
-              <span class="input-counter" id="contador">0/200</span>
+                <label for="assunto_titulo">Título Uniforme (‡a)</label>
+                <input type="text" id="assunto_titulo" name="campoContagem" maxlength="200"
+                  oninput="contarCaracteres(this)" />
+                <span class="input-counter" id="contador">0/200</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="assunto_forma">Forma (‡v)</label>
-              <input type="text" id="assunto_forma" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)" />
-              <span class="input-counter" id="contador">0/50</span>
+                <label for="assunto_forma">Forma (‡v)</label>
+                <input type="text" id="assunto_forma" name="campoContagem" maxlength="50"
+                  oninput="contarCaracteres(this)" />
+                <span class="input-counter" id="contador">0/50</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="assunto_tempo">Período Histórico (‡y)</label>
-              <input type="text" id="assunto_tempo" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)" />
-              <span class="input-counter" id="contador">0/50</span>
+                <label for="assunto_tempo">Período Histórico (‡y)</label>
+                <input type="text" id="assunto_tempo" name="campoContagem" maxlength="50"
+                  oninput="contarCaracteres(this)" />
+                <span class="input-counter" id="contador">0/50</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="assunto_local">Localidade (‡z)</label>
-              <input type="text" id="assunto_local" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)" />
-              <span class="input-counter" id="contador">0/50</span>
+                <label for="assunto_local">Localidade (‡z)</label>
+                <input type="text" id="assunto_local" name="campoContagem" maxlength="50"
+                  oninput="contarCaracteres(this)" />
+                <span class="input-counter" id="contador">0/50</span>
               </div>
             </details>
 
@@ -381,27 +424,31 @@
             <details>
               <summary>Campo 650 - Assunto - Termo Tópico</summary>
               <div class="input-wrapper">
-              <label for="assunto_topico2">Assunto (‡a)</label> 
-              <input type="text" id="assunto_topico2" name="campoContagem" maxlength="200" oninput="contarCaracteres(this)"  placeholder="Programação de computadores" />
-              <span class="input-counter" id="contador">0/200</span>
-                </div>
-
-                <div class="input-wrapper">
-              <label for="assunto_forma2">Forma (‡v)</label>
-              <input type="text" id="assunto_forma2" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)" placeholder="Manuais" />
-              <span class="input-counter" id="contador">0/50</span>
+                <label for="assunto_topico2">Assunto (‡a)</label>
+                <input type="text" id="assunto_topico2" name="campoContagem" maxlength="200"
+                  oninput="contarCaracteres(this)" placeholder="Programação de computadores" />
+                <span class="input-counter" id="contador">0/200</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="assunto_tempo2">Período Histórico (‡y)</label>
-              <input type="text" id="assunto_tempo2" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)" />
-              <span class="input-counter" id="contador">0/50</span>
+                <label for="assunto_forma2">Forma (‡v)</label>
+                <input type="text" id="assunto_forma2" name="campoContagem" maxlength="50"
+                  oninput="contarCaracteres(this)" placeholder="Manuais" />
+                <span class="input-counter" id="contador">0/50</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="assunto_local2">Localidade (‡z)</label>
-              <input type="text" id="assunto_local2" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)" />
-              <span class="input-counter" id="contador">0/50</span>
+                <label for="assunto_tempo2">Período Histórico (‡y)</label>
+                <input type="text" id="assunto_tempo2" name="campoContagem" maxlength="50"
+                  oninput="contarCaracteres(this)" />
+                <span class="input-counter" id="contador">0/50</span>
+              </div>
+
+              <div class="input-wrapper">
+                <label for="assunto_local2">Localidade (‡z)</label>
+                <input type="text" id="assunto_local2" name="campoContagem" maxlength="50"
+                  oninput="contarCaracteres(this)" />
+                <span class="input-counter" id="contador">0/50</span>
               </div>
             </details>
 
@@ -409,20 +456,22 @@
             <details>
               <summary>Campo 700 - Autor Adicional</summary>
               <div class="input-wrapper">
-              <label for="autor_adicional">Nome do Autor (‡a)</label>
-              <input type="text" id="autor_adicional" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)" placeholder="Santos, Maria dos" />
-              <span class="input-counter" id="contador">0/20</span>
+                <label for="autor_adicional">Nome do Autor (‡a)</label>
+                <input type="text" id="autor_adicional" name="campoContagem" maxlength="20"
+                  oninput="contarCaracteres(this)" placeholder="Santos, Maria dos" />
+                <span class="input-counter" id="contador">0/20</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="autor_adicional_datas">Datas (‡d)</label>
-              <input type="text" id="autor_adicional_datas" name="campoContagem"  placeholder="1975-" />
+                <label for="autor_adicional_datas">Datas (‡d)</label>
+                <input type="text" id="autor_adicional_datas" name="campoContagem" placeholder="1975-" />
               </div>
 
               <div class="input-wrapper">
-              <label for="autor_adicional_funcao">Função (‡e)</label>
-              <input type="text" id="autor_adicional_funcao" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)" placeholder="colaborador" />
-              <span class="input-counter" id="contador">0/20</span>
+                <label for="autor_adicional_funcao">Função (‡e)</label>
+                <input type="text" id="autor_adicional_funcao" name="campoContagem" maxlength="20"
+                  oninput="contarCaracteres(this)" placeholder="colaborador" />
+                <span class="input-counter" id="contador">0/20</span>
               </div>
             </details>
 
@@ -430,8 +479,9 @@
             <details>
               <summary>Campo 949 - Controle Local</summary>
               <div class="input-wrapper">
-              <label for="controle_local">Informação Local (‡a)</label>
-              <input type="text" id="controle_local" name="campoContagem" maxlength="50" oninput="contarCaracteres(this)" placeholder="BIBLIO001" />
+                <label for="controle_local">Informação Local (‡a)</label>
+                <input type="text" id="controle_local" name="campoContagem" maxlength="50"
+                  oninput="contarCaracteres(this)" placeholder="BIBLIO001" />
               </div>
 
               <label for="controle_status">Status (‡s)</label>
@@ -457,41 +507,47 @@
             <details>
               <summary>Exemplares Automáticos</summary>
               <div class="input-wrapper">
-              <label for="exemplares_numero">Número de Exemplares: </label>
-              <input type="text" id="exemplares_numeros_volume" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)" placeholder="3" />
-              <span class="input-counter" id="contador">0/20</span>
+                <label for="exemplares_numero">Número de Exemplares: </label>
+                <input type="text" id="exemplares_numeros_volume" name="campoContagem" maxlength="20"
+                  oninput="contarCaracteres(this)" placeholder="3" />
+                <span class="input-counter" id="contador">0/20</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="exemplares_numeros_volume">Número do Volume </label>
-              <input type="text" id="exemplares_numeros_volume" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)" placeholder="2" />
-              <span class="input-counter" id="contador">0/20</span>
+                <label for="exemplares_numeros_volume">Número do Volume </label>
+                <input type="text" id="exemplares_numeros_volume" name="campoContagem" maxlength="20"
+                  oninput="contarCaracteres(this)" placeholder="2" />
+                <span class="input-counter" id="contador">0/20</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="exemplares_quantidade_volume">Número de Exemplares
-              </label>
-              <input type="text" id="exemplares_quantidade_volume" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)" placeholder="3" />
-              <span class="input-counter" id="contador">0/20</span>
-                </div>
-
-                <div class="input-wrapper">
-              <label for="exemplares_data">Data de Aquisição </label>
-              <input type="date" id="exemplares_data" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)" />
-              <span class="input-counter" id="contador">0/20</span>
+                <label for="exemplares_quantidade_volume">Número de Exemplares
+                </label>
+                <input type="text" id="exemplares_quantidade_volume" name="campoContagem" maxlength="20"
+                  oninput="contarCaracteres(this)" placeholder="3" />
+                <span class="input-counter" id="contador">0/20</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="exemplares_biblioteca">Biblioteca Depositária
-              </label>
-              <input type="text" id="exemplares_biblioteca" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)" placeholder="ETEC NO" />
-              <span class="input-counter" id="contador">0/20</span>
+                <label for="exemplares_data">Data de Aquisição </label>
+                <input type="date" id="exemplares_data" name="campoContagem" maxlength="20"
+                  oninput="contarCaracteres(this)" />
+                <span class="input-counter" id="contador">0/20</span>
               </div>
 
               <div class="input-wrapper">
-              <label for="exemplares_aquisicao"> Tipo de Aquisição</label>
-              <input type="text" id="exemplares_aquisicao" name="campoContagem" maxlength="20" oninput="contarCaracteres(this)" placeholder="Compra" />
-              <span class="input-counter" id="contador">0/20</span>
+                <label for="exemplares_biblioteca">Biblioteca Depositária
+                </label>
+                <input type="text" id="exemplares_biblioteca" name="campoContagem" maxlength="20"
+                  oninput="contarCaracteres(this)" placeholder="ETEC NO" />
+                <span class="input-counter" id="contador">0/20</span>
+              </div>
+
+              <div class="input-wrapper">
+                <label for="exemplares_aquisicao"> Tipo de Aquisição</label>
+                <input type="text" id="exemplares_aquisicao" name="campoContagem" maxlength="20"
+                  oninput="contarCaracteres(this)" placeholder="Compra" />
+                <span class="input-counter" id="contador">0/20</span>
               </div>
             </details>
 
@@ -500,7 +556,7 @@
               <button type="reset">Limpar Formulário</button>
             </div>
           </form>
-          <a href="#" id="btnTopo" class="voltar-topo" ><img src="midia/ancora.png" alt="início da página"></a>
+          <a href="#" id="btnTopo" class="voltar-topo"><img src="midia/ancora.png" alt="início da página"></a>
         </div>
       </div>
     </div>
