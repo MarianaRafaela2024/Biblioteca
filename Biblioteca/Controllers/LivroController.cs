@@ -77,7 +77,7 @@ namespace Biblioteca.Controllers
                         Local_Termo = reader["Localidade_Termo"]?.ToString() ?? string.Empty,
                         Info_Local = reader["Informacao_Local"]?.ToString() ?? string.Empty,
                         Status_Item = reader["Status_Item"]?.ToString() ?? string.Empty,
-                        Status_Emprestimos = reader["Status_Emprestimos"]?.ToString() ?? string.Empty
+                        Status_Emprestimo = reader["Status_Emprestimo"]?.ToString() ?? string.Empty
                     };
                     Livros.Add(Livro);
                 }
@@ -140,7 +140,7 @@ namespace Biblioteca.Controllers
                             l.Ano_Publicacao,
                             l.ISBN,
                             l.Assunto_Termo,
-                            l.Status_Emprestimos,
+                            l.Status_Emprestimo,
                             STRING_AGG(a.Nome_Autor, ', ') AS Autores
                         FROM Livro l
                         LEFT JOIN Livro_Autor la ON l.Id_Livro = la.Id_Livro
@@ -150,13 +150,13 @@ namespace Biblioteca.Controllers
                             l.Subtitulo LIKE '%' + @termo + '%' OR
                             l.Indicacao_Responsabilidade LIKE '%' + @termo + '%' OR
                             l.Assunto_Termo LIKE '%' + @termo + '%' OR
-                            l.Status_Emprestimos LIKE '%' + @termo + '%' OR
+                            l.Status_Emprestimo LIKE '%' + @termo + '%' OR
                             CAST(l.Ano_Publicacao AS NVARCHAR) = @termo OR
                             a.Nome_Autor LIKE '%' + @termo + '%'
                         )
                         GROUP BY 
                             l.Id_Livro, l.Nome_Livro, l.Subtitulo, l.Indicacao_Responsabilidade,
-                            l.Ano_Publicacao, l.ISBN, l.Assunto_Termo, l.Status_Emprestimos
+                            l.Ano_Publicacao, l.ISBN, l.Assunto_Termo, l.Status_Emprestimo
                         ORDER BY l.Nome_Livro";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conection))
@@ -177,7 +177,7 @@ namespace Biblioteca.Controllers
                                 ISBN = reader["ISBN"].ToString(),
                                 Assunto_Termo = reader["Assunto_Termo"].ToString(),
                                 Autores = reader["Autores"]?.ToString(),
-                                Status_Emprestimos = reader["Status_Emprestimos"].ToString()
+                                Status_Emprestimo = reader["Status_Emprestimo"].ToString()
                             });
                         }
                     }
@@ -337,7 +337,7 @@ namespace Biblioteca.Controllers
         //        comand.Parameters.AddWithValue("@Localidade_Termo", CreateL.livro.Local_Termo);
         //        comand.Parameters.AddWithValue("@Informacao_Local", CreateL.livro.Info_Local);
         //        comand.Parameters.AddWithValue("@Status_Item", CreateL.livro.Status_Item);
-        //        comand.Parameters.AddWithValue("@Status_Emprestimo", CreateL.livro.Status_Emprestimos);
+        //        comand.Parameters.AddWithValue("@Status_Emprestimo", CreateL.livro.Status_emprestimo);
         //        Autor
         //            comand.Parameters.AddWithValue("@Nome_Autor", CreateL.autor.Nome_Autor);
         //        comand.Parameters.AddWithValue("@Numero", CreateL.autor.Numero);
@@ -475,7 +475,7 @@ namespace Biblioteca.Controllers
                     Funcao_Pessoal, Topico_Pessoal, Titulo_Uniforme, Forma_Uniforme,
                     Periodo_Historico_Uniforme, Localidade_Uniforme, Assunto_Termo,
                     Forma_Termo, Periodo_Historico_Termo, Localidade_Termo, Informacao_Local,
-                    Status_Item, Status_Emprestimos
+                    Status_Item, Status_Emprestimo
                 ) VALUES (
                     @ISBN, @Condicoes_Encadernacao, @Agencia_Catalogadora, @Idioma_Catalogacao,
                     @Agencia_Transcricao, @Agencia_Modificacao, @Idioma_Texto, @Idioma_Resumo,
@@ -488,7 +488,7 @@ namespace Biblioteca.Controllers
                     @Funcao_Pessoal, @Topico_Pessoal, @Titulo_Uniforme, @Forma_Uniforme,
                     @Periodo_Historico_Uniforme, @Localidade_Uniforme, @Assunto_Termo,
                     @Forma_Termo, @Periodo_Historico_Termo, @Localidade_Termo, @Informacao_Local,
-                    @Status_Item, @Status_Emprestimos
+                    @Status_Item, @Status_Emprestimo
                 );
                 SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
@@ -539,7 +539,7 @@ namespace Biblioteca.Controllers
                         comandLA.Parameters.AddWithValue("@Localidade_Termo", CreateL.livro.Local_Termo ?? (object)DBNull.Value);
                         comandLA.Parameters.AddWithValue("@Informacao_Local", CreateL.livro.Info_Local ?? (object)DBNull.Value);
                         comandLA.Parameters.AddWithValue("@Status_Item", CreateL.livro.Status_Item ?? (object)DBNull.Value);
-                        comandLA.Parameters.AddWithValue("@Status_Emprestimos", CreateL.livro.Status_Emprestimos);
+                        comandLA.Parameters.AddWithValue("@Status_Emprestimo", CreateL.livro.Status_Emprestimo);
 
                         livroId = (int)comandLA.ExecuteScalar();
                     }
@@ -847,7 +847,7 @@ namespace Biblioteca.Controllers
         //                            comandLA.Parameters.AddWithValue("@Localidade_Termo", CreateL.livro.Local_Termo);
         //                            comandLA.Parameters.AddWithValue("@Informacao_Local", CreateL.livro.Info_Local);
         //                            comandLA.Parameters.AddWithValue("@Status_Item", CreateL.livro.Status_Item);
-        //                            comandLA.Parameters.AddWithValue("@Status_Emprestimo", CreateL.livro.Status_Emprestimos);
+        //                            comandLA.Parameters.AddWithValue("@Status_Emprestimo", CreateL.livro.Status_emprestimo);
 
         //                            LivroId = (int)comandLA.ExecuteScalar();
 
@@ -905,7 +905,7 @@ namespace Biblioteca.Controllers
                     Paginas,
                     Notas_Gerais,
                     Assunto_Termo,
-                    Status_Emprestimos
+                    Status_Emprestimo
                 ) VALUES (
                     @Nome_Livro,
                     @Editora,
@@ -913,7 +913,7 @@ namespace Biblioteca.Controllers
                     @Paginas,
                     @Notas_Gerais,
                     @Assunto_Termo,
-                    @Status_Emprestimos
+                    @Status_Emprestimo
                 )";
 
                     SqlCommand comand = new SqlCommand(query, conection);
@@ -923,7 +923,7 @@ namespace Biblioteca.Controllers
                     comand.Parameters.AddWithValue("@Paginas", livro.Paginas);
                     comand.Parameters.AddWithValue("@Notas_Gerais", livro.Notas_Gerais);
                     comand.Parameters.AddWithValue("@Assunto_Termo", livro.Assunto_Termo);
-                    comand.Parameters.AddWithValue("@Status_Emprestimos", livro.Status_Emprestimos);
+                    comand.Parameters.AddWithValue("@Status_Emprestimo", livro.Status_Emprestimo);
 
                     conection.Open();
                     int rowsAffected = comand.ExecuteNonQuery();

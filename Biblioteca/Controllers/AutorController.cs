@@ -45,8 +45,6 @@ namespace Biblioteca.Controllers
             return Autors;
         }
 
-       
-
         [HttpGet("search")]
         public IActionResult Search(string? termo)
         {
@@ -109,14 +107,6 @@ namespace Biblioteca.Controllers
             return Ok(Autors);
         }
 
-
-
-
-
-       
-
-
-        
     }
 
     //[HttpPut("{id}")]

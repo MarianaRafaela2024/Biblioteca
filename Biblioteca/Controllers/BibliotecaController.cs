@@ -108,7 +108,7 @@ namespace Biblioteca.Controllers
                                 Local_Termo = reader["Localidade_Termo"]?.ToString() ?? string.Empty,
                                 Info_Local = reader["Informacao_Local"]?.ToString() ?? string.Empty,
                                 Status_Item = reader["Status_Item"]?.ToString() ?? string.Empty,
-                                Status_Emprestimos = reader["Status_Emprestimos"]?.ToString() ?? string.Empty
+                                Status_Emprestimo = reader["Status_Emprestimo"]?.ToString() ?? string.Empty
                             },
                             Autores = new List<Autor>(),
                             Entidades = new List<Entidade_Corporativa>()

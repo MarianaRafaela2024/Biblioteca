@@ -23,7 +23,7 @@ namespace Biblioteca.Controllers
         {
             using (SqlConnection conection = new SqlConnection(StrConex))
             {
-                string query = "SELECT * FROM Logi WHERE RM = @RM AND Senha = @Senha";
+                string query = "SELECT * FROM Login WHERE RM = @RM AND Senha = @Senha";
                 SqlCommand command = new SqlCommand(query, conection);
                 command.Parameters.AddWithValue("@RM", login.RM);
                 command.Parameters.AddWithValue("@Senha", login.Senha);

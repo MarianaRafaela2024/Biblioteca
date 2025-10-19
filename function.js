@@ -185,7 +185,7 @@ function updateAluno() {
 
 getAluno();
 
-//login//
+/* ===== LOGIN ===== */
 
 async function login(e) {
     if (e) e.preventDefault();
@@ -267,7 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-//CadLivro
+/* ===== CADLIVROS===== */
 
 function addLivro() {
     // Campo 020 - ISBN
@@ -460,7 +460,7 @@ function contarCaracteres(input) {
 
 
 
-// Buscar livro acervo
+/* ===== ACERVO ===== */
 
 async function buscarLivros() {
     const termo = document.getElementById('busca').value.trim();
@@ -512,14 +512,96 @@ async function buscarLivros() {
     };
 }
 
-//Emprestimo
+/* ===== EMPRÉSTIMO ===== */
+
+// Buscar livros para autocomplete
+let livrosCache = []; // Cache para evitar múltiplas requisições
+let timeoutBusca;
+
+async function buscarLivrosAutocomplete(termo) {
+    const sugestoesDiv = document.getElementById('livroSugestoes');
+    clearTimeout(timeoutBusca);
+
+    if (!termo || termo.length < 2) {
+        sugestoesDiv.innerHTML = '';
+        return;
+    }
+
+    timeoutBusca = setTimeout(async () => {
+        try {
+            const response = await fetch(`https://localhost:7139/Livro/search?termo=${encodeURIComponent(termo)}`);
+
+            if (!response.ok) {
+                throw new Error('Erro ao buscar livros');
+            }
+
+            const livros = await response.json();
+            livrosCache = livros;
+
+            sugestoesDiv.innerHTML = '';
+
+            if (livros.length === 0) {
+                sugestoesDiv.innerHTML = '<div class="autocomplete-item no-results">Nenhum livro encontrado</div>';
+                return;
+            }
+
+            // Criar lista de sugestões
+            livros.forEach(livro => {
+                const item = document.createElement('div');
+                item.className = 'autocomplete-item';
+                item.innerHTML = `
+                    <strong>${livro.nome_Livro}</strong>
+                    <small>
+                        ${livro.autores ? `Autor: ${livro.autores} | ` : ''}
+                        ISBN: ${livro.isbn || 'N/A'} | 
+                        Status: ${livro.status_Emprestimos || 'Disponível'}
+                    </small>
+                `;
+
+                item.onclick = () => selecionarLivro(livro);
+
+                sugestoesDiv.appendChild(item);
+            });
+
+        } catch (error) {
+            console.error('Erro ao buscar livros:', error);
+            sugestoesDiv.innerHTML = '<div class="autocomplete-item no-results">Erro ao buscar livros</div>';
+        }
+    }, 300);
+}
+
+function selecionarLivro(livro) {
+    // Preencher o campo com o nome do livro
+    document.getElementById('livro').value = livro.nome_Livro;
+
+    // Guardar o ID do livro em um campo hidden
+    document.getElementById('livroIdSelecionado').value = livro.id_Livro;
+
+    document.getElementById('livroSugestoes').innerHTML = '';
+}
+
+// Fechar sugestões ao clicar fora
+document.addEventListener('click', function (e) {
+    const container = document.querySelector('.autocomplete-container');
+    if (container && !container.contains(e.target)) {
+        document.getElementById('livroSugestoes').innerHTML = '';
+    }
+});
+
 function addEmprestimo() {
+    const livroId = document.getElementById('livroIdSelecionado').value;
+
+    if (!livroId) {
+        alert('Por favor, selecione um livro da lista de sugestões!');
+        return;
+    }
+
     const emprestimo = {
-        RM: document.getElementById('RM').value,
-        Livro_nome: document.getElementById('livro').value,
-        DataEmprestimo: document.getElementById('dataEmprestimo').value,
-        DataDevolucao: document.getElementById('dataDevolucao').value,
-        Status: document.getElementById('status').value
+        RM_Aluno: document.getElementById('RM').value,
+        Id_Livro: parseInt(livroId),
+        Data_Emprestimo: document.getElementById('dataEmprestimo').value,
+        Data_Devolucao_Prevista: document.getElementById('dataDevolucao').value,
+        Data_Devolucao_Real: null
     };
 
     fetch('https://localhost:7139/Emprestimo', {
@@ -527,20 +609,206 @@ function addEmprestimo() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(emprestimo)
     })
-        .then(r => {
-            if (r.ok) {
+        .then(response => {
+            if (response.ok) {
                 alert('Empréstimo cadastrado com sucesso!');
                 document.getElementById('formEmprestimo').reset();
+                document.getElementById('livroIdSelecionado').value = '';
                 closeModal('addEmprestimo');
+                getEmprestimos(); // Se você tiver uma função para listar empréstimos
             } else {
-                alert('Erro ao cadastrar empréstimo');
+                response.text().then(text => {
+                    alert('Erro ao cadastrar empréstimo: ' + text);
+                });
             }
         })
-        .catch(e => console.error(e));
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao conectar com o servidor!');
+        });
 }
 
 
-// ancora
+// Função para buscar e exibir
+function getEmprestimos() {
+    fetch('https://localhost:7139/Emprestimo')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao buscar empréstimos');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const emprestimoTable = document.getElementById('emprestimoTable');
+            const tbody = emprestimoTable.querySelector('tbody');
+            tbody.innerHTML = '';
+
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;">Nenhum empréstimo encontrado</td></tr>';
+                return;
+            }
+
+            data.forEach(emprestimo => {
+                const row = document.createElement('tr');
+
+                const idCell = document.createElement('td');
+                idCell.textContent = emprestimo.id_Emprestimo;
+                row.appendChild(idCell);
+
+                const alunoCell = document.createElement('td');
+                alunoCell.textContent = `${emprestimo.nomeAluno} (${emprestimo.rm_Aluno})`;
+                row.appendChild(alunoCell);
+
+                const livroCell = document.createElement('td');
+                livroCell.textContent = emprestimo.nomeLivro;
+                row.appendChild(livroCell);
+
+                const dataEmpCell = document.createElement('td');
+                dataEmpCell.textContent = formatarData(emprestimo.data_Emprestimo);
+                row.appendChild(dataEmpCell);
+
+                const dataPrevCell = document.createElement('td');
+                dataPrevCell.textContent = formatarData(emprestimo.data_Devolucao_Prevista);
+                row.appendChild(dataPrevCell);
+
+                const dataRealCell = document.createElement('td');
+                if (emprestimo.data_Devolucao_Real) {
+                    dataRealCell.textContent = formatarData(emprestimo.data_Devolucao_Real);
+
+                    const dataReal = new Date(emprestimo.data_Devolucao_Real);
+                    const dataPrevista = new Date(emprestimo.data_Devolucao_Prevista);
+
+                    if (dataReal > dataPrevista) {
+                        dataRealCell.style.color = '#a20c0cff';
+                        dataRealCell.style.fontWeight = '600';
+                    } else {
+                        dataRealCell.style.color = '#0d7c11ff';
+                        dataRealCell.style.fontWeight = '600';
+                    }
+                } else {
+                    dataRealCell.textContent = '-';
+                    dataRealCell.style.color = '#999';
+                }
+
+                row.appendChild(dataRealCell);
+
+
+                const statusCell = document.createElement('td');
+                const status = calcularStatus(
+                    emprestimo.data_Devolucao_Prevista,
+                    emprestimo.data_Devolucao_Real
+                );
+                statusCell.innerHTML = `<span class="status-badge ${status.classe}">${status.texto}</span>`;
+                row.appendChild(statusCell);
+
+                const actionCell = document.createElement('td');
+                actionCell.innerHTML = `
+                    <div class="action">
+                        ${emprestimo.data_Devolucao_Real === null ?
+                        `<button class="btn-devolucao" onclick="registrarDevolucao(${emprestimo.id_Emprestimo})">Devolver</button>`
+                        :''
+                    }
+                        <button class="btn-delete" onclick="abrirExclusaoEmprestimo(${emprestimo.id_Emprestimo})">Excluir</button>
+                    </div>
+                `;
+                row.appendChild(actionCell);
+
+                tbody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao buscar empréstimos:', error);
+            showNotification('Erro ao carregar empréstimos', 'error');
+        });
+}
+
+function formatarData(dataString) {
+    if (!dataString) return '-';
+    const data = new Date(dataString);
+    return data.toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
+}
+
+function calcularStatus(dataDevolucaoPrevista, dataDevolucaoReal) {
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+    const dataPrevista = new Date(dataDevolucaoPrevista);
+    dataPrevista.setHours(0, 0, 0, 0);
+
+    if (dataDevolucaoReal) {
+        return { texto: 'Devolvido', classe: 'status-devolvido' };
+    }
+
+    if (hoje > dataPrevista) {
+        return { texto: 'Atrasado', classe: 'status-atrasado' };
+    }
+
+    return { texto: 'Ativo', classe: 'status-ativo' };
+}
+
+function registrarDevolucao(idEmprestimo) {
+    if (!confirm('Confirmar devolução do livro?')) return;
+
+    const dataAtual = new Date().toISOString().split('T')[0];
+
+    fetch(`https://localhost:7139/Emprestimo/${idEmprestimo}/devolver`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ dataDevolucao: dataAtual })
+    })
+        .then(response => {
+            if (response.ok) {
+                showNotification('Devolução registrada com sucesso!', 'success');
+                getEmprestimos(); // Recarrega a tabela
+            } else {
+                response.text().then(text => {
+                    showNotification(text || 'Erro ao registrar devolução', 'error');
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            showNotification('Erro ao conectar com o servidor', 'error');
+        });
+}
+
+function abrirExclusaoEmprestimo(id) {
+    document.getElementById('deleIdEmprestimo').value = id;
+    openModal('deleteModalEmprestimo');
+}
+
+function deleteEmprestimo() {
+    const id = parseInt(document.getElementById('deleIdEmprestimo').value);
+
+    fetch(`https://localhost:7139/Emprestimo/${id}`, {
+        method: 'DELETE'
+    })
+        .then(response => {
+            if (response.ok) {
+                showNotification('Empréstimo excluído com sucesso!', 'success');
+                getEmprestimos();
+                closeModal('deleteModalEmprestimo');
+            } else {
+                showNotification('Erro ao excluir empréstimo', 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            showNotification('Erro ao conectar com o servidor', 'error');
+        });
+}
+
+if (window.location.pathname.includes('emprestimo')) {
+    getEmprestimos();
+}
+
+
+/* ===== ANCORA ===== */
 
 document.addEventListener('DOMContentLoaded', () => {
     const btnTopo = document.getElementById('btnTopo');
@@ -549,7 +817,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const scrolled = window.scrollY;
         const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
 
-        // só mostra se houver rolagem real e o usuário tiver descido
         if (totalScroll > 0 && scrolled > 0) {
             btnTopo.classList.add('mostrar');
         } else {
@@ -557,7 +824,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // quando clicar, volta suavemente ao topo
     btnTopo.addEventListener('click', (e) => {
         e.preventDefault();
         window.scrollTo({
@@ -568,6 +834,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', verificarRolagem);
     window.addEventListener('resize', verificarRolagem);
-    verificarRolagem(); // executa ao carregar
+    verificarRolagem();
 });
 

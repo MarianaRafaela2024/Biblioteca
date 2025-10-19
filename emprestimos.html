@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="styleEmprestimo.css">
   <link rel="icon" type="image/jpg" href="midia/emprestimo.png">
 </head>
+
 <body>
   <!-- Overlay -->
   <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
@@ -31,7 +33,7 @@
       <a href="#" id="logoutButton" onclick="logout(); return false;" class="login-link" style="display: none;">
         Sair
       </a>
-      </div>
+    </div>
   </nav>
 
   <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
@@ -54,13 +56,14 @@
             <th>Aluno</th>
             <th>Livro</th>
             <th>Data Empréstimo</th>
-            <th>Data Devolução</th>
+            <th>Data Prevista para Devolução</th>
+            <th>Data de Devolução</th>
             <th>Status</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Linhas serão preenchidas pelo JS -->
+          
         </tbody>
       </table>
     </div>
@@ -72,11 +75,16 @@
       <span class="close" onclick="closeModal('addEmprestimo')">&times;</span>
       <h3>Novo Empréstimo</h3>
       <form id="formEmprestimo">
-        <label for="aluno">RM do aluno:</label>
-        <input type="number" id="RM" placeholder="19876">
+        <label for="RM">RM do aluno:</label>
+        <input type="text" id="RM" placeholder="19876" required>
 
-        <label for="livro">Livro:</label>
-        <input type="text" id="livro" placeholder="Harry Potter">
+        <label for="livro">Buscar Livro:</label>
+        <div class="autocomplete-container">
+          <input type="text" id="livro" placeholder="Digite o nome do livro..." autocomplete="off"
+            oninput="buscarLivrosAutocomplete(this.value)">
+          <div id="livroSugestoes" class="autocomplete-suggestions"></div>
+        </div>
+        <input type="hidden" id="livroIdSelecionado">
 
         <label for="dataEmprestimo">Data de Empréstimo:</label>
         <input type="date" id="dataEmprestimo" required>
@@ -84,22 +92,27 @@
         <label for="dataDevolucao">Data de Devolução:</label>
         <input type="date" id="dataDevolucao" required>
 
-        <label for="status">Status:</label>
-        <select id="status" required>
-          <option value="Ativo">Ativo</option>
-          <option value="Devolvido">Devolvido</option>
-          <option value="Atrasado">Atrasado</option>
-        </select>
-
         <button type="button" onclick="addEmprestimo()">Cadastrar Empréstimo</button>
       </form>
     </div>
-  </div>
+</div>
+    <!-- Modal de exclusão de empréstimo -->
+    <div id="deleteModalEmprestimo" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('deleteModalEmprestimo')">&times;</span>
+        <h3>Confirmar Exclusão</h3>
+        <p>Tem certeza que deseja excluir este empréstimo?</p>
+        <input type="hidden" id="deleIdEmprestimo">
+        <button onclick="deleteEmprestimo()" class="btn-delete">Confirmar Exclusão</button>
+      </div>
+    </div>
 
   <a href="#" id="btnTopo" class="voltar-topo">
     <img src="midia/ancora.png" alt="Início da página">
   </a>
 
   <script src="function.js"></script>
+  <script src="animation.js"></script>
 </body>
+
 </html>
