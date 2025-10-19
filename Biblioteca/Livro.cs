@@ -94,7 +94,7 @@ namespace Biblioteca
 
         public string Status_Item { get; set; }
 
-        public string Status_Emprestimos { get; set; }
+        public string Status_Emprestimo { get; set; }
 
         
     }

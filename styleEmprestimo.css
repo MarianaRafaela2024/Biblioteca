@@ -108,3 +108,110 @@ table tbody tr:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(196, 30, 58, 0.3);
 }
+
+/* Estilo para o autocomplete */
+
+.autocomplete-container {
+  position: relative;
+}
+
+.autocomplete-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-top: none;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 6px 6px;
+}
+
+.autocomplete-item {
+  padding: 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s ease;
+}
+
+.autocomplete-item:hover {
+  background-color: rgba(196, 30, 58, 0.05);
+}
+
+.autocomplete-item strong {
+  color: #c41e3a;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.autocomplete-item small {
+  color: #666;
+  font-size: 12px;
+}
+
+.autocomplete-item.no-results {
+  padding: 12px;
+  color: #999;
+  text-align: center;
+  cursor: default;
+}
+
+.autocomplete-item.no-results:hover {
+  background-color: white;
+}
+
+/* Esconde a lista quando vazia */
+.autocomplete-suggestions:empty {
+  display: none;
+}
+
+/* Status badges */
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-ativo {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.status-atrasado {
+    background-color: #f44336;
+    color: white;
+}
+
+.status-devolvido {
+    background-color: #2196F3;
+    color: white;
+}
+
+/* Botão de devolução */
+.btn-devolucao {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-right: 5px;
+    transition: all 0.3s ease;
+}
+
+.btn-devolucao:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.action {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}

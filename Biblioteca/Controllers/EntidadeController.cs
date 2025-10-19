@@ -103,22 +103,9 @@ namespace Biblioteca.Controllers
                         }
                     }
                 }
-
                 return Ok(Entidades);
             }
-
-
-
-
-
-            
-
-
-
         }
-
-
-
     }
 
 

@@ -190,6 +190,64 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Biblioteca.Controllers.EmprestimoController",
+    "Method": "CreateEmprestimo",
+    "RelativePath": "Emprestimo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "emprestimo",
+        "Type": "Biblioteca.Emprestimo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Biblioteca.Controllers.EmprestimoController",
+    "Method": "GetEmprestimo",
+    "RelativePath": "Emprestimo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Biblioteca.Controllers.EmprestimoController",
+    "Method": "DeleteEmprestimo",
+    "RelativePath": "Emprestimo",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Biblioteca.Controllers.EmprestimoController",
+    "Method": "RegistrarDevolucao",
+    "RelativePath": "Emprestimo/{id}/devolver",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Biblioteca.Controllers.EntidadeController",
     "Method": "GetEntidade",
     "RelativePath": "Entidade",

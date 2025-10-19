@@ -41,16 +41,8 @@ namespace Biblioteca.Controllers
                 reader.Close();
             }
             return Livro_Autors;
-        }
-
-       
-
-        
-
+        } 
     }
-
-    
-
 }
 
 
