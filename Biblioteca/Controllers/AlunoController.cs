@@ -155,9 +155,9 @@ namespace Biblioteca.Controllers
             }
             return NotFound();
         }
-        [HttpDelete("{RM}")]
+        [HttpDelete("{rm}")]
         [HttpDelete]
-        public ActionResult DeleteAluno(int rm)
+        public ActionResult DeleteAluno(string rm)
         {
             using (SqlConnection connection = new SqlConnection(StrConex))
             {

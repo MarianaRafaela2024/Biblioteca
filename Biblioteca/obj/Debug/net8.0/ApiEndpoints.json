@@ -86,14 +86,14 @@
   {
     "ContainingType": "Biblioteca.Controllers.AlunoController",
     "Method": "DeleteAluno",
-    "RelativePath": "Aluno/{RM}",
+    "RelativePath": "Aluno/{rm}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "rm",
-        "Type": "System.Int32",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -285,6 +285,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Biblioteca.Controllers.Exemplares_AutomaticosController",
+    "Method": "GetExemplares",
+    "RelativePath": "Exemplares_Automaticos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Biblioteca.Exemplares_Automaticos, Biblioteca, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetExemplares"
+  },
+  {
     "ContainingType": "Biblioteca.Controllers.LivroController",
     "Method": "GetLivro",
     "RelativePath": "Livro",
@@ -391,9 +412,9 @@
   },
   {
     "ContainingType": "Biblioteca.Controllers.LivroController",
-    "Method": "DeleteLivro",
+    "Method": "GetLivroId",
     "RelativePath": "Livro/{id}",
-    "HttpMethod": "DELETE",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -403,19 +424,41 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "EndpointName": "GetLivroID"
   },
   {
     "ContainingType": "Biblioteca.Controllers.LivroController",
-    "Method": "CreateLivroLeigos",
-    "RelativePath": "Livro/PostLivroLeigos",
-    "HttpMethod": "POST",
+    "Method": "UpdateLivro",
+    "RelativePath": "Livro/{id}",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "livro",
-        "Type": "Biblioteca.Livro",
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "CreateL",
+        "Type": "Biblioteca.BibliotecaRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Biblioteca.Controllers.LivroController",
+    "Method": "DeleteLivro",
+    "RelativePath": "Livro/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

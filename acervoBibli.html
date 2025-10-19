@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="styleAcervo.css">
   <link rel="icon" type="image/jpg" href="midia/acervo.png">
 </head>
+
 <body>
   <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
@@ -32,29 +34,38 @@
         Sair
       </a>
     </div>
-</nav>
+  </nav>
 
   <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+<body class="debug">
 
   <div class="main-content">
     <div class="page-header">
       <h1>Consulta ao Acervo</h1>
       <p>Pesquise livros disponíveis na biblioteca</p>
     </div>
-    <div class="busca-container">
-      <form class="busca-topo" >
-        <input type="text" id="busca" placeholder="Digite título, autor, assunto ou ano">
-        <button type="button" onclick="buscarLivros(); return false;">Pesquisar</button>
-        <button type="button" class="btn-limpar" onclick="limparBuscar()">Limpar</button>
-      </form>
+   <div class="busca-container">
+  <form class="busca-topo">
+    <input type="text" id="busca" placeholder="Digite título, autor, assunto ou ano">
+    <button type="button" onclick="buscarLivros(); return false;">Pesquisar</button>
+    <button type="button" class="btn-limpar" onclick="limparBuscar()">Limpar</button>
+  </form>
+</div>
 
-      <div id="resultados"></div>
-    </div>
+<div class="acervo-layout">
+  <div id="resultados" class="lista-livros">Os livros irão aparecer aqui!</div>
+  <div id="detalhesMarc21" class="detalhes-livro">
+    <p>Selecione um livro para ver os detalhes MARC21.</p>
   </div>
-  <a href="#" id="btnTopo" class="voltar-topo" ><img src="midia/ancora.png" alt="início da página"></a>
+</div>
 
 
-  <script src="function.js"></script>
-  <script src="animation.js"></script>
+    </div>
+    <a href="#" id="btnTopo" class="voltar-topo"><img src="midia/ancora.png" alt="início da página"></a>
+
+
+    <script src="function.js"></script>
+    <script src="animation.js"></script>
 </body>
+
 </html>

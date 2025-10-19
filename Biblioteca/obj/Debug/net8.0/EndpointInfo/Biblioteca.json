@@ -176,7 +176,7 @@
         }
       }
     },
-    "/Aluno/{RM}": {
+    "/Aluno/{rm}": {
       "delete": {
         "tags": [
           "Aluno"
@@ -187,8 +187,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
@@ -463,6 +462,45 @@
         }
       }
     },
+    "/Exemplares_Automaticos": {
+      "get": {
+        "tags": [
+          "Exemplares_Automaticos"
+        ],
+        "operationId": "GetExemplares",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Exemplares_Automaticos"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Exemplares_Automaticos"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Exemplares_Automaticos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/Livro": {
       "get": {
         "tags": [
@@ -541,17 +579,20 @@
         }
       }
     },
-    "/Livro/search": {
+    "/Livro/{id}": {
       "get": {
         "tags": [
           "Livro"
         ],
+        "operationId": "GetLivroID",
         "parameters": [
           {
-            "name": "termo",
-            "in": "query",
+            "name": "id",
+            "in": "path",
+            "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -560,28 +601,37 @@
             "description": "OK"
           }
         }
-      }
-    },
-    "/Livro/PostLivroLeigos": {
-      "post": {
+      },
+      "put": {
         "tags": [
           "Livro"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Livro"
+                "$ref": "#/components/schemas/BibliotecaRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Livro"
+                "$ref": "#/components/schemas/BibliotecaRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Livro"
+                "$ref": "#/components/schemas/BibliotecaRequest"
               }
             }
           }
@@ -591,9 +641,7 @@
             "description": "OK"
           }
         }
-      }
-    },
-    "/Livro/{id}": {
+      },
       "delete": {
         "tags": [
           "Livro"
@@ -606,6 +654,27 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Livro/search": {
+      "get": {
+        "tags": [
+          "Livro"
+        ],
+        "parameters": [
+          {
+            "name": "termo",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           }
         ],
