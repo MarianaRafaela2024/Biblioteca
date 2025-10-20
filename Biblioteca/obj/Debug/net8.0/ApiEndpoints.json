@@ -175,19 +175,29 @@
   },
   {
     "ContainingType": "Biblioteca.Controllers.BibliotecaController",
-    "Method": "Search",
-    "RelativePath": "Biblioteca/search",
+    "Method": "GetLivroById",
+    "RelativePath": "Biblioteca/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "termo",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "Biblioteca.Biblioteca",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Biblioteca.Controllers.BibliotecaController",

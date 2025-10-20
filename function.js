@@ -219,7 +219,7 @@ function logout() {
   localStorage.removeItem("rm");
 
   alert("Logout realizado com sucesso!");
-  window.location.href = "login.html";
+  window.location.href = "index.html";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -869,44 +869,30 @@ const MAPA_MARC21 = {
 };
 
 // Busca e exibe os detalhes MARC21
+
 async function carregarMarc21Completo(idLivro) {
   const detalhesDiv = document.getElementById("detalhesMarc21");
   detalhesDiv.innerHTML = `<p>Carregando...</p>`;
 
   try {
-    // Busca o livro específico
-    const response = await fetch(`https://localhost:7139/Livro/${idLivro}`);
+    const response = await fetch(`https://localhost:7139/Biblioteca/${idLivro}`);
     if (!response.ok) throw new Error("Erro ao buscar livro");
-    const livro = await response.json();
+    const biblioteca = await response.json();
 
-    // Busca todos os autores e entidades
-    const responseAutor = await fetch(`https://localhost:7139/Livro_Autor`);
-    const responseEntidade = await fetch(`https://localhost:7139/Livro_Entidade`);
-    
-    if (!responseAutor.ok) throw new Error("Erro ao buscar Autor");
-    if (!responseEntidade.ok) throw new Error("Erro ao buscar Entidade");
+    const livro = biblioteca.livro || {};
+    const autores = biblioteca.autores || [];
+    const entidades = biblioteca.entidades || [];
+    const exemplares = biblioteca.exemplares || [];
 
-    const todosAutores = await responseAutor.json();
-    const todasEntidades = await responseEntidade.json();
-
-    // Filtra autores e entidades relacionados a este livro
-    const autoresDoLivro = todosAutores.filter(a => a.idLivro === idLivro);
-    const entidadesDoLivro = todasEntidades.filter(e => e.idLivro === idLivro);
-
-    console.log("Livro:", livro);
-    console.log("Autores do livro:", autoresDoLivro);
-    console.log("Entidades do livro:", entidadesDoLivro);
-
-    // Organiza campos do livro por número MARC21
     const camposPorNumero = {};
 
-    // Inicializa todos os campos do MAPA_MARC21
+    // Cria estrutura base do MARC21
     Object.entries(MAPA_MARC21).forEach(([campo, info]) => {
       const numero = info.numero;
       if (!camposPorNumero[numero]) {
         camposPorNumero[numero] = { secao: info.secao, subcampos: [] };
       }
-      
+
       const valor = livro[campo] || null;
       camposPorNumero[numero].subcampos.push({
         subcampo: info.subcampo,
@@ -916,65 +902,126 @@ async function carregarMarc21Completo(idLivro) {
       });
     });
 
-    // Renderiza o HTML
-    let html = "<h2>Informações do Livro</h2>";
-    
-    // Renderiza campos MARC21 do livro
+    // 🟩 INSERE AUTORES (100 - Autor Principal)
+    if (autores.length > 0) {
+      const numero = "100";
+      if (!camposPorNumero[numero])
+        camposPorNumero[numero] = { secao: "100 - Autor Principal", subcampos: [] };
+
+      autores.forEach((autor, i) => {
+        camposPorNumero[numero].subcampos.push({
+          subcampo: "a",
+          descricao: `Nome do autor ${i + 1}`,
+          campo: "Nome_Autor",
+          valor: autor.nome_Autor || "Não informado",
+        });
+        camposPorNumero[numero].subcampos.push({
+          subcampo: "b",
+          descricao: `Função / Tipo do autor ${i + 1}`,
+          campo: "Funcao",
+          valor: `${autor.funcao || ""} ${autor.tipo_Autor || ""}`.trim() || "Não informado",
+        });
+        camposPorNumero[numero].subcampos.push({
+          subcampo: "d",
+          descricao: `Datas do autor ${i + 1}`,
+          campo: "Datas",
+          valor: autor.datas || "Não informado",
+        });
+      });
+    }
+
+    // 🟦 INSERE ENTIDADES (110 - Entidade Corporativa)
+    if (entidades.length > 0) {
+      const numero = "110";
+      if (!camposPorNumero[numero])
+        camposPorNumero[numero] = { secao: "110 - Entidade Corporativa", subcampos: [] };
+
+      entidades.forEach((entidade, i) => {
+        camposPorNumero[numero].subcampos.push({
+          subcampo: "a",
+          descricao: `Nome da entidade ${i + 1}`,
+          campo: "Nome_Entidade",
+          valor: entidade.nome_Entidade || "Não informado",
+        });
+        camposPorNumero[numero].subcampos.push({
+          subcampo: "b",
+          descricao: `Subordinação / subdivisão da entidade ${i + 1}`,
+          campo: "Subordinacao",
+          valor: entidade.subordinacao || "Não informado",
+        });
+      });
+    }
+
+    // 🟥 INSERE EXEMPLARES (EX - Exemplares)
+    // 🟥 INSERE EXEMPLARES (EX - Exemplares)
+if (exemplares.length > 0) {
+  const numero = "EX";
+  // Se já existe o campo EX, limpa os placeholders
+  camposPorNumero[numero] = { secao: "EX - Exemplares", subcampos: [] };
+
+  exemplares.forEach((ex, i) => {
+    camposPorNumero[numero].subcampos.push({
+      subcampo: "",
+      descricao: `Número do exemplar ${i + 1}`,
+      campo: "Numero_Exemplares",
+      valor: ex.numero_Exemplares ?? "Não informado",
+    });
+    camposPorNumero[numero].subcampos.push({
+      subcampo: "",
+      descricao: `Número do volume ${i + 1}`,
+      campo: "Numero_Volume",
+      valor: ex.numero_Volume ?? "Não informado",
+    });
+    camposPorNumero[numero].subcampos.push({
+      subcampo: "",
+      descricao: `Quantidade total de exemplares ${i + 1}`,
+      campo: "Numero_Exemplares_Total",
+      valor: ex.numero_Exemplares_Total ?? "Não informado",
+    });
+    camposPorNumero[numero].subcampos.push({
+      subcampo: "",
+      descricao: `Data de aquisição ${i + 1}`,
+      campo: "Data_Aquisicao",
+      valor: ex.data_Aquisicao ?? "Não informado",
+    });
+    camposPorNumero[numero].subcampos.push({
+      subcampo: "",
+      descricao: `Biblioteca depositária ${i + 1}`,
+      campo: "Biblioteca_Depositaria",
+      valor: ex.biblioteca_Depositaria ?? "Não informado",
+    });
+    camposPorNumero[numero].subcampos.push({
+      subcampo: "",
+      descricao: `Tipo de aquisição ${i + 1}`,
+      campo: "Tipo_Aquisicao",
+      valor: ex.tipo_Aquisicao ?? "Não informado",
+    });
+  });
+}
+
+
+    // Renderiza HTML final
+    let html = "<h2>Informações MARC21</h2>";
+
     Object.entries(camposPorNumero)
       .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
       .forEach(([numero, data]) => {
-        const titulo = `${numero} - ${data.secao.split(" - ")[1] || data.secao}`;
-        html += `<h3>${titulo}</h3>`;
-
+        html += `<h3>${data.secao}</h3>`;
         data.subcampos.forEach((sub) => {
           const label = sub.subcampo ? `‡${sub.subcampo}` : "Indicador";
-          const descricao = sub.descricao;
-          const valorFormatado = sub.valor
-            ? Array.isArray(sub.valor)
-              ? sub.valor.join(", ")
-              : sub.valor
-            : "Não informado";
-          html += `<p><strong>${label} - ${descricao}:</strong> ${valorFormatado}</p>`;
+          const valorFormatado =
+            sub.valor && sub.valor !== "" ? sub.valor : "Não informado";
+          html += `<p><strong>${label} - ${sub.descricao}:</strong> ${valorFormatado}</p>`;
         });
       });
-
-    // Renderiza informações dos autores
-    if (autoresDoLivro.length > 0) {
-      html += "<h2>Autores</h2>";
-      autoresDoLivro.forEach((autor, index) => {
-        html += `<h3>Autor ${index + 1}</h3>`;
-        Object.entries(autor).forEach(([chave, valor]) => {
-          if (chave !== 'idLivro') {
-            const valorFormatado = valor !== null && valor !== undefined ? valor : "Não informado";
-            html += `<p><strong>${chave}:</strong> ${valorFormatado}</p>`;
-          }
-        });
-      });
-    } else {
-      html += "<h2>Autores</h2><p>Nenhum autor associado a este livro.</p>";
-    }
-
-    // Renderiza informações das entidades
-    if (entidadesDoLivro.length > 0) {
-      html += "<h2>Entidades</h2>";
-      entidadesDoLivro.forEach((entidade, index) => {
-        html += `<h3>Entidade ${index + 1}</h3>`;
-        Object.entries(entidade).forEach(([chave, valor]) => {
-          if (chave !== 'idLivro') {
-            const valorFormatado = valor !== null && valor !== undefined ? valor : "Não informado";
-            html += `<p><strong>${chave}:</strong> ${valorFormatado}</p>`;
-          }
-        });
-      });
-    } else {
-      html += "<h2>Entidades</h2><p>Nenhuma entidade associada a este livro.</p>";
-    }
 
     detalhesDiv.innerHTML = html;
   } catch (error) {
     detalhesDiv.innerHTML = `<p style="color: red;">Erro: ${error.message}</p>`;
   }
 }
+
+
 
 // async function carregarMarc21Completo(idLivro) {
 //   const detalhesDiv = document.getElementById("detalhesMarc21");
@@ -992,7 +1039,6 @@ async function carregarMarc21Completo(idLivro) {
 //     if (!response.ok) throw new Error("Erro ao buscar livro");
 //     if (!responseAutor.ok) throw new Error("Erro ao buscar Autor");
 //     if (!responseEntidade.ok) throw new Error("Erro ao buscar Entidade");
-
 
 //     const livro = await response.json();
 //     const autor = await responseAutor.json();
@@ -1110,57 +1156,56 @@ async function buscarLivros() {
     resultadosDiv.innerHTML = `<p style="color:red;">${error.message}</p>`;
     console.error(error);
   }
+}
 
-  // Função de limpar busca do acervo
-  async function limparBuscar() {
-    document.getElementById("busca").value = "";
-    document.getElementById("resultados").innerHTML = "";
-    showNotification("Busca limpa com sucesso!", "info");
+// Função de limpar busca do acervo
+async function limparBuscar() {
+  document.getElementById("busca").value = "";
+  document.getElementById("resultados").innerHTML = "";
+  showNotification("Busca limpa com sucesso!", "info");
+}
+
+/* ===== EMPRÉSTIMO ===== */
+
+// Buscar livros para autocomplete
+let livrosCache = [];
+let timeoutBusca;
+
+async function buscarLivrosAutocomplete(termo) {
+  const sugestoesDiv = document.getElementById("livroSugestoes");
+  clearTimeout(timeoutBusca);
+
+  if (!termo || termo.length < 2) {
+    sugestoesDiv.innerHTML = "";
+    return;
   }
 
-  /* ===== EMPRÉSTIMO ===== */
+  timeoutBusca = setTimeout(async () => {
+    try {
+      const response = await fetch(
+        `https://localhost:7139/Livro/search?termo=${encodeURIComponent(termo)}`
+      );
 
-  // Buscar livros para autocomplete
-  let livrosCache = [];
-  let timeoutBusca;
+      if (!response.ok) {
+        throw new Error("Erro ao buscar livros");
+      }
 
-  async function buscarLivrosAutocomplete(termo) {
-    const sugestoesDiv = document.getElementById("livroSugestoes");
-    clearTimeout(timeoutBusca);
+      const livros = await response.json();
+      livrosCache = livros;
 
-    if (!termo || termo.length < 2) {
       sugestoesDiv.innerHTML = "";
-      return;
-    }
 
-    timeoutBusca = setTimeout(async () => {
-      try {
-        const response = await fetch(
-          `https://localhost:7139/Livro/search?termo=${encodeURIComponent(
-            termo
-          )}`
-        );
+      if (livros.length === 0) {
+        sugestoesDiv.innerHTML =
+          '<div class="autocomplete-item no-results">Nenhum livro encontrado</div>';
+        return;
+      }
 
-        if (!response.ok) {
-          throw new Error("Erro ao buscar livros");
-        }
-
-        const livros = await response.json();
-        livrosCache = livros;
-
-        sugestoesDiv.innerHTML = "";
-
-        if (livros.length === 0) {
-          sugestoesDiv.innerHTML =
-            '<div class="autocomplete-item no-results">Nenhum livro encontrado</div>';
-          return;
-        }
-
-        // Criar lista de sugestões
-        livros.forEach((livro) => {
-          const item = document.createElement("div");
-          item.className = "autocomplete-item";
-          item.innerHTML = `
+      // Criar lista de sugestões
+      livros.forEach((livro) => {
+        const item = document.createElement("div");
+        item.className = "autocomplete-item";
+        item.innerHTML = `
                     <strong>${livro.nome_Livro}</strong>
                     <small>
                         ${livro.autores ? `Autor: ${livro.autores} | ` : ""}
@@ -1169,154 +1214,154 @@ async function buscarLivros() {
                     </small>
                 `;
 
-          item.onclick = () => selecionarLivro(livro);
+        item.onclick = () => selecionarLivro(livro);
 
-          sugestoesDiv.appendChild(item);
-        });
-      } catch (error) {
-        console.error("Erro ao buscar livros:", error);
-        sugestoesDiv.innerHTML =
-          '<div class="autocomplete-item no-results">Erro ao buscar livros</div>';
-      }
-    }, 300);
-  }
+        sugestoesDiv.appendChild(item);
+      });
+    } catch (error) {
+      console.error("Erro ao buscar livros:", error);
+      sugestoesDiv.innerHTML =
+        '<div class="autocomplete-item no-results">Erro ao buscar livros</div>';
+    }
+  }, 300);
+}
 
-  function selecionarLivro(livro) {
-    // Preencher o campo com o nome do livro
-    document.getElementById("livro").value = livro.nome_Livro;
+function selecionarLivro(livro) {
+  // Preencher o campo com o nome do livro
+  document.getElementById("livro").value = livro.nome_Livro;
 
-    // Guardar o ID do livro em um campo hidden
-    document.getElementById("livroIdSelecionado").value = livro.id_Livro;
+  // Guardar o ID do livro em um campo hidden
+  document.getElementById("livroIdSelecionado").value = livro.id_Livro;
 
+  document.getElementById("livroSugestoes").innerHTML = "";
+}
+
+// Fechar sugestões ao clicar fora
+document.addEventListener("click", function (e) {
+  const container = document.querySelector(".autocomplete-container");
+  if (container && !container.contains(e.target)) {
     document.getElementById("livroSugestoes").innerHTML = "";
   }
+});
 
-  // Fechar sugestões ao clicar fora
-  document.addEventListener("click", function (e) {
-    const container = document.querySelector(".autocomplete-container");
-    if (container && !container.contains(e.target)) {
-      document.getElementById("livroSugestoes").innerHTML = "";
-    }
-  });
+function addEmprestimo() {
+  const livroId = document.getElementById("livroIdSelecionado").value;
 
-  function addEmprestimo() {
-    const livroId = document.getElementById("livroIdSelecionado").value;
-
-    if (!livroId) {
-      alert("Por favor, selecione um livro da lista de sugestões!");
-      return;
-    }
-
-    const emprestimo = {
-      RM_Aluno: document.getElementById("RM").value,
-      Id_Livro: parseInt(livroId),
-      Data_Emprestimo: document.getElementById("dataEmprestimo").value,
-      Data_Devolucao_Prevista: document.getElementById("dataDevolucao").value,
-      Data_Devolucao_Real: null,
-    };
-
-    fetch("https://localhost:7139/Emprestimo", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(emprestimo),
-    })
-      .then((response) => {
-        if (response.ok) {
-          alert("Empréstimo cadastrado com sucesso!");
-          document.getElementById("formEmprestimo").reset();
-          document.getElementById("livroIdSelecionado").value = "";
-          closeModal("addEmprestimo");
-          getEmprestimos(); // Se você tiver uma função para listar empréstimos
-        } else {
-          response.text().then((text) => {
-            alert("Erro ao cadastrar empréstimo: " + text);
-          });
-        }
-      })
-      .catch((error) => {
-        console.error("Erro:", error);
-        alert("Erro ao conectar com o servidor!");
-      });
+  if (!livroId) {
+    alert("Por favor, selecione um livro da lista de sugestões!");
+    return;
   }
 
-  // Função para buscar e exibir
-  function getEmprestimos() {
-    fetch("https://localhost:7139/Emprestimo")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Erro ao buscar empréstimos");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        const emprestimoTable = document.getElementById("emprestimoTable");
-        const tbody = emprestimoTable.querySelector("tbody");
-        tbody.innerHTML = "";
+  const emprestimo = {
+    RM_Aluno: document.getElementById("RM").value,
+    Id_Livro: parseInt(livroId),
+    Data_Emprestimo: document.getElementById("dataEmprestimo").value,
+    Data_Devolucao_Prevista: document.getElementById("dataDevolucao").value,
+    Data_Devolucao_Real: null,
+  };
 
-        if (data.length === 0) {
-          tbody.innerHTML =
-            '<tr><td colspan="8" style="text-align:center;">Nenhum empréstimo encontrado</td></tr>';
-          return;
-        }
+  fetch("https://localhost:7139/Emprestimo", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(emprestimo),
+  })
+    .then((response) => {
+      if (response.ok) {
+        alert("Empréstimo cadastrado com sucesso!");
+        document.getElementById("formEmprestimo").reset();
+        document.getElementById("livroIdSelecionado").value = "";
+        closeModal("addEmprestimo");
+        getEmprestimos(); // Se você tiver uma função para listar empréstimos
+      } else {
+        response.text().then((text) => {
+          alert("Erro ao cadastrar empréstimo: " + text);
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Erro:", error);
+      alert("Erro ao conectar com o servidor!");
+    });
+}
 
-        data.forEach((emprestimo) => {
-          const row = document.createElement("tr");
+// Função para buscar e exibir
+function getEmprestimos() {
+  fetch("https://localhost:7139/Emprestimo")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Erro ao buscar empréstimos");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const emprestimoTable = document.getElementById("emprestimoTable");
+      const tbody = emprestimoTable.querySelector("tbody");
+      tbody.innerHTML = "";
 
-          const idCell = document.createElement("td");
-          idCell.textContent = emprestimo.id_Emprestimo;
-          row.appendChild(idCell);
+      if (data.length === 0) {
+        tbody.innerHTML =
+          '<tr><td colspan="8" style="text-align:center;">Nenhum empréstimo encontrado</td></tr>';
+        return;
+      }
 
-          const alunoCell = document.createElement("td");
-          alunoCell.textContent = `${emprestimo.nomeAluno} (${emprestimo.rm_Aluno})`;
-          row.appendChild(alunoCell);
+      data.forEach((emprestimo) => {
+        const row = document.createElement("tr");
 
-          const livroCell = document.createElement("td");
-          livroCell.textContent = emprestimo.nomeLivro;
-          row.appendChild(livroCell);
+        const idCell = document.createElement("td");
+        idCell.textContent = emprestimo.id_Emprestimo;
+        row.appendChild(idCell);
 
-          const dataEmpCell = document.createElement("td");
-          dataEmpCell.textContent = formatarData(emprestimo.data_Emprestimo);
-          row.appendChild(dataEmpCell);
+        const alunoCell = document.createElement("td");
+        alunoCell.textContent = `${emprestimo.nomeAluno} (${emprestimo.rm_Aluno})`;
+        row.appendChild(alunoCell);
 
-          const dataPrevCell = document.createElement("td");
-          dataPrevCell.textContent = formatarData(
-            emprestimo.data_Devolucao_Prevista
-          );
-          row.appendChild(dataPrevCell);
+        const livroCell = document.createElement("td");
+        livroCell.textContent = emprestimo.nomeLivro;
+        row.appendChild(livroCell);
 
-          const dataRealCell = document.createElement("td");
-          if (emprestimo.data_Devolucao_Real) {
-            dataRealCell.textContent = formatarData(
-              emprestimo.data_Devolucao_Real
-            );
+        const dataEmpCell = document.createElement("td");
+        dataEmpCell.textContent = formatarData(emprestimo.data_Emprestimo);
+        row.appendChild(dataEmpCell);
 
-            const dataReal = new Date(emprestimo.data_Devolucao_Real);
-            const dataPrevista = new Date(emprestimo.data_Devolucao_Prevista);
+        const dataPrevCell = document.createElement("td");
+        dataPrevCell.textContent = formatarData(
+          emprestimo.data_Devolucao_Prevista
+        );
+        row.appendChild(dataPrevCell);
 
-            if (dataReal > dataPrevista) {
-              dataRealCell.style.color = "#a20c0cff";
-              dataRealCell.style.fontWeight = "600";
-            } else {
-              dataRealCell.style.color = "#0d7c11ff";
-              dataRealCell.style.fontWeight = "600";
-            }
-          } else {
-            dataRealCell.textContent = "-";
-            dataRealCell.style.color = "#999";
-          }
-
-          row.appendChild(dataRealCell);
-
-          const statusCell = document.createElement("td");
-          const status = calcularStatus(
-            emprestimo.data_Devolucao_Prevista,
+        const dataRealCell = document.createElement("td");
+        if (emprestimo.data_Devolucao_Real) {
+          dataRealCell.textContent = formatarData(
             emprestimo.data_Devolucao_Real
           );
-          statusCell.innerHTML = `<span class="status-badge ${status.classe}">${status.texto}</span>`;
-          row.appendChild(statusCell);
 
-          const actionCell = document.createElement("td");
-          actionCell.innerHTML = `
+          const dataReal = new Date(emprestimo.data_Devolucao_Real);
+          const dataPrevista = new Date(emprestimo.data_Devolucao_Prevista);
+
+          if (dataReal > dataPrevista) {
+            dataRealCell.style.color = "#a20c0cff";
+            dataRealCell.style.fontWeight = "600";
+          } else {
+            dataRealCell.style.color = "#0d7c11ff";
+            dataRealCell.style.fontWeight = "600";
+          }
+        } else {
+          dataRealCell.textContent = "-";
+          dataRealCell.style.color = "#999";
+        }
+
+        row.appendChild(dataRealCell);
+
+        const statusCell = document.createElement("td");
+        const status = calcularStatus(
+          emprestimo.data_Devolucao_Prevista,
+          emprestimo.data_Devolucao_Real
+        );
+        statusCell.innerHTML = `<span class="status-badge ${status.classe}">${status.texto}</span>`;
+        row.appendChild(statusCell);
+
+        const actionCell = document.createElement("td");
+        actionCell.innerHTML = `
                     <div class="action">
                         ${
                           emprestimo.data_Devolucao_Real === null
@@ -1328,129 +1373,128 @@ async function buscarLivros() {
                         })">Excluir</button>
                     </div>
                 `;
-          row.appendChild(actionCell);
+        row.appendChild(actionCell);
 
-          tbody.appendChild(row);
-        });
-      })
-      .catch((error) => {
-        console.error("Erro ao buscar empréstimos:", error);
-        showNotification("Erro ao carregar empréstimos", "error");
+        tbody.appendChild(row);
       });
-  }
-
-  function formatarData(dataString) {
-    if (!dataString) return "-";
-    const data = new Date(dataString);
-    return data.toLocaleDateString("pt-BR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-  }
-
-  function calcularStatus(dataDevolucaoPrevista, dataDevolucaoReal) {
-    const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0);
-    const dataPrevista = new Date(dataDevolucaoPrevista);
-    dataPrevista.setHours(0, 0, 0, 0);
-
-    if (dataDevolucaoReal) {
-      return { texto: "Devolvido", classe: "status-devolvido" };
-    }
-
-    if (hoje > dataPrevista) {
-      return { texto: "Atrasado", classe: "status-atrasado" };
-    }
-
-    return { texto: "Ativo", classe: "status-ativo" };
-  }
-
-  function registrarDevolucao(idEmprestimo) {
-    if (!confirm("Confirmar devolução do livro?")) return;
-
-    const dataAtual = new Date().toISOString().split("T")[0];
-
-    fetch(`https://localhost:7139/Emprestimo/${idEmprestimo}/devolver`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ dataDevolucao: dataAtual }),
     })
-      .then((response) => {
-        if (response.ok) {
-          showNotification("Devolução registrada com sucesso!", "success");
-          getEmprestimos(); // Recarrega a tabela
-        } else {
-          response.text().then((text) => {
-            showNotification(text || "Erro ao registrar devolução", "error");
-          });
-        }
-      })
-      .catch((error) => {
-        console.error("Erro:", error);
-        showNotification("Erro ao conectar com o servidor", "error");
-      });
-  }
-
-  function abrirExclusaoEmprestimo(id) {
-    document.getElementById("deleIdEmprestimo").value = id;
-    openModal("deleteModalEmprestimo");
-  }
-
-  function deleteEmprestimo() {
-    const id = parseInt(document.getElementById("deleIdEmprestimo").value);
-
-    fetch(`https://localhost:7139/Emprestimo/${id}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (response.ok) {
-          showNotification("Empréstimo excluído com sucesso!", "success");
-          getEmprestimos();
-          closeModal("deleteModalEmprestimo");
-        } else {
-          showNotification("Erro ao excluir empréstimo", "error");
-        }
-      })
-      .catch((error) => {
-        console.error("Erro:", error);
-        showNotification("Erro ao conectar com o servidor", "error");
-      });
-  }
-
-  if (window.location.pathname.includes("emprestimo")) {
-    getEmprestimos();
-  }
-
-  /* ===== ANCORA ===== */
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const btnTopo = document.getElementById("btnTopo");
-
-    function verificarRolagem() {
-      const scrolled = window.scrollY;
-      const totalScroll =
-        document.documentElement.scrollHeight - window.innerHeight;
-
-      if (totalScroll > 0 && scrolled > 0) {
-        btnTopo.classList.add("mostrar");
-      } else {
-        btnTopo.classList.remove("mostrar");
-      }
-    }
-
-    btnTopo.addEventListener("click", (e) => {
-      e.preventDefault();
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+    .catch((error) => {
+      console.error("Erro ao buscar empréstimos:", error);
+      showNotification("Erro ao carregar empréstimos", "error");
     });
+}
 
-    window.addEventListener("scroll", verificarRolagem);
-    window.addEventListener("resize", verificarRolagem);
-    verificarRolagem();
+function formatarData(dataString) {
+  if (!dataString) return "-";
+  const data = new Date(dataString);
+  return data.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
   });
 }
+
+function calcularStatus(dataDevolucaoPrevista, dataDevolucaoReal) {
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0);
+  const dataPrevista = new Date(dataDevolucaoPrevista);
+  dataPrevista.setHours(0, 0, 0, 0);
+
+  if (dataDevolucaoReal) {
+    return { texto: "Devolvido", classe: "status-devolvido" };
+  }
+
+  if (hoje > dataPrevista) {
+    return { texto: "Atrasado", classe: "status-atrasado" };
+  }
+
+  return { texto: "Ativo", classe: "status-ativo" };
+}
+
+function registrarDevolucao(idEmprestimo) {
+  if (!confirm("Confirmar devolução do livro?")) return;
+
+  const dataAtual = new Date().toISOString().split("T")[0];
+
+  fetch(`https://localhost:7139/Emprestimo/${idEmprestimo}/devolver`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ dataDevolucao: dataAtual }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        showNotification("Devolução registrada com sucesso!", "success");
+        getEmprestimos(); // Recarrega a tabela
+      } else {
+        response.text().then((text) => {
+          showNotification(text || "Erro ao registrar devolução", "error");
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Erro:", error);
+      showNotification("Erro ao conectar com o servidor", "error");
+    });
+}
+
+function abrirExclusaoEmprestimo(id) {
+  document.getElementById("deleIdEmprestimo").value = id;
+  openModal("deleteModalEmprestimo");
+}
+
+function deleteEmprestimo() {
+  const id = parseInt(document.getElementById("deleIdEmprestimo").value);
+
+  fetch(`https://localhost:7139/Emprestimo?id=${id}`, {
+    method: "DELETE",
+  })
+    .then((response) => {
+      if (response.ok) {
+        showNotification("Empréstimo excluído com sucesso!", "success");
+        getEmprestimos();
+        closeModal("deleteModalEmprestimo");
+      } else {
+        showNotification("Erro ao excluir empréstimo", "error");
+      }
+    })
+    .catch((error) => {
+      console.error("Erro:", error);
+      showNotification("Erro ao conectar com o servidor", "error");
+    });
+}
+
+if (window.location.pathname.includes("emprestimo")) {
+  getEmprestimos();
+}
+
+/* ===== ANCORA ===== */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const btnTopo = document.getElementById("btnTopo");
+
+  function verificarRolagem() {
+    const scrolled = window.scrollY;
+    const totalScroll =
+      document.documentElement.scrollHeight - window.innerHeight;
+
+    if (totalScroll > 0 && scrolled > 0) {
+      btnTopo.classList.add("mostrar");
+    } else {
+      btnTopo.classList.remove("mostrar");
+    }
+  }
+
+  btnTopo.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+
+  window.addEventListener("scroll", verificarRolagem);
+  window.addEventListener("resize", verificarRolagem);
+  verificarRolagem();
+});

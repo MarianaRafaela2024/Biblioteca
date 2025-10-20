@@ -297,27 +297,6 @@
         }
       }
     },
-    "/Biblioteca/search": {
-      "get": {
-        "tags": [
-          "Biblioteca"
-        ],
-        "parameters": [
-          {
-            "name": "termo",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/Biblioteca/search-complete": {
       "get": {
         "tags": [
@@ -358,6 +337,46 @@
                   "items": {
                     "$ref": "#/components/schemas/Biblioteca"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Biblioteca/{id}": {
+      "get": {
+        "tags": [
+          "Biblioteca"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Biblioteca"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Biblioteca"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Biblioteca"
                 }
               }
             }
