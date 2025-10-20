@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Consulta ao Acervo - Biblioteca</title>
+  <link rel="stylesheet" href="styleAcervoSimples.css">
   <link rel="stylesheet" href="styleAcervo.css">
   <link rel="icon" type="image/jpg" href="midia/acervo.png">
 </head>
@@ -37,8 +38,8 @@
     <div class="busca-container">
       <form class="busca-topo">
         <input type="text" id="busca" placeholder="Digite título, autor, assunto ou ano">
-        <button type="button" onclick="buscarLivros(); return false;">Pesquisar</button>
-        <button type="button" class="btn-limpar" onclick="limparBuscar()">Limpar</button>
+        <button type="button" onclick="buscarLivrosSimples(); return false;">Pesquisar</button>
+        <button type="button" class="btn-limpar" onclick="limparBuscarSimples()">Limpar</button>
       </form>
     </div>
     <div class="acervo-layout">

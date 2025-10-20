@@ -338,7 +338,7 @@ function addLivro() {
   const Status_Item = document
     .getElementById("controle_status")
     .value.toString();
-  const Status_Emprestimos = document
+  const status_Emprestimo = document
     .getElementById("status_emprestimo")
     .value.toString();
 
@@ -398,7 +398,7 @@ function addLivro() {
     Local_Termo: Local_Termo,
     Info_Local: Info_Local,
     Status_Item: Status_Item,
-    Status_Emprestimos: Status_Emprestimos,
+    status_Emprestimo: status_Emprestimo,
   };
 
   const autor = {
@@ -1109,7 +1109,7 @@ async function buscarLivros() {
 
   try {
     const response = await fetch(
-      `https://localhost:7139/Livro/search?termo=${encodeURIComponent(termo)}`
+      `https://localhost:7139/livro/search?termo=${encodeURIComponent(termo)}`
     );
     if (!response.ok) throw new Error("Erro ao buscar livros");
 
@@ -1139,7 +1139,7 @@ async function buscarLivros() {
                   livro.assunto_Termo || "Não informado"
                 }<br>
                 <strong>Status:</strong> ${
-                  livro.status_Emprestimos || "Não informado"
+                  livro.status_Emprestimo || "Não informado"
                 }
                 <button class="btn-verMarc">Ver MARC21</button>
             `;
@@ -1163,6 +1163,65 @@ async function limparBuscar() {
   document.getElementById("busca").value = "";
   document.getElementById("resultados").innerHTML = "";
   showNotification("Busca limpa com sucesso!", "info");
+}
+
+async function buscarLivrosSimples() {
+  const termo = document.getElementById("busca").value.trim();
+  const resultadosDiv = document.getElementById("resultados");
+
+  resultadosDiv.innerHTML = "<p>Buscando...</p>";
+
+  try {
+    const response = await fetch(
+      `https://localhost:7139/Livro/search?termo=${encodeURIComponent(termo)}`
+    );
+    if (!response.ok) throw new Error("Erro ao buscar livros");
+
+    const livros = await response.json();
+
+    if (livros.length === 0) {
+      resultadosDiv.innerHTML = "<p>Nenhum livro encontrado.</p>";
+      return;
+    }
+
+    resultadosDiv.innerHTML = ""; // Limpa o conteúdo
+
+    livros.forEach((livro) => {
+      const card = document.createElement("div");
+      card.className = "livro-card";
+      card.innerHTML = `
+                <strong>${livro.nome_Livro}</strong> ${
+        livro.subtitulo ? livro.subtitulo + "<br>" : ""
+      }
+                (${livro.ano_Publicacao || "Ano não informado"})<br>
+                <strong>Autor/Responsável:</strong> ${
+                  livro.indicacao_Responsabilidade || "Não informado"
+                }<br>
+                <strong>Autores:</strong> ${
+                  livro.autores || "Não informado"
+                }<br>
+                <strong>ISBN:</strong> ${livro.isbn || "Não informado"}<br>
+                <strong>Assunto:</strong> ${
+                  livro.assunto_Termo || "Não informado"
+                }<br>
+                <strong>Status:</strong> ${
+                  livro.status_Emprestimo || "Não informado"
+                }
+                <button class="btn-verMarc">Ver MARC21</button>
+            `;
+
+      resultadosDiv.appendChild(card);
+    });
+  } catch (error) {
+    resultadosDiv.innerHTML = `<p style="color:red;">Erro ao buscar livros: ${error.message}</p>`;
+    console.error(error);
+  }
+}
+
+// Função de limpar busca simplificada
+function limparBuscarSimples() {
+  document.getElementById("busca").value = "";
+  document.getElementById("resultados").innerHTML = "Os livros irão aparecer aqui!";
 }
 
 /* ===== EMPRÉSTIMO ===== */
@@ -1210,7 +1269,7 @@ async function buscarLivrosAutocomplete(termo) {
                     <small>
                         ${livro.autores ? `Autor: ${livro.autores} | ` : ""}
                         ISBN: ${livro.isbn || "N/A"} | 
-                        Status: ${livro.status_Emprestimos || "Disponível"}
+                        Status: ${livro.status_Emprestimo || "Disponível"}
                     </small>
                 `;
 

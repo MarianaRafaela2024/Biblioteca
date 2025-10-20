@@ -1,0 +1,69 @@
+/* ====== CSS PARA ACERVO.HTML - IGUAL AO ACERVOBIBLI SEM BOTÃO MARC ====== */
+
+/* Sobrescreve o layout apenas para acervo.html */
+.acervo-layout {
+  display: block; /* Remove o flex de 2 colunas */
+  margin-top: 25px;
+}
+
+/* Lista de livros ocupa toda a largura */
+.lista-livros {
+  width: 100%;
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+
+/* Grid de cards igual ao acervoBibli */
+#resultados {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 0;
+}
+
+/* Mensagem inicial */
+#resultados p {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--white);
+  background: var(--primary-red);
+  padding: 30px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+/* Cards dos livros - IGUAL ao acervoBibli */
+.livro-card {
+  background-color: var(--primary-red);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: var(--secondary-gray);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.livro-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.livro-card strong {
+  color: var(--white);
+  font-weight: 600;
+}
+
+/* Esconde o botão Ver MARC21 se existir */
+.btn-verMarc {
+  display: none !important;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  #resultados {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}

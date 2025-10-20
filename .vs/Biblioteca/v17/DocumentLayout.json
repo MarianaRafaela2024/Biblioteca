@@ -109,22 +109,20 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "dbo.Emprestimo [Dados]",
+              "Title": "dbo.Emprestimo.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Biblioteca/True/SqlTable/dbo.Emprestimo.sql",
-              "ToolTip": "dbo.Emprestimo [Dados]",
+              "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Biblioteca/True/SqlTable/dbo.Emprestimo.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-10-20T14:51:59.445Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-20T14:51:59.445Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "dbo.Login [Dados]",
+              "Title": "dbo.Login.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Biblioteca/True/SqlTable/dbo.Login.sql",
-              "ToolTip": "dbo.Login [Dados]",
+              "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Biblioteca/True/SqlTable/dbo.Login.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-10-20T14:37:16.972Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-20T14:37:16.972Z"
             },
             {
               "$type": "Document",
@@ -170,8 +168,7 @@
               "RelativeToolTip": "Biblioteca\\Controllers\\BibliotecaController.cs",
               "ViewState": "AgIAAAgCAAAAAAAAAAAYwCcCAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-12T18:30:28.866Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-12T18:30:28.866Z"
             },
             {
               "$type": "Document",
@@ -217,8 +214,7 @@
               "ViewState": "AgIAABIBAAAAAAAAAAAQwPsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "OverriddenGroupName": "Biblioteca\\Controllers",
-              "WhenOpened": "2025-09-29T20:48:18.863Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T20:48:18.863Z"
             },
             {
               "$type": "Document",
@@ -230,8 +226,7 @@
               "RelativeToolTip": "Biblioteca\\BibliotecaRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-12T18:35:33.169Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-12T18:35:33.169Z"
             },
             {
               "$type": "Document",
@@ -372,8 +367,7 @@
               "RelativeToolTip": "Biblioteca\\Aluno.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-20T20:53:38.057Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-20T20:53:38.057Z"
             },
             {
               "$type": "Document",
