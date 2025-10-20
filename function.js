@@ -874,23 +874,39 @@ async function carregarMarc21Completo(idLivro) {
   detalhesDiv.innerHTML = `<p>Carregando...</p>`;
 
   try {
+    // Busca o livro específico
     const response = await fetch(`https://localhost:7139/Livro/${idLivro}`);
     if (!response.ok) throw new Error("Erro ao buscar livro");
-
     const livro = await response.json();
 
-    console.log(livro);
+    // Busca todos os autores e entidades
+    const responseAutor = await fetch(`https://localhost:7139/Livro_Autor`);
+    const responseEntidade = await fetch(`https://localhost:7139/Livro_Entidade`);
+    
+    if (!responseAutor.ok) throw new Error("Erro ao buscar Autor");
+    if (!responseEntidade.ok) throw new Error("Erro ao buscar Entidade");
 
-    // Organiza por número do campo MARC21, incluindo todos os campos do MAPA_MARC21
+    const todosAutores = await responseAutor.json();
+    const todasEntidades = await responseEntidade.json();
+
+    // Filtra autores e entidades relacionados a este livro
+    const autoresDoLivro = todosAutores.filter(a => a.idLivro === idLivro);
+    const entidadesDoLivro = todasEntidades.filter(e => e.idLivro === idLivro);
+
+    console.log("Livro:", livro);
+    console.log("Autores do livro:", autoresDoLivro);
+    console.log("Entidades do livro:", entidadesDoLivro);
+
+    // Organiza campos do livro por número MARC21
     const camposPorNumero = {};
 
-    // Primeiro, inicializa todos os campos do MAPA_MARC21
+    // Inicializa todos os campos do MAPA_MARC21
     Object.entries(MAPA_MARC21).forEach(([campo, info]) => {
       const numero = info.numero;
       if (!camposPorNumero[numero]) {
         camposPorNumero[numero] = { secao: info.secao, subcampos: [] };
       }
-      // Adiciona o subcampo, mesmo se não tiver valor
+      
       const valor = livro[campo] || null;
       camposPorNumero[numero].subcampos.push({
         subcampo: info.subcampo,
@@ -901,18 +917,15 @@ async function carregarMarc21Completo(idLivro) {
     });
 
     // Renderiza o HTML
-    let html = "";
-    // Ordena os campos por número crescente (numericamente)
+    let html = "<h2>Informações do Livro</h2>";
+    
+    // Renderiza campos MARC21 do livro
     Object.entries(camposPorNumero)
       .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
       .forEach(([numero, data]) => {
-        // Título do campo (ex: "020 - ISBN") com cor azul
-        const titulo = `${numero} - ${
-          data.secao.split(" - ")[1] || data.secao
-        }`;
+        const titulo = `${numero} - ${data.secao.split(" - ")[1] || data.secao}`;
         html += `<h3>${titulo}</h3>`;
 
-        // Lista os subcampos
         data.subcampos.forEach((sub) => {
           const label = sub.subcampo ? `‡${sub.subcampo}` : "Indicador";
           const descricao = sub.descricao;
@@ -925,11 +938,119 @@ async function carregarMarc21Completo(idLivro) {
         });
       });
 
+    // Renderiza informações dos autores
+    if (autoresDoLivro.length > 0) {
+      html += "<h2>Autores</h2>";
+      autoresDoLivro.forEach((autor, index) => {
+        html += `<h3>Autor ${index + 1}</h3>`;
+        Object.entries(autor).forEach(([chave, valor]) => {
+          if (chave !== 'idLivro') {
+            const valorFormatado = valor !== null && valor !== undefined ? valor : "Não informado";
+            html += `<p><strong>${chave}:</strong> ${valorFormatado}</p>`;
+          }
+        });
+      });
+    } else {
+      html += "<h2>Autores</h2><p>Nenhum autor associado a este livro.</p>";
+    }
+
+    // Renderiza informações das entidades
+    if (entidadesDoLivro.length > 0) {
+      html += "<h2>Entidades</h2>";
+      entidadesDoLivro.forEach((entidade, index) => {
+        html += `<h3>Entidade ${index + 1}</h3>`;
+        Object.entries(entidade).forEach(([chave, valor]) => {
+          if (chave !== 'idLivro') {
+            const valorFormatado = valor !== null && valor !== undefined ? valor : "Não informado";
+            html += `<p><strong>${chave}:</strong> ${valorFormatado}</p>`;
+          }
+        });
+      });
+    } else {
+      html += "<h2>Entidades</h2><p>Nenhuma entidade associada a este livro.</p>";
+    }
+
     detalhesDiv.innerHTML = html;
   } catch (error) {
-    detalhesDiv.innerHTML = `<p>Erro: ${error.message}</p>`;
+    detalhesDiv.innerHTML = `<p style="color: red;">Erro: ${error.message}</p>`;
   }
 }
+
+// async function carregarMarc21Completo(idLivro) {
+//   const detalhesDiv = document.getElementById("detalhesMarc21");
+//   detalhesDiv.innerHTML = `<p>Carregando...</p>`;
+
+//   try {
+//     const response = await fetch(`https://localhost:7139/Livro/${idLivro}`);
+//     const responseAutor = await fetch(
+//       `https://localhost:7139/Livro_Autor`
+//     );
+//     const responseEntidade = await fetch(
+//       `https://localhost:7139/Livro_Entidade`
+//     )
+
+//     if (!response.ok) throw new Error("Erro ao buscar livro");
+//     if (!responseAutor.ok) throw new Error("Erro ao buscar Autor");
+//     if (!responseEntidade.ok) throw new Error("Erro ao buscar Entidade");
+
+
+//     const livro = await response.json();
+//     const autor = await responseAutor.json();
+//     const entidade = await responseEntidade.json();
+
+//     console.log(autor);
+//     console.log(entidade);
+//     console.log(livro);
+
+//     // Organiza por número do campo MARC21, incluindo todos os campos do MAPA_MARC21
+//     const camposPorNumero = {};
+
+//     // Primeiro, inicializa todos os campos do MAPA_MARC21
+//     Object.entries(MAPA_MARC21).forEach(([campo, info]) => {
+//       const numero = info.numero;
+//       if (!camposPorNumero[numero]) {
+//         camposPorNumero[numero] = { secao: info.secao, subcampos: [] };
+//       }
+//       // Adiciona o subcampo, mesmo se não tiver valor
+//       const valor = livro[campo] || null;
+//       camposPorNumero[numero].subcampos.push({
+//         subcampo: info.subcampo,
+//         descricao: info.descricao,
+//         campo,
+//         valor,
+//       });
+//     });
+
+//     // Renderiza o HTML
+//     let html = "";
+//     // Ordena os campos por número crescente (numericamente)
+//     Object.entries(camposPorNumero)
+//       .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
+//       .forEach(([numero, data]) => {
+//         // Título do campo (ex: "020 - ISBN") com cor azul
+//         const titulo = `${numero} - ${
+//           data.secao.split(" - ")[1] || data.secao
+//         }`;
+//         html += `<h3>${titulo}</h3>`;
+
+//         // Lista os subcampos
+//         data.subcampos.forEach((sub) => {
+//           const label = sub.subcampo ? `‡${sub.subcampo}` : "Indicador";
+//           const descricao = sub.descricao;
+//           const valorFormatado = sub.valor
+//             ? Array.isArray(sub.valor)
+//               ? sub.valor.join(", ")
+//               : sub.valor
+//             : "Não informado";
+//           html += `<p><strong>${label} - ${descricao}:</strong> ${valorFormatado}</p>`;
+//         });
+//       });
+
+//     detalhesDiv.innerHTML = html;
+//   } catch (error) {
+//     detalhesDiv.innerHTML = `<p>Erro: ${error.message}</p>`;
+//   }
+//}
 
 async function buscarLivros() {
   const termo = document.getElementById("busca").value.trim();

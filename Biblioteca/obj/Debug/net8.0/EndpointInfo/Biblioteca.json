@@ -318,6 +318,53 @@
         }
       }
     },
+    "/Biblioteca/search-complete": {
+      "get": {
+        "tags": [
+          "Biblioteca"
+        ],
+        "parameters": [
+          {
+            "name": "termo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Biblioteca"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Biblioteca"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Biblioteca"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/Emprestimo": {
       "post": {
         "tags": [
@@ -918,6 +965,13 @@
               "$ref": "#/components/schemas/Entidade_Corporativa"
             },
             "nullable": true
+          },
+          "exemplares": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Exemplares_Automaticos"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1017,7 +1071,8 @@
           },
           "data_Aquisicao": {
             "type": "string",
-            "format": "date"
+            "format": "date",
+            "nullable": true
           },
           "biblioteca_Depositaria": {
             "type": "string",

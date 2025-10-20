@@ -2,16 +2,14 @@ cadUser html
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro de Usuários - Biblioteca</title>
-  <link rel="stylesheet" href="styleCadUser.css">
-  <link rel="icon" type="image/jpg" href="midia/cadastro.png" >
-</head>
-<body>
-    
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Usuários - Biblioteca</title>
+    <link rel="stylesheet" href="styleCadUser.css" />
+    <link rel="icon" type="image/jpg" href="midia/cadastro.png" />
+  </head>
+  <body>
     <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
     <nav class="sidebar">
@@ -25,186 +23,234 @@ cadUser html
           <li><a href="indexBibli.html">Início</a></li>
           <li><a href="CadLivro.html">Catalogação</a></li>
           <li><a href="acervoBibli.html">Consulta ao Acervo</a></li>
-          <li><a href="CadUser.html" class="active">Cadastro de Usuários</a></li>
+          <li>
+            <a href="CadUser.html" class="active">Cadastro de Usuários</a>
+          </li>
           <li><a href="emprestimos.html">Empréstimos</a></li>
 
-        <!--<li><a href="admin.html">Administração</a></li>-->
-      </ul>
+          <!--<li><a href="admin.html">Administração</a></li>-->
+        </ul>
       </div>
       <div class="sidebar-footer">
-      <a href="#" id="logoutButton" onclick="logout(); return false;" class="login-link" style="display: none;">
-        Sair
-      </a>
+        <a
+          href="#"
+          id="logoutButton"
+          onclick="logout(); return false;"
+          class="login-link"
+          style="display: none"
+        >
+          Sair
+        </a>
       </div>
     </nav>
     <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
     <!-- Main Content -->
     <div class="main-content">
-        <div class="page-header">
-            <h1>Cadastro de Usuários</h1>
-            <p>Gerencie alunos e usuários da biblioteca</p>
+      <div class="page-header">
+        <h1>Cadastro de Usuários</h1>
+        <p>Gerencie alunos e usuários da biblioteca</p>
+      </div>
+
+      <div class="table-container">
+        <table id="alunoTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Sobrenome</th>
+              <th>Telefone</th>
+              <th>RM</th>
+              <th>Curso</th>
+              <th>Atividade</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Dados serão inseridos via JavaScript -->
+          </tbody>
+        </table>
+      </div>
+      <div class="actions">
+        <button onclick="openModal('addModal')">Adicionar Usuário</button>
+        <button onclick="openModal('editModal')">Editar Usuário</button>
+        <button onclick="openModal('deleteModal')">Excluir Usuário</button>
+      </div>
+
+      <!-- ======= MODAIS ======= -->
+      <div id="addModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal('addModal')">&times;</span>
+          <form id="addAlunoForm">
+            <h3>Adicionar Usuário</h3>
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" placeholder="Digite o nome" required />
+
+            <label for="sobrenome">Sobrenome</label>
+            <input
+              type="text"
+              id="sobrenome"
+              placeholder="Digite o sobrenome"
+              required
+            />
+
+            <label for="matricula">Matrícula</label>
+            <input
+              type="number"
+              id="RM"
+              placeholder="Digite a matrícula"
+              required
+            />
+
+            <label for="telefone">Telefone</label>
+            <input
+              type="text"
+              id="telefone"
+              placeholder="Digite o telefone"
+              required
+            />
+
+            <label for="curso">Curso</label>
+            <select id="curso" required>
+              <option value="">Selecione o curso</option>
+              <option value="ADM1">ADM1</option>
+              <option value="ADM2">ADM2</option>
+              <option value="ADM3">ADM3</option>
+              <option value="CHS1">CHS1</option>
+              <option value="CHS2">CHS2</option>
+              <option value="CHS3">CHS3</option>
+              <option value="DS1">DS1</option>
+              <option value="DS2">DS2</option>
+              <option value="DS3">DS3</option>
+              <option value="MKT1">MKT1</option>
+              <option value="MKT2">MKT2</option>
+              <option value="MKT3">MKT3</option>
+              <option value="RH1">RH1</option>
+              <option value="RH2">RH2</option>
+              <option value="RH3">RH3</option>
+              <option value="ADM1-N">ADM1-N</option>
+              <option value="ADM2-N">ADM2-N</option>
+              <option value="ADM3-N">ADM3-N</option>
+              <option value="COMEX1">COMEX1</option>
+              <option value="COMEX2">COMEX2</option>
+              <option value="COMEX3">COMEX3</option>
+              <option value="IOT1">IOT1</option>
+              <option value="IOT2">IOT2</option>
+              <option value="IOT3">IOT3</option>
+            </select>
+
+            <label for="status">Status</label>
+            <select id="status" required>
+              <option value="">Selecione o status</option>
+              <option value="Ativo">Ativo</option>
+              <option value="Inativo">Inativo</option>
+            </select>
+            <button type="button" onclick="addAluno(); return false;">
+              Adicionar
+            </button>
+          </form>
         </div>
-        
-        <div class="table-container">
-            <table id="alunoTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Sobrenome</th>
-                        <th>Telefone</th>
-                        <th>RM</th>
-                        <th>Curso</th>
-                        <th>Atividade</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Dados serão inseridos via JavaScript -->
-                </tbody>
-            </table>
+      </div>
+
+      <div id="editModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal('editModal')">&times;</span>
+          <h3>Atualizar Usuário</h3>
+          <form id="updateAlunoForm">
+            <label for="upid">ID</label>
+            <input type="text" id="upid" placeholder="Digite o ID" required />
+
+            <label for="upnome">Nome</label>
+            <input
+              type="text"
+              id="upnome"
+              placeholder="Digite o nome"
+              required
+            />
+
+            <label for="upsobrenome">Sobrenome</label>
+            <input
+              type="text"
+              id="upsobrenome"
+              placeholder="Digite o sobrenome"
+              required
+            />
+
+            <label for="uptelefone">Telefone</label>
+            <input
+              type="text"
+              id="uptelefone"
+              placeholder="Digite o telefone"
+              required
+            />
+
+            <label for="upRM">Matrícula</label>
+            <input
+              type="number"
+              id="upRM"
+              placeholder="Digite a matrícula"
+              required
+            />
+
+            <label for="upcurso">Curso</label>
+            <select id="upcurso" required>
+              <option value="">Selecione o curso</option>
+              <option value="ADM1">ADM1</option>
+              <option value="ADM2">ADM2</option>
+              <option value="ADM3">ADM3</option>
+              <option value="CHS1">CHS1</option>
+              <option value="CHS2">CHS2</option>
+              <option value="CHS3">CHS3</option>
+              <option value="DS1">DS1</option>
+              <option value="DS2">DS2</option>
+              <option value="DS3">DS3</option>
+              <option value="MKT1">MKT1</option>
+              <option value="MKT2">MKT2</option>
+              <option value="MKT3">MKT3</option>
+              <option value="RH1">RH1</option>
+              <option value="RH2">RH2</option>
+              <option value="RH3">RH3</option>
+              <option value="ADM1-N">ADM1-N</option>
+              <option value="ADM2-N">ADM2-N</option>
+              <option value="ADM3-N">ADM3-N</option>
+              <option value="COMEX1">COMEX1</option>
+              <option value="COMEX2">COMEX2</option>
+              <option value="COMEX3">COMEX3</option>
+              <option value="IOT1">IOT1</option>
+              <option value="IOT2">IOT2</option>
+              <option value="IOT3">IOT3</option>
+            </select>
+            <label for="status">Status</label>
+            <select id="upstatus" required>
+              <option value="">Selecione o status</option>
+              <option value="Ativo">Ativo</option>
+              <option value="Inativo">Inativo</option>
+            </select>
+            <button type="button" onclick="updateAluno(); return false;">
+              Atualizar
+            </button>
+          </form>
         </div>
-        <div class="actions">
-            <button onclick="openModal('addModal')">Adicionar Usuário</button>
-            <button onclick="openModal('editModal')">Editar Usuário</button>
-            <button onclick="openModal('deleteModal')">Excluir Usuário</button>
-          </div>
-          
-          
-          <!-- ======= MODAIS ======= -->
-          <div id="addModal" class="modal">
-            <div class="modal-content">
-              <span class="close" onclick="closeModal('addModal')">&times;</span>
-              <form id="addAlunoForm">
-                <h3>Adicionar Usuário</h3>
-                    <label for="nome">Nome</label>
-                    <input type="text" id="nome" placeholder="Digite o nome" required>
+      </div>
 
-                    <label for="sobrenome">Sobrenome</label>
-                    <input type="text" id="sobrenome" placeholder="Digite o sobrenome" required>
-                    
-                    <label for="matricula">Matrícula</label>
-                    <input type="number" id="RM" placeholder="Digite a matrícula" required>
-
-                        <label for="telefone">Telefone</label>
-                        <input type="text" id="telefone" placeholder="Digite o telefone" required />
-
-                        <label for="curso">Curso</label>
-                        <select id="curso" required>
-                            <option value="">Selecione o curso</option>
-                            <option value="ADM1">ADM1</option>
-                            <option value="ADM2">ADM2</option>
-                            <option value="ADM3">ADM3</option>
-                            <option value="CHS1">CHS1</option>
-                            <option value="CHS2">CHS2</option>
-                            <option value="CHS3">CHS3</option>
-                            <option value="DS1">DS1</option>
-                            <option value="DS2">DS2</option>
-                            <option value="DS3">DS3</option>
-                            <option value="MKT1">MKT1</option>
-                            <option value="MKT2">MKT2</option>
-                            <option value="MKT3">MKT3</option>
-                            <option value="RH1">RH1</option>
-                            <option value="RH2">RH2</option>
-                            <option value="RH3">RH3</option>
-                            <option value="ADM1-N">ADM1-N</option>
-                            <option value="ADM2-N">ADM2-N</option>
-                            <option value="ADM3-N">ADM3-N</option>
-                            <option value="COMEX1">COMEX1</option>
-                            <option value="COMEX2">COMEX2</option>
-                            <option value="COMEX3">COMEX3</option>
-                            <option value="IOT1">IOT1</option>
-                            <option value="IOT2">IOT2</option>
-                            <option value="IOT3">IOT3</option>
-                        </select>
-
-                    <label for="status">Status</label>
-                    <select id="status" required>
-                        <option value="">Selecione o status</option>
-                        <option value="Ativo">Ativo</option>
-                        <option value="Inativo">Inativo</option>
-                    </select>
-                <button type="button" onclick="addAluno(); return false;">Adicionar</button>
-              </form>
-            </div>
-          </div>
-          
-          <div id="editModal" class="modal">
-            <div class="modal-content">
-              <span class="close" onclick="closeModal('editModal')">&times;</span>
-              <h3>Atualizar Usuário</h3>
-              <form id="updateAlunoForm">
-                <label for="upid">ID</label>
-                    <input type="text" id="upid" placeholder="Digite o ID" required>
-
-                    <label for="upnome">Nome</label>
-                    <input type="text" id="upnome" placeholder="Digite o nome" required>
-
-                    <label for="upsobrenome">Sobrenome</label>
-                    <input type="text" id="upsobrenome" placeholder="Digite o sobrenome" required>
-
-                        <label for="uptelefone">Telefone</label>
-                        <input type="text" id="uptelefone" placeholder="Digite o telefone" required />
-
-                        <label for="upRM">Matrícula</label>
-                        <input type="number" id="upRM" placeholder="Digite a matrícula" required />
-
-                        <label for="upcurso">Curso</label>
-                        <select id="upcurso" required>
-                            <option value="">Selecione o curso</option>
-                            <option value="ADM1">ADM1</option>
-                            <option value="ADM2">ADM2</option>
-                            <option value="ADM3">ADM3</option>
-                            <option value="CHS1">CHS1</option>
-                            <option value="CHS2">CHS2</option>
-                            <option value="CHS3">CHS3</option>
-                            <option value="DS1">DS1</option>
-                            <option value="DS2">DS2</option>
-                            <option value="DS3">DS3</option>
-                            <option value="MKT1">MKT1</option>
-                            <option value="MKT2">MKT2</option>
-                            <option value="MKT3">MKT3</option>
-                            <option value="RH1">RH1</option>
-                            <option value="RH2">RH2</option>
-                            <option value="RH3">RH3</option>
-                            <option value="ADM1-N">ADM1-N</option>
-                            <option value="ADM2-N">ADM2-N</option>
-                            <option value="ADM3-N">ADM3-N</option>
-                            <option value="COMEX1">COMEX1</option>
-                            <option value="COMEX2">COMEX2</option>
-                            <option value="COMEX3">COMEX3</option>
-                            <option value="IOT1">IOT1</option>
-                            <option value="IOT2">IOT2</option>
-                            <option value="IOT3">IOT3</option>
-                        </select>
-
-                    <label for="status">Status</label>
-                    <select id="upstatus" required>
-                        <option value="">Selecione o status</option>
-                        <option value="Ativo">Ativo</option>
-                        <option value="Inativo">Inativo</option>
-                    </select>
-                <button type="button" onclick="updateAluno(); return false;">Atualizar</button>
-              </form>
-            </div>
-          </div>
-          
-          <div id="deleteModal" class="modal">
-            <div class="modal-content">
-              <span class="close" onclick="closeModal('deleteModal')">&times;</span>
-              <h3>Excluir Usuário</h3>
-              <form id="deleteAlunoForm">
-                <label for="deleId">ID</label>
-                <input type="text" id="deleId" required>
-                <button type="button" onclick="confirmDelete(); return false;">Excluir</button>
-              </form>
-            </div>
+      <div id="deleteModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal('deleteModal')">&times;</span>
+          <h3>Excluir Usuário</h3>
+          <form id="deleteAlunoForm">
+            <label for="deleId">ID</label>
+            <input type="text" id="deleId" required />
+            <button type="button" onclick="confirmDelete(); return false;">
+              Excluir
+            </button>
+          </form>
         </div>
+      </div>
     </div>
-    <a href="#" id="btnTopo" class="voltar-topo" ><img src="midia/ancora.png" alt="início da página"></a>
+    <a href="#" id="btnTopo" class="voltar-topo"
+      ><img src="midia/ancora.png" alt="início da página"
+    /></a>
 
     <script src="function.js"></script>
     <script src="animation.js"></script>
-</body>
+  </body>
 </html>
-

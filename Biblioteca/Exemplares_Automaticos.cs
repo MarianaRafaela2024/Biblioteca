@@ -12,7 +12,7 @@
 
         public int Numero_Exemplares_Total { get; set; }
 
-        public DateOnly Data_Aquisicao { get; set; }
+        public DateOnly? Data_Aquisicao { get; set; }
 
         public string Biblioteca_Depositaria { get; set; }
         

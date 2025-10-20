@@ -190,6 +190,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Biblioteca.Controllers.BibliotecaController",
+    "Method": "SearchComplete",
+    "RelativePath": "Biblioteca/search-complete",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "termo",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Biblioteca.Biblioteca, Biblioteca, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Biblioteca.Controllers.EmprestimoController",
     "Method": "CreateEmprestimo",
     "RelativePath": "Emprestimo",

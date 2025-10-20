@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "C:\\Users\\User\\Softwares\\Biblioteca\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\controllers\\bibliotecacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\bibliotecacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\controllers\\exemplares_automaticoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\exemplares_automaticoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\exemplares_automaticos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\exemplares_automaticos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\biblioteca.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\biblioteca.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\controllers\\livrocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\livrocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -19,16 +35,8 @@
       "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\livro_autorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\controllers\\exemplares_automaticoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\exemplares_automaticoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\controllers\\entidadecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\entidadecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\exemplares_automaticos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\exemplares_automaticos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\entidade_corporativa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -39,15 +47,7 @@
       "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\livro_autor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\biblioteca.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\biblioteca.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Biblioteca/True/SqlTable/dbo.Exemplares_Automaticos.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\controllers\\bibliotecacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|solutionrelative:biblioteca\\controllers\\bibliotecacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A19B1045-5472-418A-AE88-43AAB12564B5}|Biblioteca\\Biblioteca.csproj|c:\\users\\user\\softwares\\biblioteca\\biblioteca\\bibliotecarequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -98,56 +98,56 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "Exemplares_AutomaticosController.cs",
               "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\Exemplares_AutomaticosController.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Controllers\\Exemplares_AutomaticosController.cs",
               "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\Exemplares_AutomaticosController.cs",
               "RelativeToolTip": "Biblioteca\\Controllers\\Exemplares_AutomaticosController.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAADIAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAnwCwAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-19T19:49:43.712Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "dbo.Exemplares_Automaticos [Dados]",
+              "DocumentIndex": 11,
+              "Title": "dbo.Exemplares_Automaticos.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Biblioteca/True/SqlTable/dbo.Exemplares_Automaticos.sql",
-              "ToolTip": "dbo.Exemplares_Automaticos [Dados]",
+              "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Biblioteca/True/SqlTable/dbo.Exemplares_Automaticos.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-10-19T18:56:48.787Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-19T18:56:48.787Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
               "Title": "Exemplares_Automaticos.cs",
               "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Exemplares_Automaticos.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Exemplares_Automaticos.cs",
-              "ToolTip": "Biblioteca/Exemplares_Automaticos.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Exemplares_Automaticos.cs",
+              "RelativeToolTip": "Biblioteca\\Exemplares_Automaticos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "OverriddenGroupName": "Biblioteca",
-              "OverriddenToolTip": "Biblioteca/Exemplares_Automaticos.cs",
               "WhenOpened": "2025-10-19T18:46:39.173Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 0,
               "Title": "BibliotecaController.cs",
               "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\BibliotecaController.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Controllers\\BibliotecaController.cs",
-              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\BibliotecaController.cs",
-              "RelativeToolTip": "Biblioteca\\Controllers\\BibliotecaController.cs",
-              "ViewState": "AgIAAO4AAAAAAAAAAAAAAD4BAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\BibliotecaController.cs*",
+              "RelativeToolTip": "Biblioteca\\Controllers\\BibliotecaController.cs*",
+              "ViewState": "AgIAAP8BAAAAAAAAAAAYwBgCAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-12T18:30:28.866Z"
+              "WhenOpened": "2025-10-12T18:30:28.866Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -184,13 +184,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "LivroController.cs",
               "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\LivroController.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Controllers\\LivroController.cs",
               "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\LivroController.cs",
               "RelativeToolTip": "Biblioteca\\Controllers\\LivroController.cs",
-              "ViewState": "AgIAAOYAAAAAAAAAAAAQwNwCAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAPUAAAAAAAAAAAAAAPsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "OverriddenGroupName": "Biblioteca\\Controllers",
               "WhenOpened": "2025-09-29T20:48:18.863Z",
@@ -210,7 +210,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "EntidadeController.cs",
               "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\EntidadeController.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Controllers\\EntidadeController.cs",
@@ -218,12 +218,11 @@
               "RelativeToolTip": "Biblioteca\\Controllers\\EntidadeController.cs",
               "ViewState": "AgIAACoAAAAAAAAAAAAowBoAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-07T02:09:27.852Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-07T02:09:27.852Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "Livro_Autor.cs",
               "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Livro_Autor.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Livro_Autor.cs",
@@ -231,8 +230,7 @@
               "RelativeToolTip": "Biblioteca\\Livro_Autor.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T02:14:14.269Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T02:14:14.269Z"
             },
             {
               "$type": "Document",
@@ -248,7 +246,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "Entidade_Corporativa.cs",
               "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Entidade_Corporativa.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Entidade_Corporativa.cs",
@@ -256,8 +254,7 @@
               "RelativeToolTip": "Biblioteca\\Entidade_Corporativa.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-05T20:25:55.832Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-05T20:25:55.832Z"
             },
             {
               "$type": "Document",
@@ -273,7 +270,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "Livro_AutorController.cs",
               "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\Livro_AutorController.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Controllers\\Livro_AutorController.cs",
@@ -281,18 +278,17 @@
               "RelativeToolTip": "Biblioteca\\Controllers\\Livro_AutorController.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAADIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-07T14:01:31.244Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-07T14:01:31.244Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 3,
               "Title": "Biblioteca.cs",
               "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Biblioteca.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Biblioteca.cs",
               "ToolTip": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Biblioteca.cs",
               "RelativeToolTip": "Biblioteca\\Biblioteca.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-12T18:45:15.04Z",
               "EditorCaption": ""
@@ -311,7 +307,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "Livro.cs",
               "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Livro.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Livro.cs",
@@ -319,8 +315,7 @@
               "RelativeToolTip": "Biblioteca\\Livro.cs",
               "ViewState": "AgIAACIAAAAAAAAAAAAgwBIAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-18T01:14:08.627Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-18T01:14:08.627Z"
             },
             {
               "$type": "Document",
@@ -369,7 +364,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "AlunoController.cs",
               "DocumentMoniker": "C:\\Users\\User\\Softwares\\Biblioteca\\Biblioteca\\Controllers\\AlunoController.cs",
               "RelativeDocumentMoniker": "Biblioteca\\Controllers\\AlunoController.cs",
@@ -377,8 +372,7 @@
               "RelativeToolTip": "Biblioteca\\Controllers\\AlunoController.cs",
               "ViewState": "AgIAAHcAAAAAAAAAAAAAAIIAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T14:03:35.333Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-09T14:03:35.333Z"
             }
           ]
         }

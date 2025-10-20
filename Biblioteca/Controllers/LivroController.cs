@@ -250,7 +250,7 @@ namespace Biblioteca.Controllers
                             checkCmd.Parameters.AddWithValue("@Nome_Autor", CreateL.autor.Nome_Autor);
                             var result = checkCmd.ExecuteScalar();
 
-                            if (result != null)
+                            if (result != null || CreateL.autor.Nome_Autor.ToString() == "string" || CreateL.autor.Nome_Autor.ToString() == null)
                             {
                                 autorId = Convert.ToInt32(result);
                             }

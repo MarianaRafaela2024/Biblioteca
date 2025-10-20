@@ -35,7 +35,8 @@ namespace Biblioteca.Controllers
                         Numero_Exemplares = Convert.ToInt32(reader["Numero_Exemplares"]),
                         Numero_Volume = Convert.ToInt32(reader["Numero_Volume"]),
                         Numero_Exemplares_Total = Convert.ToInt32(reader["Numero_Exemplares_Total"]),
-                        Data_Aquisicao = DateOnly.Parse(reader["Data_Aquisicao"].ToString()),
+                        Data_Aquisicao = reader["Data_Aquisicao"] != DBNull.Value ? DateOnly.FromDateTime(Convert.ToDateTime(reader["Data_Aquisicao"]))
+                        : (DateOnly?)null,
                         Biblioteca_Depositaria = reader["Biblioteca_Depositaria"].ToString(),
                         Tipo_Aquisicao = reader["Tipo_Aquisicao"].ToString()
 
@@ -48,7 +49,7 @@ namespace Biblioteca.Controllers
             return Exemplares;
         }
 
-        
+    
 
     }
 }
