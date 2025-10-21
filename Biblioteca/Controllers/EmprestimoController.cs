@@ -76,10 +76,15 @@ namespace Biblioteca.Controllers
                             ? emprestimo.Data_Devolucao_Real.Value.Date
                             : (object)DBNull.Value);
 
+                    string updateStatus = "UPDATE Livro SET Status_Emprestimo = 'Emprestado' WHERE Id_Livro = @Id_Livro";
+                    SqlCommand commandUp = new SqlCommand(updateStatus, connection);
+                    commandUp.Parameters.AddWithValue("@Id_Livro", emprestimo.Id_Livro);
+
 
                     int rowsAffected = command.ExecuteNonQuery();
+                    int rowsAffectedUp = commandUp.ExecuteNonQuery();
 
-                    if (rowsAffected > 0)
+                    if (rowsAffected > 0 && rowsAffectedUp>0)
                     {
                         return Ok("Empréstimo criado com sucesso!");
                     }
@@ -158,22 +163,30 @@ namespace Biblioteca.Controllers
                 {
                     connection.Open();
 
-                    string checkQuery = "SELECT Data_Devolucao_Real FROM Emprestimo WHERE Id_Emprestimo = @Id";
+                    // ✅ Primeiro: busca o Id_Livro e verifica se já foi devolvido
+                    string checkQuery = "SELECT Id_Livro, Data_Devolucao_Real FROM Emprestimo WHERE Id_Emprestimo = @Id";
                     SqlCommand checkCmd = new SqlCommand(checkQuery, connection);
                     checkCmd.Parameters.AddWithValue("@Id", id);
 
-                    var result = checkCmd.ExecuteScalar();
+                    SqlDataReader reader = checkCmd.ExecuteReader();
 
-                    if (result == null)
+                    if (!reader.Read())
                     {
+                        reader.Close();
                         return NotFound($"Empréstimo com ID {id} não encontrado.");
                     }
 
-                    if (result != DBNull.Value)
+                    int idLivro = Convert.ToInt32(reader["Id_Livro"]);
+                    var dataDevolucaoReal = reader["Data_Devolucao_Real"];
+
+                    reader.Close(); // ✅ IMPORTANTE: Fecha o reader antes de executar outros comandos
+
+                    if (dataDevolucaoReal != DBNull.Value)
                     {
                         return BadRequest("Este empréstimo já foi devolvido.");
                     }
 
+                    // ✅ Segundo: atualiza a data de devolução do empréstimo
                     string updateQuery = "UPDATE Emprestimo SET Data_Devolucao_Real = @DataDevolucao WHERE Id_Emprestimo = @Id";
                     SqlCommand updateCmd = new SqlCommand(updateQuery, connection);
                     updateCmd.Parameters.AddWithValue("@Id", id);
@@ -181,7 +194,14 @@ namespace Biblioteca.Controllers
 
                     int rowsAffected = updateCmd.ExecuteNonQuery();
 
-                    if (rowsAffected > 0)
+                    // ✅ Terceiro: atualiza o status do livro
+                    string updateStatus = "UPDATE Livro SET Status_Emprestimo = 'Devolvido' WHERE Id_Livro = @Id_Livro";
+                    SqlCommand commandUp = new SqlCommand(updateStatus, connection);
+                    commandUp.Parameters.AddWithValue("@Id_Livro", idLivro);
+
+                    int rowsAffectedUp = commandUp.ExecuteNonQuery();
+
+                    if (rowsAffected > 0 && rowsAffectedUp > 0)
                     {
                         return Ok(new { message = "Devolução registrada com sucesso!" });
                     }

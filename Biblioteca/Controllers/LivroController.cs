@@ -237,6 +237,7 @@ namespace Biblioteca.Controllers
                 try
                 {
                     int autorId = 0;
+                    int autorSegunId = 0;
                     int entidadeId = 0;
                     int livroId = 0;
                     int exemplaresId = 0;
@@ -270,6 +271,39 @@ namespace Biblioteca.Controllers
                                     insertCmd.Parameters.AddWithValue("@Tipo_Autor", CreateL.autor.Tipo_Autor ?? (object)DBNull.Value);
 
                                     autorId = (int)insertCmd.ExecuteScalar();
+                                }
+                            }
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(CreateL.autorSegundario?.Nome_Autor))
+                    {
+                        string checkAutorQuery = "SELECT Id_Autor FROM Autor WHERE Nome_Autor = @Nome_Autor";
+                        using (SqlCommand checkCmd = new SqlCommand(checkAutorQuery, connection, transaction))
+                        {
+                            checkCmd.Parameters.AddWithValue("@Nome_Autor", CreateL.autorSegundario.Nome_Autor);
+                            var result = checkCmd.ExecuteScalar();
+
+                            if (result != null || CreateL.autorSegundario.Nome_Autor.ToString() == "string" || CreateL.autorSegundario.Nome_Autor.ToString() == null)
+                            {
+                                autorId = Convert.ToInt32(result);
+                            }
+                            else
+                            {
+                                string insertAutorQuery = @"
+                            INSERT INTO Autor (Nome_Autor, Numero, Datas, Funcao, Tipo_Autor) 
+                            VALUES (@Nome_Autor, @Numero, @Datas, @Funcao, @Tipo_Autor);
+                            SELECT CAST(SCOPE_IDENTITY() AS INT);";
+
+                                using (SqlCommand insertCmd = new SqlCommand(insertAutorQuery, connection, transaction))
+                                {
+                                    insertCmd.Parameters.AddWithValue("@Nome_Autor", CreateL.autorSegundario.Nome_Autor);
+                                    insertCmd.Parameters.AddWithValue("@Numero", CreateL.autorSegundario.Numero ?? (object)DBNull.Value);
+                                    insertCmd.Parameters.AddWithValue("@Datas", CreateL.autorSegundario.Datas ?? (object)DBNull.Value);
+                                    insertCmd.Parameters.AddWithValue("@Funcao", CreateL.autorSegundario.Funcao ?? (object)DBNull.Value);
+                                    insertCmd.Parameters.AddWithValue("@Tipo_Autor", CreateL.autorSegundario.Tipo_Autor ?? (object)DBNull.Value);
+
+                                    autorSegunId = (int)insertCmd.ExecuteScalar();
                                 }
                             }
                         }
@@ -424,6 +458,17 @@ namespace Biblioteca.Controllers
                         }
                     }
 
+                    if (autorSegunId > 0)
+                    {
+                        string livroAutorInsert = "INSERT INTO Livro_Autor (Id_Autor, Id_Livro) VALUES (@Id_Autor, @Id_Livro)";
+                        using (SqlCommand comandLA = new SqlCommand(livroAutorInsert, connection, transaction))
+                        {
+                            comandLA.Parameters.AddWithValue("@Id_Autor", autorSegunId);
+                            comandLA.Parameters.AddWithValue("@Id_Livro", livroId);
+                            comandLA.ExecuteNonQuery();
+                        }
+                    }
+
                     // ========== INSERIR RELACIONAMENTO LIVRO-ENTIDADE ==========
                     if (entidadeId > 0)
                     {
@@ -457,7 +502,8 @@ namespace Biblioteca.Controllers
                         livroId = livroId,
                         autorId = autorId,
                         entidadeId = entidadeId,
-                        exemplaresId = exemplaresId
+                        exemplaresId = exemplaresId,
+                        autorSegunId = autorSegunId
                     });
                 }
                 catch (Exception ex)

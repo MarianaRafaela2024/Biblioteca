@@ -265,7 +265,7 @@ function addLivro() {
   const Agen_Catalogadora = document.getElementById("agencia").value;
   const Idi_Catalogacao = document.getElementById("idioma_catalogacao").value;
   const Agen_Transcricao = document.getElementById("agencia_transcricao").value;
-  const Agen_Modigicacao = document.getElementById("agencia_modificacao").value;
+  const Agen_Modificacao = document.getElementById("agencia_modificacao").value;
 
   // Campo 041 - Código de Idioma
   const Idi_Texto = document.getElementById("idioma_texto").value;
@@ -348,9 +348,13 @@ function addLivro() {
   const Datas = document.getElementById("autor_datas").value;
   const Funcao = document.getElementById("autor_funcao").value;
 
+  const Nome_Autor_Adicional = document.getElementById("autor_adicional").value;
+  const Autor_Adicional_Datas = document.getElementById("autor_adicional_datas").value;
+  const Autor_Adicional_Funcao = document.getElementById("autor_adicional_funcao").value;
+  
   //  DADOS DA ENTIDADE
   const Nome_Entidade = document.getElementById("entidade_nome").value;
-  const Subordinacao = document.getElementById("entidade_subordinacao").value;
+  const Subordinacao = document.getElementById("entidade_subordinada").value;
 
   // Objeto com os mesmos nomes da classe C# Livro.cs
   const livro = {
@@ -359,7 +363,7 @@ function addLivro() {
     Agen_Catalogadora: Agen_Catalogadora,
     Idi_Catalogacao: Idi_Catalogacao,
     Agen_Transcricao: Agen_Transcricao,
-    Agen_Modigicacao: Agen_Modigicacao,
+    Agen_Modificacao: Agen_Modificacao,
     Idi_Texto: Idi_Texto,
     Idi_Resumo: Idi_Resumo,
     Idi_Legenda: Idi_Legenda,
@@ -403,11 +407,28 @@ function addLivro() {
 
   const autor = {
     Nome_Autor: Nome_Autor,
-    Numero: Numero_Autor,
-    Datas: Datas_Autor,
-    Funcao: Funcao_Autor,
-    Tipo_Autor: Tipo_Autor,
+    Numero: Numero,
+    Datas: Datas,
+    Funcao: Funcao,
+    Tipo_Autor: "Principal",
   };
+
+  const autorSegundario = {
+    Nome_Autor: Nome_Autor_Adicional,
+    Numero: "",
+    Datas: Autor_Adicional_Datas,
+    Funcao: Autor_Adicional_Funcao,
+    Tipo_Autor: "Adicional",
+  }
+  
+const exemplares = {
+  Numero_Exemplares: parseInt(document.getElementById("exemplares_numeros").value) || 0,
+  Numero_Volume: parseInt(document.getElementById("exemplares_numeros_volume").value) || 0,
+  Numero_Exemplares_Total: parseInt(document.getElementById("exemplares_quantidade_total").value) || 0,
+  Data_Aquisicao: document.getElementById("exemplares_data").value,
+  Biblioteca_Depositaria: document.getElementById("exemplares_biblioteca").value,
+  Tipo_Aquisicao: document.getElementById("exemplares_aquisicao").value
+};
 
   const entidade = {
     Nome_Entidade: Nome_Entidade,
@@ -418,6 +439,8 @@ function addLivro() {
     livro: livro,
     autor: autor,
     entidade: entidade,
+    Exemplares: exemplares,
+    autorSegundario: autorSegundario,
   };
 
   console.log("Dados do livro:", BibliotecaRequest);
@@ -427,7 +450,7 @@ function addLivro() {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(bibliotecaRequest),
+    body: JSON.stringify(BibliotecaRequest),
   })
     .then((response) => {
       if (response.ok) {
@@ -883,10 +906,13 @@ async function carregarMarc21Completo(idLivro) {
     const autores = biblioteca.autores || [];
     const entidades = biblioteca.entidades || [];
     const exemplares = biblioteca.exemplares || [];
+    const autorSegundario = biblioteca.autoresSegundario || [];
+
+    console.log(autorSegundario, autores);
 
     const camposPorNumero = {};
 
-    // Cria estrutura base do MARC21
+    // Cria estrutura base do MARC21 (MANTÉM ESTA PARTE)
     Object.entries(MAPA_MARC21).forEach(([campo, info]) => {
       const numero = info.numero;
       if (!camposPorNumero[numero]) {
@@ -902,39 +928,127 @@ async function carregarMarc21Completo(idLivro) {
       });
     });
 
-    // 🟩 INSERE AUTORES (100 - Autor Principal)
-    if (autores.length > 0) {
+    // 🟩 INSERE AUTORES PRINCIPAIS (100 - Autor Principal)
+    const autoresPrincipais = autores.filter(
+      (a) => a.tipo_Autor === "Principal"
+    );
+
+    if (autoresPrincipais.length > 0) {
       const numero = "100";
       if (!camposPorNumero[numero])
-        camposPorNumero[numero] = { secao: "100 - Autor Principal", subcampos: [] };
+        camposPorNumero[numero] = {
+          secao: "100 - Autor Principal",
+          subcampos: [],
+        };
+      
+      // Limpa os placeholders do MAPA_MARC21 se houver dados reais (CRUCIAL)
+       camposPorNumero[numero].subcampos = [];
 
-      autores.forEach((autor, i) => {
+      autoresPrincipais.forEach((autor, i) => {
+        // NOTE: No seu HTML, o primeiro autor não tem um índice '1', então vamos deixar a descrição mais limpa.
+        const suffix = autoresPrincipais.length > 1 ? ` ${i + 1}` : "";
+
         camposPorNumero[numero].subcampos.push({
           subcampo: "a",
-          descricao: `Nome do autor ${i + 1}`,
+          descricao: `Nome do autor${suffix}`,
           campo: "Nome_Autor",
           valor: autor.nome_Autor || "Não informado",
         });
+        
+        // Adiciona subcampo b se o número do autor for informado
+         if (autor.numero && autor.numero !== "Não informado") {
+           camposPorNumero[numero].subcampos.push({
+             subcampo: "b",
+             descricao: `Número do autor${suffix}`,
+             campo: "Numero",
+             valor: autor.numero,
+           });
+         }
+        
         camposPorNumero[numero].subcampos.push({
-          subcampo: "b",
-          descricao: `Função / Tipo do autor ${i + 1}`,
+          subcampo: "b", // Reutilizando 'b' para Função/Tipo, como na imagem
+          descricao: `Função / Tipo do autor${suffix}`,
           campo: "Funcao",
           valor: `${autor.funcao || ""} ${autor.tipo_Autor || ""}`.trim() || "Não informado",
         });
+        
         camposPorNumero[numero].subcampos.push({
           subcampo: "d",
-          descricao: `Datas do autor ${i + 1}`,
+          descricao: `Datas do autor${suffix}`,
           campo: "Datas",
           valor: autor.datas || "Não informado",
         });
       });
     }
 
+
+    // 🟨 INSERE AUTORES ADICIONAIS (700 - Autor Adicional)
+    const autoresAdicionais = autores.filter((a) => a.tipo_Autor === "Adicional");
+
+    if (autoresAdicionais.length > 0) {
+      const numero = "700";
+      if (!camposPorNumero[numero])
+        camposPorNumero[numero] = {
+          secao: "700 - Autor Adicional",
+          subcampos: [],
+        };
+      
+      // Limpa os placeholders do MAPA_MARC21 se houver dados reais (CRUCIAL)
+       camposPorNumero[numero].subcampos = [];
+
+
+      autoresAdicionais.forEach((autor, i) => {
+        // Nome: Autor Adicional 1
+        camposPorNumero[numero].subcampos.push({
+          subcampo: "a",
+          descricao: `Nome do autor adicional ${i + 1}`,
+          campo: "Nome_Autor",
+          valor: autor.nome_Autor || "Não informado",
+        });
+
+        // Número
+        if (autor.numero && autor.numero !== "Não informado") {
+          camposPorNumero[numero].subcampos.push({
+            subcampo: "b",
+            descricao: `Número do autor adicional ${i + 1}`,
+            campo: "Numero",
+            valor: autor.numero,
+          });
+        }
+
+        // Datas
+        camposPorNumero[numero].subcampos.push({
+          subcampo: "d",
+          descricao: `Datas do autor adicional ${i + 1}`,
+          campo: "Datas",
+          valor: autor.datas || "Não informado",
+        });
+
+        // Função
+        camposPorNumero[numero].subcampos.push({
+          subcampo: "e",
+          descricao: `Função do autor adicional ${i + 1}`,
+          campo: "Funcao",
+          valor: autor.funcao || "Não informado",
+        });
+        
+        // Tipo do Autor (pode usar o subcampo '4' para relação)
+        camposPorNumero[numero].subcampos.push({
+          subcampo: "4",
+          descricao: `Tipo do autor adicional ${i + 1}`,
+          campo: "Tipo_Autor",
+          valor: autor.tipo_Autor || "Adicional",
+        });
+      });
+    }
     // 🟦 INSERE ENTIDADES (110 - Entidade Corporativa)
     if (entidades.length > 0) {
       const numero = "110";
       if (!camposPorNumero[numero])
         camposPorNumero[numero] = { secao: "110 - Entidade Corporativa", subcampos: [] };
+      
+      // Se já existe o campo 110, limpa os placeholders
+       camposPorNumero[numero].subcampos = [];
 
       entidades.forEach((entidade, i) => {
         camposPorNumero[numero].subcampos.push({
@@ -951,54 +1065,51 @@ async function carregarMarc21Completo(idLivro) {
         });
       });
     }
-
     // 🟥 INSERE EXEMPLARES (EX - Exemplares)
-    // 🟥 INSERE EXEMPLARES (EX - Exemplares)
-if (exemplares.length > 0) {
-  const numero = "EX";
-  // Se já existe o campo EX, limpa os placeholders
-  camposPorNumero[numero] = { secao: "EX - Exemplares", subcampos: [] };
+    if (exemplares.length > 0) {
+      const numero = "EX";
+      // Se já existe o campo EX, limpa os placeholders
+      camposPorNumero[numero] = { secao: "EX - Exemplares", subcampos: [] };
 
-  exemplares.forEach((ex, i) => {
-    camposPorNumero[numero].subcampos.push({
-      subcampo: "",
-      descricao: `Número do exemplar ${i + 1}`,
-      campo: "Numero_Exemplares",
-      valor: ex.numero_Exemplares ?? "Não informado",
-    });
-    camposPorNumero[numero].subcampos.push({
-      subcampo: "",
-      descricao: `Número do volume ${i + 1}`,
-      campo: "Numero_Volume",
-      valor: ex.numero_Volume ?? "Não informado",
-    });
-    camposPorNumero[numero].subcampos.push({
-      subcampo: "",
-      descricao: `Quantidade total de exemplares ${i + 1}`,
-      campo: "Numero_Exemplares_Total",
-      valor: ex.numero_Exemplares_Total ?? "Não informado",
-    });
-    camposPorNumero[numero].subcampos.push({
-      subcampo: "",
-      descricao: `Data de aquisição ${i + 1}`,
-      campo: "Data_Aquisicao",
-      valor: ex.data_Aquisicao ?? "Não informado",
-    });
-    camposPorNumero[numero].subcampos.push({
-      subcampo: "",
-      descricao: `Biblioteca depositária ${i + 1}`,
-      campo: "Biblioteca_Depositaria",
-      valor: ex.biblioteca_Depositaria ?? "Não informado",
-    });
-    camposPorNumero[numero].subcampos.push({
-      subcampo: "",
-      descricao: `Tipo de aquisição ${i + 1}`,
-      campo: "Tipo_Aquisicao",
-      valor: ex.tipo_Aquisicao ?? "Não informado",
-    });
-  });
-}
-
+      exemplares.forEach((ex, i) => {
+        camposPorNumero[numero].subcampos.push({
+          subcampo: "",
+          descricao: `Número do exemplar ${i + 1}`,
+          campo: "Numero_Exemplares",
+          valor: ex.numero_Exemplares ?? "Não informado",
+        });
+        camposPorNumero[numero].subcampos.push({
+          subcampo: "",
+          descricao: `Número do volume ${i + 1}`,
+          campo: "Numero_Volume",
+          valor: ex.numero_Volume ?? "Não informado",
+        });
+        camposPorNumero[numero].subcampos.push({
+          subcampo: "",
+          descricao: `Quantidade total de exemplares ${i + 1}`,
+          campo: "Numero_Exemplares_Total",
+          valor: ex.numero_Exemplares_Total ?? "Não informado",
+        });
+        camposPorNumero[numero].subcampos.push({
+          subcampo: "",
+          descricao: `Data de aquisição ${i + 1}`,
+          campo: "Data_Aquisicao",
+          valor: ex.data_Aquisicao ?? "Não informado",
+        });
+        camposPorNumero[numero].subcampos.push({
+          subcampo: "",
+          descricao: `Biblioteca depositária ${i + 1}`,
+          campo: "Biblioteca_Depositaria",
+          valor: ex.biblioteca_Depositaria ?? "Não informado",
+        });
+        camposPorNumero[numero].subcampos.push({
+          subcampo: "",
+          descricao: `Tipo de aquisição ${i + 1}`,
+          campo: "Tipo_Aquisicao",
+          valor: ex.tipo_Aquisicao ?? "Não informado",
+        });
+      });
+    }
 
     // Renderiza HTML final
     let html = "<h2>Informações MARC21</h2>";
@@ -1006,13 +1117,46 @@ if (exemplares.length > 0) {
     Object.entries(camposPorNumero)
       .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
       .forEach(([numero, data]) => {
+        // IGNORA campos com número 100, 700, 110 e EX que não tiveram dados reais para evitar a duplicação dos placeholders
+         if (
+           (numero === "100" && autoresPrincipais.length === 0) ||
+           (numero === "700" && autoresAdicionais.length === 0)
+         ) {
+           // Pula a renderização se não houver dados reais nos campos de autor principal ou adicional
+           return;
+         }
+        
+        // Verifica se é um campo que pode ter sido limpo e não recebeu dados
+         if (
+           data.subcampos.every((sub) => sub.valor === null) &&
+           (numero === "100" || numero === "700" || numero === "110" || numero === "EX")
+         ) {
+           return;
+         }
+
+
         html += `<h3>${data.secao}</h3>`;
-        data.subcampos.forEach((sub) => {
-          const label = sub.subcampo ? `‡${sub.subcampo}` : "Indicador";
-          const valorFormatado =
-            sub.valor && sub.valor !== "" ? sub.valor : "Não informado";
-          html += `<p><strong>${label} - ${sub.descricao}:</strong> ${valorFormatado}</p>`;
-        });
+        
+        // Filtra subcampos duplicados e nulos do MAPA_MARC21 original que não foram limpos
+         const renderedSubfields = {};
+         data.subcampos.forEach((sub) => {
+           // Cria uma chave única para o subcampo (ex: "020-a")
+           const key = `${numero}-${sub.subcampo}-${sub.campo}`;
+
+           // Regra para subcampos duplicados/nulos do MAPA_MARC21 original:
+           if (numero !== "100" && numero !== "700" && numero !== "110" && numero !== "EX") {
+             // Para campos não manipulados (ex: 020, 082, 245), evita placeholders nulos duplicados
+             if (sub.valor === null && renderedSubfields[key]) {
+               return;
+             }
+           }
+           
+           const label = sub.subcampo ? `‡${sub.subcampo}` : "Indicador";
+           const valorFormatado =
+             sub.valor && sub.valor !== "" ? sub.valor : "Não informado";
+           html += `<p><strong>${label} - ${sub.descricao}:</strong> ${valorFormatado}</p>`;
+           renderedSubfields[key] = true;
+         });
       });
 
     detalhesDiv.innerHTML = html;

@@ -145,6 +145,21 @@ namespace Biblioteca.Controllers
                      bibliotecaAtual.Autores.Add(autor);
                     }
 
+                    if (reader["Id_Autor_Secundario"] != DBNull.Value)
+                    {
+                        AutorSegundario autorSeg = new AutorSegundario()
+                        {
+                            Id = Convert.ToInt32(reader["Id_Autor_Secundario"]),
+                            Nome_Autor = reader["Nome_Autor_Secundario"]?.ToString() ?? string.Empty,
+                            Numero = reader["Numero_Secundario"]?.ToString() ?? string.Empty,
+                            Datas = reader["Datas_Secundario"]?.ToString() ?? string.Empty,
+                            Funcao = reader["Funcao_Secundario"]?.ToString() ?? string.Empty,
+                            Tipo_Autor = reader["Tipo_Autor_Secundario"]?.ToString() ?? string.Empty
+                        };
+                        bibliotecaAtual.AutoresSegundarios.Add(autorSeg);
+                    }
+
+
                     if (reader["Id_Entidade"] != DBNull.Value)
                     {
                         Entidade_Corporativa entidade = new Entidade_Corporativa()
@@ -414,7 +429,7 @@ namespace Biblioteca.Controllers
             LEFT JOIN Entidade_Corporativa e ON le.Id_Entidade = e.Id_Entidade
             LEFT JOIN Exemplares_Automaticos ex ON l.Id_Livro = ex.Id_Livro
             WHERE l.Id_Livro = @id
-            ORDER BY l.Id_Livro";
+            ORDER BY l.Id_Livro;";
 
                 SqlCommand command = new SqlCommand(query, conection);
                 command.Parameters.AddWithValue("@id", id);
@@ -482,7 +497,8 @@ namespace Biblioteca.Controllers
                             },
                             Autores = new List<Autor>(),
                             Entidades = new List<Entidade_Corporativa>(),
-                            Exemplares = new List<Exemplares_Automaticos>()
+                            Exemplares = new List<Exemplares_Automaticos>(),
+                            AutoresSegundarios = new List<AutorSegundario>()
                         };
                     }
 
@@ -503,6 +519,24 @@ namespace Biblioteca.Controllers
                             });
                         }
                     }
+
+                    if (reader["Id_Autor"] != DBNull.Value && reader["Tipo_Autor"].Equals("Adicional"))
+                    {
+                        int idAutorS = Convert.ToInt32(reader["Id_Autor"]);
+                        if (!biblioteca.AutoresSegundarios.Any(a => a.Id == idAutorS))
+                        {
+                            biblioteca.AutoresSegundarios.Add(new AutorSegundario()
+                            {
+                                Id = idAutorS,
+                                Nome_Autor = reader["Nome_Autor"]?.ToString() ?? string.Empty,
+                                Numero = reader["Numero"]?.ToString() ?? string.Empty,
+                                Datas = reader["Datas"]?.ToString() ?? string.Empty,
+                                Funcao = reader["Funcao"]?.ToString() ?? string.Empty,
+                                Tipo_Autor = reader["Tipo_Autor"]?.ToString() ?? string.Empty
+                            });
+                        }
+                    }
+
 
                     // Adiciona a entidade se existir
                     if (reader["Id_Entidade"] != DBNull.Value)
